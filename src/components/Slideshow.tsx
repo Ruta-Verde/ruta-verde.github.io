@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Image, Button, Flex, Fade } from '@chakra-ui/react';
+import { Box, Image, Button, Flex } from '@chakra-ui/react';
 import '../styles/slideshow.css';
 
 interface SlideProps {
@@ -8,7 +8,6 @@ interface SlideProps {
 
 function Slideshow({ images }: SlideProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // const [fadeIn, setFadeIn] = useState(true);
 
   // Function to handle dot clicks
   const handleDotClick = (index: number) => {
@@ -19,7 +18,7 @@ function Slideshow({ images }: SlideProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex === images.length - 1? 0 : prevIndex + 1
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000); // Change slide every 5 seconds
 
@@ -41,18 +40,19 @@ function Slideshow({ images }: SlideProps) {
         />
       </Flex>
       {/* Navigation dots */}
-      <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translateX(-50%)'>
+      <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translateX(-50%)' p='0px'>
         {images.map((_, index) => (
           <Button
-            key={index} onClick={() => handleDotClick(index)}
+            key={index}
+            onClick={() => handleDotClick(index)}
             size='xs'
             bg='white'
-            colorScheme='gray'
             borderRadius='full'
             border='1px solid'
             opacity='70%'
             _hover={{ opacity: '100%' }}
-            m={1} />
+            m={1}
+          />
         ))}
       </Flex>
   </Box>

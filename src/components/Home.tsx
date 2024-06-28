@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../styles/home.css';
 import Preview from './Preview.tsx';
-// import Slideshow from './Slideshow.tsx';
+import Slideshow from './Slideshow.tsx';
 import { Box, Flex, Fade, Center, Button } from '@chakra-ui/react';
 import { filler } from './constants/constants.tsx'
 
@@ -18,11 +18,11 @@ function Home() {
   const [fadeIn, setFadeIn] = useState(true);
   // const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-  // const images = [
-  //   'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png',
-  //   'https://creature-companions.in/wp-content/uploads/2024/03/Purrfect-Pals-for-Indian-Homes_-Top-Cat-Breeds-That-Thrive-in-Our-Climate-1080x400.png',
-  //   'https://www.valleyvet.com/library/article-si_cat_vaccine.jpg',
-  // ];
+  const images = [
+    'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png',
+    'https://creature-companions.in/wp-content/uploads/2024/03/Purrfect-Pals-for-Indian-Homes_-Top-Cat-Breeds-That-Thrive-in-Our-Climate-1080x400.png',
+    'https://www.valleyvet.com/library/article-si_cat_vaccine.jpg',
+  ];
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
@@ -56,7 +56,7 @@ function Home() {
   return (
     <Box>
       {/* Content Section */}
-      {/* <Slideshow images={images} /> */}
+      <Slideshow images={images} />
       <Button variant='link' onClick={handlePrev} mr={2}>
         {'<'}
       </Button>
