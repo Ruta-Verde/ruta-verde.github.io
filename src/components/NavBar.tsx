@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 function NavBar() {
     return(
-        <Box p={4} borderBottom='1px solid' textAlign='left' zIndex='5' bg="grey.500" color="white">
+        <Box textAlign='left' bg="grey.500" color="black">
           <nav>
               <Link as={RouterLink} to="/" mr={4} p={4}>
                 Home

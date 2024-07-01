@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Image, Button, Flex } from '@chakra-ui/react';
+import { Box, Image, Button, Flex, Circle } from '@chakra-ui/react';
 import '../styles/slideshow.css';
 
 interface SlideProps {
@@ -7,7 +7,7 @@ interface SlideProps {
 }
 
 function Slideshow({ images }: SlideProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageIndex, setCurrentImageIndex] = useState(0);
 
   // Function to handle dot clicks
   const handleDotClick = (index: number) => {
@@ -31,28 +31,24 @@ function Slideshow({ images }: SlideProps) {
       <Flex w='100%' h='100%' overflow='hidden'>
         {images.map( url => (
           <Image key={url} src={url} className='slider' style={{
-            translate: `${-100 * currentImageIndex}%`}} />
+            translate: `${-100 * imageIndex}%`}} />
         ))}
         <Image
-          src={images[currentImageIndex]}
-          alt={`Slide ${currentImageIndex}`}
+          src={images[imageIndex]}
+          alt={`Slide ${imageIndex}`}
           className='slider'
         />
       </Flex>
       {/* Navigation dots */}
-      <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translateX(-50%)' p='0px'>
+      <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translate(-50%)' zIndex={3}>
         {images.map((_, index) => (
-          <Button
+          <button
             key={index}
+            className='slider-btn'
             onClick={() => handleDotClick(index)}
-            size='xs'
-            bg='white'
-            borderRadius='full'
-            border='1px solid'
-            opacity='70%'
-            _hover={{ opacity: '100%' }}
-            m={1}
-          />
+          >
+            {index === imageIndex ? <Circle _hover={{ opacity: '100%'}} /> : <Circle />}
+          </button>
         ))}
       </Flex>
   </Box>
