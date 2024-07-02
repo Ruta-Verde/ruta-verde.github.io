@@ -56,24 +56,28 @@ function Home() {
   return (
     <Box>
       {/* Content Section */}
-      <Slideshow images={images} />
-      <Button variant='link' onClick={handlePrev} mr={2}>
-        {'<'}
-      </Button>
-      <Button variant='link' onClick={handleNext}>
-        {'>'}
-      </Button>
-      <Flex
-        direction={{ base: 'column', md: 'row' }}
-        align='center'
-        justify='center'
-      >
-        <Center>
-          <Fade in={fadeIn}>
-            <Preview title={currentPreview.title} text={currentPreview.text}/>
-          </Fade>
-        </Center>
-      </Flex>
+      <Box>
+        <Slideshow images={images} />
+      </Box>
+      <Box className='main-content'>
+        <Button variant='link' onClick={handlePrev} mr={2}>
+          {'<'}
+        </Button>
+        <Button variant='link' onClick={handleNext}>
+          {'>'}
+        </Button>
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          align='center'
+          justify='center'
+        >
+          <Center>
+            <Fade in={fadeIn}>
+              <Preview title={currentPreview.title} text={currentPreview.text}/>
+            </Fade>
+          </Center>
+        </Flex>
+      </Box>
     </Box>
   );
 };

@@ -8,10 +8,23 @@ interface SlideProps {
 
 function Slideshow({ images }: SlideProps) {
   const [imageIndex, setCurrentImageIndex] = useState(0);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   // Function to handle dot clicks
   const handleDotClick = (index: number) => {
     setCurrentImageIndex(index);
+
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+
+    const newIntervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex == images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    setIntervalId(newIntervalId);
   };
 
   // Effect to automatically change slides
@@ -21,6 +34,8 @@ function Slideshow({ images }: SlideProps) {
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000); // Change slide every 5 seconds
+
+    setIntervalId(timer);
 
     return () => clearInterval(timer); // Cleanup on unmount
   }, [images]);
@@ -42,13 +57,25 @@ function Slideshow({ images }: SlideProps) {
       {/* Navigation dots */}
       <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translate(-50%)' zIndex={3}>
         {images.map((_, index) => (
-          <button
+          // <button
+          //   key={index}
+          //   className='slider-btn'
+          //   onClick={() => handleDotClick(index)}
+          // >
+          //   {index === imageIndex ? <Circle _hover={{ opacity: '100%'}} /> : <Circle />}
+          // </button>
+          <Button
             key={index}
-            className='slider-btn'
             onClick={() => handleDotClick(index)}
-          >
-            {index === imageIndex ? <Circle _hover={{ opacity: '100%'}} /> : <Circle />}
-          </button>
+            size='xs'
+            bg='white'
+            colorScheme='gray'
+            borderRadius='full'
+            border='1px solid'
+            opacity='70%'
+            _hover={{ opacity: '100%' }}
+            m={1}
+          />
         ))}
       </Flex>
   </Box>
