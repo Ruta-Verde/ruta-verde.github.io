@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Image, Button, Flex, Circle } from '@chakra-ui/react';
+import { Box, Image, Button, Flex } from '@chakra-ui/react';
 import '../styles/slideshow.css';
 
 interface SlideProps {
