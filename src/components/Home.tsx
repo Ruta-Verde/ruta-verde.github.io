@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import '../styles/home.css';
-import Preview from './Preview.tsx';
 import Slideshow from './Slideshow.tsx';
 import { Box, Flex, Fade, Center, Button } from '@chakra-ui/react';
 import { filler } from './constants/constants.tsx'
@@ -22,51 +20,13 @@ const images = [
 ];
 
 function Home() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fadeIn, setFadeIn] = useState(true);
-
-  const handleNext = () => {
-    setFadeIn(false);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % previews.length);
-      setFadeIn(true);
-    }, 600);
-  };
-
-  const handlePrev = () => {
-    setFadeIn(false);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + previews.length) % previews.length);
-      setFadeIn(true);
-    }, 600);
-  };
-
-  const currentPreview = previews[currentIndex];
   return (
     <Box>
       {/* Content Section */}
       <Box>
         <Slideshow images={images} previews={previews}/>
       </Box>
-      <Box className='main-content'>
-        <Button variant='link' onClick={handlePrev} mr={2}>
-          {'<'}
-        </Button>
-        <Button variant='link' onClick={handleNext}>
-          {'>'}
-        </Button>
-        <Flex
-          direction={{ base: 'column', md: 'row' }}
-          align='center'
-          justify='center'
-        >
-          <Center>
-            <Fade in={fadeIn}>
-              <Preview title={currentPreview.title} text={currentPreview.text}/>
-            </Fade>
-          </Center>
-        </Flex>
-      </Box>
+      {/* I want a grid-like structure here that provides links/descriptions to content */}
     </Box>
   );
 };
