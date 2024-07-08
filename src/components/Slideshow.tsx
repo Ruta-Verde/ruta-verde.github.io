@@ -49,17 +49,19 @@ function Slideshow({ images, previews }: SlideProps) {
     {/* Display current image */}
       <Flex w='100%' h='100%' overflow='hidden'>
         {images.map( url => (
-          <Image key={url} src={url} className='slider' style={{
-            translate: `${-100 * imageIndex}%`}} />
+          <Box className='slider' style={{
+            translate: `${-100 * imageIndex}%`, filter: 'brightness(90%)'}}>
+            <Image key={url} src={url} className='slider' />
+            <Box position='absolute' top='30%' left='30%' textColor='white' textAlign='left'>
+              <Text fontSize='5xl' as='b'>
+                {previews[imageIndex].title}
+              </Text>
+              <Text fontSize='lg' mt={4} width='20rem'>
+                {previews[imageIndex].text}
+              </Text>
+            </Box>
+          </Box>
         ))}
-        <Box position='absolute' top='50%' left='50%' transform='translate(-50%, -50%);' textColor='white' textAlign='left'>
-          <Text fontSize='5xl' as='b'>
-            {previews[imageIndex].title}
-          </Text>
-          <Text fontSize='lg' mt={4} width='20rem'>
-            {previews[imageIndex].text}
-          </Text>
-        </Box>
       </Flex>
       {/* Navigation dots */}
       <Flex justify='center' mt='10' position='absolute' bottom='30px' left='50%' transform='translate(-50%)' zIndex={3}>
