@@ -1,6 +1,6 @@
 import '../styles/home.css';
 import Slideshow from './Slideshow.tsx';
-import { Box, Flex, Fade, Center, Button } from '@chakra-ui/react';
+import { Box, Button, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Text, HStack } from '@chakra-ui/react';
 import { filler } from './constants/constants.tsx'
 
 const previews = [
@@ -23,11 +23,57 @@ function Home() {
   return (
     <Box>
       {/* Content Section */}
-      <Box>
+      <Box mb={4}>
         <Slideshow images={images} previews={previews}/>
       </Box>
       {/* I want a grid-like structure here that provides links/descriptions to content */}
+      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+        <Card>
+          <CardHeader>
+            <Heading size='md'> Some Company </Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>View a summary of all your customers over the last month.</Text>
+          </CardBody>
+          <CardFooter>
+            <Button>View here</Button>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <Heading size='md'> Customer dashboard</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>View a summary of all your customers over the last month.</Text>
+          </CardBody>
+          <CardFooter>
+            <Button>View here</Button>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <Heading size='md'> Customer dashboard</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>View a summary of all your customers over the last month.</Text>
+          </CardBody>
+          <CardFooter>
+            <Button>View here</Button>
+          </CardFooter>
+        </Card>
+      </SimpleGrid>
+      <Card size='md'>
+        <HStack>
+          <CardHeader>
+            <Heading size='md'>Contact Us</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text> Stay up to date with our upcoming events! </Text>
+          </CardBody>
+        </HStack>    
+      </Card>
     </Box>
+    
   );
 };
 
