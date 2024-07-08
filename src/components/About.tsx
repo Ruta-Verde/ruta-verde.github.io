@@ -7,6 +7,8 @@ import {
   Flex,
   SimpleGrid,
   Icon,
+  Card,
+  CardBody,
 } from '@chakra-ui/react';
 import { FaLightbulb, FaHandshake, FaRocket } from 'react-icons/fa';
 import { filler } from './constants/constants.tsx'
@@ -83,13 +85,17 @@ function About() {
               { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
             ].map((member, index) => (
               <VStack key={index} align="center" p={4} bg="gray.50" borderRadius="md" boxShadow="sm">
-                <Image src={member.image} alt={member.name} borderRadius="full" boxSize="150px" objectFit="cover" />
-                <Heading as="h3" size="md" mt={2}>
-                  {member.name}
-                </Heading>
-                <Text color="gray.600" fontWeight="medium">
-                  {member.role}
-                </Text>
+                <Card>
+                  <CardBody>
+                    <Image src={member.image} alt={member.name} borderRadius="full" boxSize="150px" objectFit="cover" />
+                  <Heading as="h3" size="md" mt={2}>
+                    {member.name}
+                  </Heading>
+                  <Text color="gray.600" fontWeight="medium">
+                    {member.role}
+                  </Text>
+                  </CardBody>
+                </Card>
               </VStack>
             ))}
           </SimpleGrid>
