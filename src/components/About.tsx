@@ -65,6 +65,15 @@ function About() {
             ))}
           </SimpleGrid>
         </Box>
+
+        <Box>
+          <Heading as="h2" size="xl" mb={8} textAlign="center">
+            Meet the Team
+          </Heading>
+          <SimpleGrid columns={[3, null, 3]} spacing='30px'>
+
+          </SimpleGrid>
+        </Box>
       </VStack>
     </Box>
   );
