@@ -72,15 +72,15 @@ function About() {
           </Heading>
           <SimpleGrid columns={[1, 2, 3]} spacing='30px'>
             {[
-              { name: "John Doe", role: "CEO", image: "https://via.placeholder.com/150" },
-              { name: "Jane Smith", role: "CTO", image: "https://via.placeholder.com/150" },
-              { name: "Mike Johnson", role: "CFO", image: "https://via.placeholder.com/150" },
-              { name: "Emily Brown", role: "Marketing Director", image: "https://via.placeholder.com/150" },
-              { name: "David Lee", role: "Lead Developer", image: "https://via.placeholder.com/150" },
-              { name: "Sarah Wilson", role: "UX Designer", image: "https://via.placeholder.com/150" },
-              { name: "Tom Harris", role: "Sales Manager", image: "https://via.placeholder.com/150" },
-              { name: "Lisa Chen", role: "Product Manager", image: "https://via.placeholder.com/150" },
-              { name: "Alex Taylor", role: "Customer Support Lead", image: "https://via.placeholder.com/150" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
+              { name: "Some Name", role: "Person", image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" },
             ].map((member, index) => (
               <VStack key={index} align="center" p={4} bg="gray.50" borderRadius="md" boxShadow="sm">
                 <Image src={member.image} alt={member.name} borderRadius="full" boxSize="150px" objectFit="cover" />
