@@ -11,7 +11,7 @@ import {
   CardBody,
 } from '@chakra-ui/react';
 import { FaLightbulb, FaHandshake, FaRocket } from 'react-icons/fa';
-import { filler } from './constants/constants.tsx'
+import { filler } from '../components/constants/constants.tsx'
 
 function About() {
   return (

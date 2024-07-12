@@ -1,7 +1,7 @@
 import '../styles/home.css';
-import Slideshow from './Slideshow.tsx';
+import Slideshow from '../components/Slideshow.tsx';
 import { Box, Button, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Text, HStack } from '@chakra-ui/react';
-import { filler } from './constants/constants.tsx'
+import { filler } from '../components/constants/constants.tsx'
 
 const previews = [
   { title: 'Who We Are', text: filler},
