@@ -10,8 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <ChakraProvider>
-      <Router>
-        <Box sx={{ width: "100%", height: "auto"}}>
+      <Box sx={{ width: "100%", height: "auto"}}>
+        <Router>
           <Header />
           <Flex position="relative">
             <Routes>
@@ -20,8 +20,8 @@ function App() {
             </Routes>
           </Flex>
           <Footer />
-        </Box>
-      </Router>
+        </Router>
+      </Box>
     </ChakraProvider>
   );
 };
