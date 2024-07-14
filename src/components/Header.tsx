@@ -12,7 +12,7 @@ function Header() {
       <Heading as="h1" size="md" pl={2} pr={2}>
         Ruta Verde Sustainability Nonprofit
       </Heading>
-      <Box position='absolute' right='0' pr='4rem'>
+      <Box className='navbar' position='absolute' right='0'>
         <NavBar />
       </Box>
     </HStack>
