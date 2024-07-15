@@ -18,8 +18,8 @@ function SideNav() {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-      <HamburgerIcon />
+      <Button ref={btnRef} colorScheme='white' onClick={onOpen}>
+        <HamburgerIcon color='black' />
       </Button>
       <Drawer
       isOpen={isOpen}

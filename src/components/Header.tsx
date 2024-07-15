@@ -10,7 +10,7 @@ function Header() {
         <Image src={logo} />
       </Box>
       <Heading as="h1" size="md" pl={2} pr={2}>
-        Ruta Verde Sustainability Nonprofit
+        Ruta Verde
       </Heading>
       <Box className='navbar' position='absolute' right='0'>
         <NavBar />
