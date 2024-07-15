@@ -1,14 +1,15 @@
 import {
   Button,
+  Link,
+  VStack,
   Drawer,
   DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { Link as RouterLink } from 'react-router-dom';
 import '../styles/navbar.css';
 import React from 'react';
 
@@ -30,18 +31,16 @@ function SideNav() {
         <DrawerOverlay />
         <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
-
         <DrawerBody>
-          Placeholder content
+          <VStack>
+            <Link as={RouterLink} to="/" mt={10} p={2} borderY='1px solid black' width='100%'>
+              Home
+            </Link>
+            <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'>
+              About
+            </Link>
+          </VStack>
         </DrawerBody>
-
-        <DrawerFooter>
-          <Button variant='outline' mr={3} onClick={onClose}>
-            Cancel
-          </Button>
-          <Button colorScheme='blue'>Save</Button>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
     </>

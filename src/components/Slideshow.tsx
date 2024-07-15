@@ -3,7 +3,6 @@ import { Box, Image, Button, Flex, Text } from '@chakra-ui/react';
 import '../styles/slideshow.css';
 
 interface SlideProps {
-  // images: string[];
   slides: {
     title: string;
     text: string;
