@@ -7,11 +7,14 @@ function NavBar() {
   return(
     <Box textAlign='left' bg="grey.500" color="black">
       <nav className='non-phone'>
-        <Link as={RouterLink} to="/" mr={4} p={4}>
+        <Link as={RouterLink} to="/" p={4}>
           Home
         </Link>
-        <Link as={RouterLink} to="/about">
+        <Link as={RouterLink} to="/about" p={4}>
           About
+        </Link>
+        <Link as={RouterLink} to="/donate" p={4}>
+          Donate
         </Link>
       </nav>
       <nav className='phone-nav'>

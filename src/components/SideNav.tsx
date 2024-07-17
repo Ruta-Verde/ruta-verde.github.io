@@ -39,6 +39,9 @@ function SideNav() {
             <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'>
               About
             </Link>
+            <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'>
+              Donate
+            </Link>
           </VStack>
         </DrawerBody>
       </DrawerContent>
