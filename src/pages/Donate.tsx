@@ -38,15 +38,6 @@ function Donate() {
           </CardFooter>
         </Stack>
       </Card>
-      {/* <Heading>Donate</Heading>
-      <Text>
-        
-      </Text>
-      <Button>
-        <Link href='https://www.iatspayments.com/saaura/PA9ACE27D2159C5D04?fbclid=IwAR20hCOzgY97-Gg5nX5oTeQT62TfWgwECUHjDR6wVAgixHHwxQR898UdPZY' isExternal>
-          Click Here
-        </Link>
-      </Button> */}
     </Box>
   );
 };
