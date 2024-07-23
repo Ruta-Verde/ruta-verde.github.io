@@ -1,7 +1,20 @@
 import '../styles/home.css';
 import Slideshow from '../components/Slideshow.tsx';
-import { Box, Button, SimpleGrid, Card, CardHeader, CardBody, CardFooter, Heading, Text, HStack } from '@chakra-ui/react';
-import { filler } from '../components/constants/constants.tsx'
+import {
+  Box,
+  Image,
+  Text,
+  // Button,
+  // SimpleGrid,
+  // Card,
+  // CardHeader,
+  // CardBody,
+  // CardFooter,
+  // Heading,
+  // HStack
+} from '@chakra-ui/react';
+import { filler } from '../components/constants/constants.tsx';
+import sec2 from '../assets/sec2.png';
 
 const slides = [
   { title: 'Who We Are', text: filler, image: 'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png'},
@@ -13,57 +26,12 @@ const slides = [
 
 function Home() {
   return (
-    <Box>
-      {/* Content Section */}
-      <Box mb={4}>
+    <Box position='relative'>
+      <Box>
         <Slideshow slides={slides}/>
       </Box>
-      {/* I want a grid-like structure here that provides links/descriptions to content */}
-      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-        <Card>
-          <CardHeader>
-            <Heading size='md'> Some Company </Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>View a summary of all your customers over the last month.</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size='md'> Customer dashboard</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>View a summary of all your customers over the last month.</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size='md'> Customer dashboard</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>View a summary of all your customers over the last month.</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-      </SimpleGrid>
-      <Card size='md'>
-        <HStack>
-          <CardHeader>
-            <Heading size='md'>Contact Us</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text> Stay up to date with our upcoming events! </Text>
-          </CardBody>
-        </HStack>    
-      </Card>
+      <Image src={sec2} w='100vw' h='auto' opacity='35%' />
+      <Text position='absolute' top='68%' left='50%' ml='-35%' width='70%' fontSize={'30px'} lineHeight={'50px'} textAlign={'center'}>Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. From building community forests to urban plantings to sponsoring events, we know that to build a greener future we must act together!</Text>
     </Box>
     
   );
