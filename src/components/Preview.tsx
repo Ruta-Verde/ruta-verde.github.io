@@ -1,26 +1,20 @@
-import { Box, Text, Image, HStack } from '@chakra-ui/react';
+import { Box, Text, Image, VStack } from '@chakra-ui/react';
+import { PreviewProps } from './constants/constants.tsx';
 
-type PreviewProps = {
-    title: string,
-    text: string,
-};
-
-function Preview({ title, text }: PreviewProps) {
+function Preview({ title, text, img }: PreviewProps) {
   return (
     <Box>
-      <HStack width='80%' margin='auto'>
-        <Box width='50%' margin='auto'>
-          <Text fontSize="2xl" fontWeight="bold">
+      <VStack width='70%' margin='auto' spacing='20px'>
+        <Image width='360px' height='415px' src={img} alt="Your Image" borderRadius="50px" overflow='hidden' />
+        <Box margin='auto'>
+          <Text fontSize="xl" fontWeight="bold">
             {title}
           </Text>
-          <Text mt={4}>
+          <Text fontSize='lg'>
             {text}
           </Text>
         </Box>
-        <Box p={8}>
-          <Image src='https://www.adorama.com/alc/wp-content/uploads/2021/12/Nature-Camera-Settings-2-825x465.jpeg' alt="Your Image" borderRadius="50px" />
-        </Box>
-      </HStack>
+      </VStack>
     </Box>
   );
 };

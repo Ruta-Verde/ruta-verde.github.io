@@ -1,11 +1,12 @@
 import '../styles/home.css';
 import Slideshow from '../components/Slideshow.tsx';
+import Preview from '../components/Preview.tsx';
 import {
   Box,
   Image,
   Text,
   // Button,
-  // SimpleGrid,
+  SimpleGrid,
   // Card,
   // CardHeader,
   // CardBody,
@@ -15,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { filler } from '../components/constants/constants.tsx';
 import sec2 from '../assets/sec2.png';
+import { previews } from '../components/constants/constants.tsx';
 
 const slides = [
   { title: 'Who We Are', text: filler, image: 'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png'},
@@ -26,12 +28,33 @@ const slides = [
 
 function Home() {
   return (
-    <Box position='relative'>
+    <Box>
       <Box>
         <Slideshow slides={slides}/>
       </Box>
-      <Image src={sec2} w='100vw' h='auto' opacity='35%' />
-      <Text position='absolute' top='68%' left='50%' ml='-35%' width='70%' fontSize={'30px'} lineHeight={'50px'} textAlign={'center'}>Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. From building community forests to urban plantings to sponsoring events, we know that to build a greener future we must act together!</Text>
+      <Box position='relative'>
+        <Image src={sec2} w='100vw' h='auto' opacity='35%' />
+        <Text
+          position='absolute'
+          top='25%'
+          left='50%'
+          ml='-40%'
+          width='80%'
+          fontSize={['10px', null, '15px', '20px', '30px', '40px']}
+          lineHeight={'50px'}
+          textAlign={'center'}
+          fontWeight='bold'
+        >
+          Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. 
+          From building community forests to urban plantings to sponsoring events, we know that to build a greener 
+          future we must act together!
+        </Text>
+      </Box>
+      <SimpleGrid columns={[1, null, null, 3]} spacing='10px' px='8rem' py='5rem'>
+        {previews.map( (preview) => (
+          <Preview title={preview.title} text={preview.text} img={preview.img} />
+        ))}
+      </SimpleGrid>
     </Box>
     
   );
