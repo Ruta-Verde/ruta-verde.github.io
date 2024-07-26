@@ -51,7 +51,7 @@ function fadeslider() {
       >
         <Center>
           <Fade in={fadeIn}>
-            <Preview title={currentPreview.title} text={currentPreview.text}/>
+            <Preview title={currentPreview.title} text={currentPreview.text} img='someurl'/>
           </Fade>
         </Center>
       </Flex>
