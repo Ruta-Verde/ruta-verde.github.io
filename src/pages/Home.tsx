@@ -3,13 +3,16 @@ import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
 import {
   Box,
+  Flex,
   Image,
   Text,
   Button,
   SimpleGrid,
   Heading,
   HStack,
-  VStack
+  VStack,
+  FormControl,
+  Input
 } from '@chakra-ui/react';
 import { filler } from '../components/constants/constants.tsx';
 import { previews } from '../components/constants/constants.tsx';
@@ -133,12 +136,13 @@ function Home() {
           </VStack>
         </Box>
       </HStack>
-      <Box display='flex' height='550px' bgColor='#ADB9B8' justifyContent='center'>
+      <Flex height='550px' bgColor='#ADB9B8' justifyContent='center'>
         <VStack
         mt='5%'
         w='30%'
         h='100%'
         spacing='10px'
+        textColor='#385C40'
         >
           <Heading fontSize='9xl'>
             $10,000
@@ -153,7 +157,28 @@ function Home() {
             Donate Now
           </Button>
         </VStack>
-      </Box>
+      </Flex>
+      <Flex bgColor='#385C40' h='400px' textColor='white' justifyContent='center'>
+        <VStack w='80%'>
+          <Heading fontSize='6xl'>
+            Stay Updated With Ruta Verde
+          </Heading>
+          <Text fontSize='3xl'>
+            Sign up to receive information about sustainability and events
+          </Text>
+          <HStack w='100%'>
+            <FormControl w='20%'>
+              <Input placeholder='Name' />
+            </FormControl>
+            <FormControl w='20%'>
+              <Input placeholder='Email' />
+            </FormControl>
+            <Button w='20%' h='100%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+              Sign Up
+            </Button>
+          </HStack>
+        </VStack>
+      </Flex>
     </Box>
     
   );
