@@ -12,9 +12,11 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { filler } from '../components/constants/constants.tsx';
-import sec2 from '../assets/sec2.png';
 import { previews } from '../components/constants/constants.tsx';
-import fade1 from '../assets/fade1.png'
+import sec2 from '../assets/sec2.png';
+import fade1 from '../assets/fade1.png';
+import fade2 from '../assets/fade2.png';
+import joao from '../assets/joao.png';
 
 const slides = [
   { title: 'Who We Are', text: filler, image: 'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png'},
@@ -53,7 +55,7 @@ function Home() {
           <Preview title={preview.title} text={preview.text} img={preview.img} />
         ))}
       </SimpleGrid>
-      <HStack position='relative' h='400px'>
+      <HStack position='relative' h='500px'>
         <Box
         w='100%'
         height='100%'
@@ -61,21 +63,116 @@ function Home() {
         bgGradient='linear(to-r, rgba(56, 92, 64, 1) 60%, rgba(56, 92, 64, 0))'
         position='relative'
         >
-          <VStack position='absolute' textAlign='left' align='left' textColor='white' w='30%' top='10%' left='15%' h='80%' spacing='30px'>
-            <Heading fontSize='6xl'>
-              Join Us
-            </Heading>
-            <Text fontSize='2xl'>
-              We can stop the climate crisis. But we must act now, together, to save our home, our world. Join our cause today!
-            </Text>
-            <Button w='50%' h='18%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>Get Involved</Button>
+          <VStack
+          position='absolute'
+          textAlign='left'
+          align='left'
+          textColor='white' 
+          w='30%'
+          top='20%'
+          left='15%'
+          h='80%'
+          spacing='30px'
+          >
+            <ButtonPreview
+            title='Join Us'
+            text='We can stop the climate crisis. But we must act now, together, to save our home, our world. Join our cause today!'
+            btntext='Get Involved'
+            />
           </VStack>
         </Box>
         <Image src={fade1} position='absolute' left='60%' w='40%' h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
       </HStack>
+      <Box h='500px'>
+        <HStack position='relative' h='80%' top='10%' spacing='100px'>
+          <Image src={joao} ml='25%' w='auto' h='100%' borderRadius='50px'/>
+          <VStack
+          w='30%'
+          h='100%'
+          spacing='40px'
+          textAlign='left'
+          align='left'
+          >
+            <Heading fontSize='4xl'>
+              Meet Joao Vilca Soto
+            </Heading>
+            <Text fontSize='2xl' w='80%'>
+            Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
+            </Text>
+            <Button w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+              Our Story
+            </Button>
+          </VStack>
+        </HStack>
+      </Box>
+      <HStack position='relative' h='500px'>
+        <Image src={fade2} position='absolute' left='0%' w='40%' h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
+        <Box
+        w='100%'
+        height='100%'
+        zIndex='2'
+        bgGradient='linear(to-l, rgba(20, 51, 67, 1) 60%, rgba(20, 51, 67, 0))'
+        position='relative'
+        >
+          <VStack
+          position='absolute'
+          textAlign='left'
+          align='left'
+          textColor='white' 
+          w='30%'
+          top='20%'
+          left='60%'
+          h='80%'
+          spacing='30px'
+          >
+            <ButtonPreview
+            title='Local Events'
+            text='Interested in attending Ruta Verde’s next event? Check out our Events Page to see what’s happening in your area.'
+            btntext='Events'
+            />
+          </VStack>
+        </Box>
+      </HStack>
+      <Box display='flex' height='600px' bgColor='#ADB9B8' justifyContent='center'>
+        <VStack
+        mt='6%'
+        w='30%'
+        h='100%'
+        spacing='10px'
+        >
+          <Heading fontSize='9xl'>
+            $10,000
+          </Heading>
+          <Heading fontSize='3xl'>
+            Dollars Raised and Donated
+          </Heading>
+          <Text fontSize='lg'>
+            Thanks to generous donors like you, Ruta Verde has been able to donate over $10,000 to other sustainability non-profits.
+          </Text>
+          <Button w='40%' h='10%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+            Donate Now
+          </Button>
+        </VStack>
+      </Box>
     </Box>
     
   );
 };
+
+function ButtonPreview( {title, text, btntext}: {title: string, text: string, btntext: string} ) {
+  return(
+    <>
+      <Heading fontSize='6xl'>
+        {title}
+      </Heading>
+      <Text fontSize='2xl' w='90%'>
+        {text}
+      </Text>
+      <Button w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+        {btntext}
+      </Button>
+    </>
+  )
+}
 
 export default Home;
