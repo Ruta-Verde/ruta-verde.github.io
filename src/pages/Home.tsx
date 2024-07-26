@@ -133,9 +133,9 @@ function Home() {
           </VStack>
         </Box>
       </HStack>
-      <Box display='flex' height='600px' bgColor='#ADB9B8' justifyContent='center'>
+      <Box display='flex' height='550px' bgColor='#ADB9B8' justifyContent='center'>
         <VStack
-        mt='6%'
+        mt='5%'
         w='30%'
         h='100%'
         spacing='10px'
