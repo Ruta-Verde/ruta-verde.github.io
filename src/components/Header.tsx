@@ -90,7 +90,7 @@ function SideNav() {
   return (
     <>
       <IconButton ref={btnRef} mr='20px' colorScheme='white' onClick={onOpen}
-       size='lg' color='black' icon={<HamburgerIcon/>} />
+       size='lg' color='black' icon={<HamburgerIcon/>} ariaLabel />
       <Drawer
       isOpen={isOpen}
       placement='right'
