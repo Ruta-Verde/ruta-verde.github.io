@@ -136,10 +136,11 @@ function Home() {
           </VStack>
         </Box>
       </HStack>
-      <Flex height='550px' bgColor='#ADB9B8' justifyContent='center' alignItems='center'>
+      <Flex height='550px' bgColor='#ADB9B8' justifyContent='center'>
         <VStack
-        // mt='5%'
+        mt='5%'
         w='30%'
+        h='100%'
         spacing='10px'
         textColor='#385C40'
         >
@@ -152,30 +153,30 @@ function Home() {
           <Text fontSize='lg'>
             Thanks to generous donors like you, Ruta Verde has been able to donate over $10,000 to other sustainability non-profits.
           </Text>
-          <Button w='40%' h='50px' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+          <Button w='40%' h='10%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
             Donate Now
           </Button>
         </VStack>
       </Flex>
-      <Flex bgColor='#385C40' h='400px' textColor='white' justifyContent='center' alignItems='center'>
+      <Flex bgColor='#385C40' h='400px' textColor='white' justifyContent='center'>
         <VStack w='80%'>
-          <Heading fontSize='6xl' justifyContent='center'>
+          <Heading fontSize='6xl'>
             Stay Updated With Ruta Verde
           </Heading>
           <Text fontSize='3xl'>
             Sign up to receive information about sustainability and events
           </Text>
-          <Flex pt='75px' alignItems='center'>
-            <FormControl w='500px' mr='2rem'>
-              <Input bgColor='white' placeholder='Name' />
+          <HStack w='100%'>
+            <FormControl w='20%'>
+              <Input placeholder='Name' />
             </FormControl>
-            <FormControl w='500px' mr='2rem'>
-              <Input bgColor='white' placeholder='Email' />
+            <FormControl w='20%'>
+              <Input placeholder='Email' />
             </FormControl>
-            <Button w='300px' h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523'>
+            <Button w='20%' h='100%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
               Sign Up
             </Button>
-          </Flex>
+          </HStack>
         </VStack>
       </Flex>
     </Box>
