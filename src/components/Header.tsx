@@ -30,7 +30,7 @@ function Header() {
         <Image objectFit='contain'
           src={Logo}/>
       </LinkBox>
-      <LinkBox as={RouterLink} to="/" minWidth='296px' marginLeft='-20px' height='100%' alignContent='center' textTransform='uppercase'>
+      <LinkBox as={RouterLink} to="/" minWidth='296px' marginLeft='-20px' height='100%' fontFamily='josefinSans' alignContent='center' textTransform='uppercase'>
         <Text fontSize='37px' color='#385C40' fontWeight='600' letterSpacing='3.33px'>
           Ruta Verde</Text>
         <Text fontSize='15px' marginTop='-10px' fontWeight='600px' letterSpacing='2px' color='#72C15B'> 

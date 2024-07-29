@@ -8,10 +8,11 @@ import Donate from './pages/Donate.tsx';
 import Events from './pages/Events.tsx';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import theme from './theme.tsx'
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Box sx={{ width: "100%", height: "auto"}}>
         <Router>
           <Header />
