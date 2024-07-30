@@ -25,19 +25,34 @@ import Logo from '../assets/rutalogo.svg';
 
 function Header() {
   return (
-    <Flex className='header' height='130px' alignItems='center'>
-      <LinkBox as={RouterLink} to="/" marginLeft='23px' minWidth='119px' height='72px'>
-        <Image objectFit='contain'
-          src={Logo}/>
+    <Flex className='header' height={['80px', null, '100px', null, '130px']} alignItems='center' justifyContent='center'>
+      <LinkBox
+      display='flex'
+      as={RouterLink}
+      to="/"
+      marginLeft={['10px', null, null, null, '23px']}
+      w={['90px', '100px', null, null, '119px']}
+      h='100%'
+      alignItems='center'
+      >
+        <Image display='flex' objectFit='contain' src={Logo} h='60%' />
       </LinkBox>
-      <LinkBox as={RouterLink} to="/" minWidth='296px' marginLeft='-20px' height='100%' fontFamily='josefinSans' alignContent='center' textTransform='uppercase'>
-        <Text fontSize='37px' color='#385C40' fontWeight='600' letterSpacing='3.33px'>
+      <LinkBox
+      as={RouterLink}
+      to="/"
+      w={['230px', null, null, null, '296px']}
+      height='100%'
+      fontFamily='josefinSans'
+      alignContent='center'
+      textTransform='uppercase'
+      >
+        <Text fontSize={['20px', null, '27px', null, '37px']} color='#385C40' fontWeight='600' letterSpacing='3.33px'>
           Ruta Verde</Text>
-        <Text fontSize='15px' marginTop='-10px' fontWeight='600px' letterSpacing='2px' color='#72C15B'> 
+        <Text fontSize={['8px', null, '10.5px', null, '15px']} marginTop='-10px' fontWeight='600px' letterSpacing='2px' color='#72C15B'> 
           Sustainability Nonprofit</Text>
       </LinkBox>
       <Spacer/>
-      <Flex className='navbar'>
+      <Flex className='navbar' h='100%' alignItems='center' justifyContent='center'>
         <NavBar />
       </Flex>
     </Flex>
@@ -76,9 +91,9 @@ function NavBar() {
         </Link>
         </ButtonGroup>
       </Box>
-      <nav className='phone-nav'>
+      <Box className='phone-nav' h='100%'>
         <SideNav/>
-      </nav>
+      </Box>
     </>
   )
 }
@@ -89,8 +104,10 @@ function SideNav() {
 
   return (
     <>
-      <IconButton aria-label='sidedrawer' ref={btnRef} mr='20px' colorScheme='white' onClick={onOpen}
-       size='lg' color='black' icon={<HamburgerIcon/>} />
+      <Flex alignItems='center'>
+        <IconButton aria-label='sidedrawer' ref={btnRef} mr='20px' colorScheme='white' onClick={onOpen}
+        size={['lg']} color='black' icon={<HamburgerIcon/>} />
+      </Flex>
       <Drawer
       isOpen={isOpen}
       placement='right'
