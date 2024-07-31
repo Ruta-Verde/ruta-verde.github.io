@@ -35,8 +35,8 @@ function Home() {
       <Box>
         <Slideshow slides={slides}/>
       </Box>
-      <Box position='relative'>
-        <Image src={sec2} w='100vw' opacity='35%' />
+      <Box position='relative' h={['350px', null, null, '400px']}>
+        <Image src={sec2} w='100vw' h={['350px', null, null, '400px']} opacity='35%' />
         <Text
         position='absolute'
         top='25%'
@@ -53,7 +53,7 @@ function Home() {
           future we must act together!
         </Text>
       </Box>
-      {/* <SimpleGrid columns={[1, null, null, 3]} spacing='10px' px='8rem' py='5rem'>
+      <SimpleGrid columns={[1, null, null, 3]} spacing='10px' px='8rem' py='5rem'>
         {previews.map( (preview) => (
           <Preview title={preview.title} text={preview.text} img={preview.img} />
         ))}
@@ -177,7 +177,7 @@ function Home() {
             </Button>
           </Flex>
         </VStack>
-      </Flex> */}
+      </Flex>
     </Box>
     
   );
