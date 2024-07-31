@@ -1,6 +1,7 @@
 import '../styles/home.css';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
+import PreviewSlide from '../components/PreviewSlides.tsx';
 import {
   Box,
   Flex,
@@ -35,16 +36,16 @@ function Home() {
       <Box>
         <Slideshow slides={slides}/>
       </Box>
-      <Box position='relative' h={['350px', null, null, '400px']}>
+      <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
         <Image src={sec2} w='100vw' h={['350px', null, null, '400px']} opacity='35%' />
         <Text
         position='absolute'
-        top='25%'
+        top={['17%', null, '20%', '25%']}
         left='50%'
         ml='-40%'
         w='80%'
-        fontSize={['10px', null, '15px', '20px', '30px', '40px']}
-        lineHeight={'50px'}
+        fontSize={['14px', null, '20px', '25px', '30px', '40px']}
+        lineHeight={['40px', '45px', '50px']}
         textAlign={'center'}
         fontWeight='bold'
         >
@@ -53,11 +54,14 @@ function Home() {
           future we must act together!
         </Text>
       </Box>
-      <SimpleGrid columns={[1, null, null, 3]} spacing='10px' px='8rem' py='5rem'>
+      <SimpleGrid className='wide-prev' columns={[1, null, null, 3]} spacing='10px' px={['1rem', null, '8rem']} py='5rem'>
         {previews.map( (preview) => (
           <Preview title={preview.title} text={preview.text} img={preview.img} />
         ))}
       </SimpleGrid>
+      <Box className='mobile-prev' h='670px' py='50px'>
+        <PreviewSlide previews={previews}/>
+      </Box>
       <HStack position='relative' h='500px'>
         <Box
         w='100%'
@@ -138,7 +142,6 @@ function Home() {
       </HStack>
       <Flex height='550px' bgColor='#ADB9B8' justifyContent='center' alignItems='center'>
         <VStack
-        // mt='5%'
         w='30%'
         spacing='10px'
         textColor='#385C40'
