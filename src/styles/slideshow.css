@@ -11,8 +11,6 @@
 .slider-btn {
   all: unset;
   display: block;
-  width: 1rem;
-  height: 1rem;
   cursor: pointer;
   transition: scale 100ms ease-in-out;
 }

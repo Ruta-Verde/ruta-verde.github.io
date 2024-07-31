@@ -106,7 +106,7 @@ function SideNav() {
     <>
       <Flex alignItems='center'>
         <IconButton aria-label='sidedrawer' ref={btnRef} mr='20px' colorScheme='white' onClick={onOpen}
-        size={['lg']} color='black' icon={<HamburgerIcon/>} />
+        size={['lg']} color='black' fontSize={['25px', '30px']} icon={<HamburgerIcon/>} />
       </Flex>
       <Drawer
       isOpen={isOpen}
