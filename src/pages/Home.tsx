@@ -36,7 +36,7 @@ function Home() {
       <Box>
         <Slideshow slides={slides}/>
       </Box>
-      <Box position='relative' h={['350px', null, null, '400px']}>
+      <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
         <Image src={sec2} w='100vw' h={['350px', null, null, '400px']} opacity='35%' />
         <Text
         position='absolute'
