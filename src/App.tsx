@@ -8,7 +8,7 @@ import Donate from './pages/Donate.tsx';
 import SingleEventPage from './pages/SingleEventPage.tsx';
 import Events from './pages/Events.tsx';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from './theme.tsx'
 
 function App() {

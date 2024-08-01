@@ -11,7 +11,7 @@ function Events() {
     return (
         <UnorderedList textAlign={"left"}>
             {eventList.map(event => 
-                 <ListItem key={event.slug}><Link href={'/events/' + event.slug}>{event.title}</Link></ListItem>
+                 <ListItem key={event.slug}><Link href={'/#/events/' + event.slug}>{event.title}</Link></ListItem>
         )}
         </UnorderedList>
     )
