@@ -5,8 +5,8 @@ import Footer from './components/Footer.tsx';
 import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
 import Donate from './pages/Donate.tsx';
-import EventPage from './pages/EventPage.tsx';
-// import Events from './pages/Events.tsx';
+import SingleEventPage from './pages/SingleEventPage.tsx';
+import Events from './pages/Events.tsx';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from './theme.tsx'
@@ -22,8 +22,8 @@ function App() {
                 <Route path="/" element={<Home />}/>
                 <Route path="/about" element={<About />} />
                 <Route path="/donate" element={<Donate />}/>
-                <Route path="/events/:slug" element={<EventPage />}/>
-{/*                 <Route path="events" element={<Events />}/> */}
+                <Route path="/events" element={<Events />}/>
+                <Route path="/events/:slug" element={<SingleEventPage />}/>
             </Routes>
           </Flex>
           <Footer />
