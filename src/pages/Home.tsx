@@ -62,12 +62,12 @@ function Home() {
       <Box className='mobile-prev' h='670px' py='50px'>
         <PreviewSlide previews={previews}/>
       </Box>
-      <HStack position='relative' h='500px'>
+      <HStack position='relative' h={['550px', null, '500px']}>
         <Box
         w='100%'
         height='100%'
         zIndex='2'
-        bgGradient='linear(to-r, rgba(56, 92, 64, 1) 60%, rgba(56, 92, 64, 0))'
+        bgGradient={['linear(to-r, rgba(56, 92, 64, 0.95) 100%, rgba(56, 92, 64, 0))', null, null, 'linear(to-r, rgba(56, 92, 64, 1) 60%, rgba(56, 92, 64, 0))']}
         position='relative'
         >
           <VStack
@@ -75,11 +75,11 @@ function Home() {
           textAlign='left'
           align='left'
           textColor='white' 
-          w='30%'
-          top='20%'
-          left='15%'
+          w={['70%', null, null, '30%']}
+          top={['13%', null, '20%']}
+          left={['17%', null, null, '15%']}
           h='80%'
-          spacing='30px'
+          spacing='40px'
           >
             <ButtonPreview
             title='Join Us'
@@ -88,10 +88,10 @@ function Home() {
             />
           </VStack>
         </Box>
-        <Image src={fade1} position='absolute' left='60%' w='40%' h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
+        <Image src={fade1} position='absolute' left={[null, null, null, '60%']} w={[null, null, null, '40%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
       </HStack>
-      <Box h='500px'>
-        <HStack position='relative' h='80%' top='10%' spacing='100px'>
+      <Box h={['770px', null, '650px', '500px']}>
+        <HStack className='wide-prev' position='relative' h='80%' top='10%' spacing='100px'>
           <Image src={joao} ml='25%' w='auto' h='100%' borderRadius='50px'/>
           <VStack
           w='30%'
@@ -103,7 +103,7 @@ function Home() {
             <Heading fontSize='4xl'>
               Meet Joao Vilca Soto
             </Heading>
-            <Text fontSize='2xl' w='80%'>
+            <Text fontSize={['2xl', null, null, 'xl']} w='80%'>
             Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
             </Text>
             <Button w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
@@ -111,14 +111,26 @@ function Home() {
             </Button>
           </VStack>
         </HStack>
+        <VStack className='mobile-prev' position='relative' h='90%' top='5%' spacing='20px'>
+          <Image src={joao} w='auto' h='300px' borderRadius='50px'/>
+            <Heading fontSize='3xl'>
+              Meet Joao Vilca Soto
+            </Heading>
+            <Text fontSize='xl' w='80%'>
+            Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
+            </Text>
+            <Button fontSize='xl' w={['70%', null, '35%']} h={['10%', null, '12%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+              Our Story
+            </Button>
+        </VStack>
       </Box>
-      <HStack position='relative' h='500px'>
-        <Image src={fade2} position='absolute' left='0%' w='40%' h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
+      <HStack position='relative' h={['550px', null, '500px']}>
+        <Image src={fade2} position='absolute' left='0%' w={[null, null, null, '40%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
         <Box
         w='100%'
         height='100%'
         zIndex='2'
-        bgGradient='linear(to-l, rgba(20, 51, 67, 1) 60%, rgba(20, 51, 67, 0))'
+        bgGradient={['linear(to-l, rgba(20, 51, 67, 0.95) 100%, rgba(20, 51, 67, 0))', null, null, 'linear(to-l, rgba(20, 51, 67, 1) 60%, rgba(20, 51, 67, 0))']}
         position='relative'
         >
           <VStack
@@ -126,9 +138,9 @@ function Home() {
           textAlign='left'
           align='left'
           textColor='white' 
-          w='30%'
-          top='20%'
-          left='60%'
+          w={['70%', null, null, '30%']}
+          top={['9%', null, '20%']}
+          left={['17%', null, null, '60%']}
           h='80%'
           spacing='30px'
           >
@@ -140,7 +152,7 @@ function Home() {
           </VStack>
         </Box>
       </HStack>
-      <Flex height='550px' bgColor='#ADB9B8' justifyContent='center' alignItems='center'>
+      <Flex className='wide-prev' height='550px' bgColor='#ADB9B8' justifyContent='center' alignItems='center'>
         <VStack
         w='30%'
         spacing='10px'
@@ -160,25 +172,25 @@ function Home() {
           </Button>
         </VStack>
       </Flex>
-      <Flex bgColor='#385C40' h='400px' textColor='white' justifyContent='center' alignItems='center'>
-        <VStack w='80%'>
-          <Heading fontSize='6xl' justifyContent='center'>
+      <Flex bgColor='#385C40' h={['500px', null, '400px']} textColor='white' justifyContent='center' alignItems={['stretch', null, null, 'center']}>
+        <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '0px']}>
+          <Heading fontSize={['4xl', null, '6xl']} justifyContent='center'>
             Stay Updated With Ruta Verde
           </Heading>
-          <Text fontSize='3xl'>
+          <Text fontSize={['xl', null, '3xl']}>
             Sign up to receive information about sustainability and events
           </Text>
-          <Flex pt='75px' alignItems='center'>
-            <FormControl w='500px' mr='2rem'>
+          <Box display={['inline', null, 'flex']} pt={['10px', null, null, '30px']} justifyContent='center' alignItems='center' w='100%'>
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']}>
               <Input bgColor='white' placeholder='Name' />
             </FormControl>
-            <FormControl w='500px' mr='2rem'>
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} mt={['10px', null, '0px']}>
               <Input bgColor='white' placeholder='Email' />
             </FormControl>
-            <Button w='300px' h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523'>
+            <Button w={['60%', null, null, '300px']} h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523' mt={['50px', null, '0px']}>
               Sign Up
             </Button>
-          </Flex>
+          </Box>
         </VStack>
       </Flex>
     </Box>
@@ -192,10 +204,10 @@ function ButtonPreview( {title, text, btntext}: {title: string, text: string, bt
       <Heading fontSize='6xl'>
         {title}
       </Heading>
-      <Text fontSize='2xl' w='90%'>
+      <Text fontSize={['xl', null, '2xl']} w='90%'>
         {text}
       </Text>
-      <Button w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+      <Button fontSize={'xl'} w={['90%', null, '50%']} h={['15%', null, '17%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
         {btntext}
       </Button>
     </>
