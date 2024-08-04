@@ -8,10 +8,7 @@ import {
     Heading,
     Image,
     Link,
-    ListItem,
     Button,
-    UnorderedList,
-    textDecoration,
   } from '@chakra-ui/react'
 
 import { eventList } from '../events_data/events.ts';
