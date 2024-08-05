@@ -23,7 +23,6 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 function EventsCarousel() {
     return (
         <Flex 
-        mt='20px' 
         height='700px' w='100%' 
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
@@ -32,12 +31,13 @@ function EventsCarousel() {
             <Flex 
             height='100%' w='100%' 
             justifyContent='center' alignItems='center' 
+            overflow='hidden'
             >
                 <HStack 
-                height='150%' 
+                height='110%' 
                 width='70%'
                 spacing='60px' 
-                overflowX='auto' 
+                overflow='auto' 
                 overscrollBehaviorX='contain'
                 scrollSnapType='x mandatory'
                 > 
