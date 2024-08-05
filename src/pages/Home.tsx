@@ -37,7 +37,7 @@ function Home() {
         <Slideshow slides={slides}/>
       </Box>
       <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
-        <Image src={sec2} w='100vw' h={['350px', null, null, '400px']} opacity='35%' />
+        <Image src={sec2} w='100%' h={['350px', null, null, '400px']} opacity='35%' />
         <Text
         position='absolute'
         top={['17%', null, '20%', '25%']}
@@ -76,7 +76,7 @@ function Home() {
           align='left'
           textColor='white' 
           w={['70%', null, null, '30%']}
-          top={['13%', null, '20%']}
+          top={['13%', null, '16%']}
           left={['17%', null, null, '15%']}
           h='80%'
           spacing='40px'
@@ -104,24 +104,24 @@ function Home() {
               Meet Joao Vilca Soto
             </Heading>
             <Text fontSize={['2xl', null, null, 'xl']} w='80%'>
-            Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
+              Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
             </Text>
-            <Button w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+            <Button fontSize='xl' w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
               Our Story
             </Button>
           </VStack>
         </HStack>
         <VStack className='mobile-prev' position='relative' h='90%' top='5%' spacing='20px'>
           <Image src={joao} w='auto' h='300px' borderRadius='50px'/>
-            <Heading fontSize='3xl'>
-              Meet Joao Vilca Soto
-            </Heading>
-            <Text fontSize='xl' w='80%'>
-            Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
-            </Text>
-            <Button fontSize='xl' w={['70%', null, '35%']} h={['10%', null, '12%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
-              Our Story
-            </Button>
+          <Heading fontSize='3xl'>
+            Meet Joao Vilca Soto
+          </Heading>
+          <Text fontSize='xl' w='80%'>
+          Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
+          </Text>
+          <Button fontSize='xl' w={['70%', null, '35%']} h={['10%', null, '12%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+            Our Story
+          </Button>
         </VStack>
       </Box>
       <HStack position='relative' h={['550px', null, '500px']}>
@@ -139,7 +139,7 @@ function Home() {
           align='left'
           textColor='white' 
           w={['70%', null, null, '30%']}
-          top={['9%', null, '20%']}
+          top={['9%', null, '16%']}
           left={['17%', null, null, '60%']}
           h='80%'
           spacing='30px'
@@ -167,7 +167,7 @@ function Home() {
           <Text fontSize='lg'>
             Thanks to generous donors like you, Ruta Verde has been able to donate over $10,000 to other sustainability non-profits.
           </Text>
-          <Button w='40%' h='50px' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+          <Button w='45%' h='65px' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
             Donate Now
           </Button>
         </VStack>
