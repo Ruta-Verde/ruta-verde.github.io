@@ -10,7 +10,7 @@ import {
     Button,
     IconButton,
   } from '@chakra-ui/react'
-
+import Carousel from './Carousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import pic from '../assets/research.png';
 import arrowLeftImg from '../assets/ArrowL.svg';
@@ -30,30 +30,7 @@ function EventsCarousel() {
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
         >
-            {/* extra container to hide scrollbar */}
-            <Flex 
-            flexDir='row'
-            height='100%' w='100%' 
-            justifyContent='center' alignItems='center' 
-            overflow='hidden'
-            >
-                <IconButton
-                    mr='5vw'
-                    icon={<Image src={arrowLeftImg}/>}
-                    onClick={() => document.getElementById('carousel')
-                        .scrollBy({left: -document.getElementById('carousel').clientWidth, 
-                            behavior: "smooth"})}
-                >
-                </IconButton>
-                <HStack 
-                id='carousel'
-                height='110%' 
-                width='70vw'
-                spacing='60px' 
-                overflow='auto' 
-                overscrollBehaviorX='contain'
-                scrollSnapType='x mandatory'
-                > 
+            <Carousel childWidth={250}>
                 {eventList.map( event => 
                     <Card
                     h='500px' w='250px' 
@@ -156,16 +133,8 @@ function EventsCarousel() {
                             </Button>
                         </Flex>
                     </Card>
-        )}
-                </HStack>
-                <IconButton
-                    ml='5vw'
-                    icon={<Image src={arrowRightImg}/>}
-                    onClick={() => document.getElementById('carousel')
-                        .scrollBy({left: document.getElementById('carousel').clientWidth, 
-                            behavior: "smooth"})}
-                ></IconButton>
-            </Flex>
+                )}
+            </Carousel>
         </Flex>
     )
 }
