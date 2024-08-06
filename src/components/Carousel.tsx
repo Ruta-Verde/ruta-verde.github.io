@@ -13,6 +13,22 @@ import {
 import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
 
+function scrollLeft(id: string) {
+    let element = document.getElementById(id);
+    if (element) {
+        element.scrollBy({left: -element.clientWidth, 
+            behavior: "smooth"})
+    }
+}
+
+function scrollRight(id: string) {
+    let element = document.getElementById(id);
+    if (element) {
+        element.scrollBy({left: element.clientWidth, 
+            behavior: "smooth"})
+    }
+}
+
 const Carousel = ({children}) => {
     return (
             <Flex 
@@ -24,9 +40,7 @@ const Carousel = ({children}) => {
                 <IconButton
                     mr='5%'
                     icon={<Image src={arrowLeftImg}/>}
-                    onClick={() => document.getElementById('carousel')
-                        .scrollBy({left: -document.getElementById('carousel').clientWidth, 
-                            behavior: "smooth"})}
+                    onClick={() => scrollLeft('carousel')}
                 >
                 </IconButton>
                 <HStack 
@@ -43,9 +57,7 @@ const Carousel = ({children}) => {
                 <IconButton
                     ml='5%'
                     icon={<Image src={arrowRightImg}/>}
-                    onClick={() => document.getElementById('carousel')
-                        .scrollBy({left: document.getElementById('carousel').clientWidth, 
-                            behavior: "smooth"})}
+                    onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>
     )
