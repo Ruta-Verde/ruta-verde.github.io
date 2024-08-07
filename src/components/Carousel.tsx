@@ -1,12 +1,7 @@
 import {
     Flex,
-    Text,
-    Card,
     HStack,
-    Heading,
     Image,
-    Link,
-    Button,
     IconButton,
   } from '@chakra-ui/react'
 
@@ -38,7 +33,11 @@ const Carousel = ({children}) => {
             overflow='hidden'
             >
                 <IconButton
-                    mr='5%'
+                    mr={{base: '0', sm: '60px'}}
+                    opacity={{base: '50%', sm: '100%'}}
+                    position={{base: 'absolute', sm:'relative'}}
+                    left='0'
+                    zIndex='1'
                     icon={<Image src={arrowLeftImg}/>}
                     onClick={() => scrollLeft('carousel')}
                 >
@@ -48,6 +47,7 @@ const Carousel = ({children}) => {
                 height='110%' 
                 width='70%'
                 spacing='60px' 
+                padding='40px'
                 overflow='auto' 
                 overscrollBehaviorX='contain'
                 scrollSnapType='x mandatory'
@@ -55,7 +55,10 @@ const Carousel = ({children}) => {
                     {children}
                 </HStack>
                 <IconButton
-                    ml='5%'
+                    ml={{base: '0', sm: '40px'}}
+                    opacity={{base: '50%', sm: '100%'}}
+                    position={{base: 'absolute', sm: 'relative'}}
+                    right='0'
                     icon={<Image src={arrowRightImg}/>}
                     onClick={() => scrollRight('carousel')}
                 ></IconButton>
