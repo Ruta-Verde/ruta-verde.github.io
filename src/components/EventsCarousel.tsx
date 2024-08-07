@@ -30,7 +30,7 @@ function EventsCarousel() {
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
         >
-            <Carousel childWidth={250}>
+            <Carousel viewWidth={{base: '100%', sm: '70%'}}>
                 {eventList.map( event => 
                     <Card
                     h='500px' w='250px' 
@@ -44,6 +44,7 @@ function EventsCarousel() {
                         <Flex
                         w='100%' h='200px'
                         >
+                            {/* corner date tag */}
                             <Flex 
                             flexDirection='column'
                             padding='5px'

@@ -24,7 +24,7 @@ function scrollRight(id: string) {
     }
 }
 
-const Carousel = ({children}) => {
+const Carousel = ({viewWidth, children}) => {
     return (
             <Flex 
             flexDir='row'
@@ -45,7 +45,7 @@ const Carousel = ({children}) => {
                 <HStack 
                 id='carousel'
                 height='110%' 
-                width='70%'
+                width={viewWidth}
                 spacing='60px' 
                 padding='40px'
                 overflow='auto' 
