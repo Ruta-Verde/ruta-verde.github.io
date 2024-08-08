@@ -51,12 +51,9 @@ function Home() {
   };
 
   async function handleClick(name: string, email: string) {
-    if (name === '') {
-      setNameError(true)
-      return
-    }
-    if (email === '' || !validateEmail(email)) {
-      setEmailError(true)
+    if (name === '' || !validateEmail(email)) {
+      setNameError(name === '')
+      setEmailError(!validateEmail(email))
       return
     }
 
@@ -221,20 +218,20 @@ function Home() {
           <Text fontSize={['xl', null, '3xl']}>
             Sign up to receive information about sustainability and events
           </Text>
-          <Box display={['inline', null, 'flex']} pt={['10px', null, null, '30px']} justifyContent='center' alignItems='center' w='100%'>
-            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} isInvalid={nameError}>
-              <Input type='name' bgColor='white' textColor='black' placeholder='Name' value={name} onChange={handleNameChange} />
+          <Box display={['inline', null, 'flex']} pt={['10px', null, null, '30px']} justifyContent='center' w='100%'>
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} isInvalid={nameError} h={['75px']}>
+              <Input type='name' bgColor='white' textColor='black' placeholder='Name'value={name} onChange={handleNameChange} />
               {nameError &&
                 <FormErrorMessage>Please input a name</FormErrorMessage> 
               } 
             </FormControl>
-            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} mt={['10px', null, '0px']} isInvalid={emailError}>
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} mt={['10px', null, '0px']} isInvalid={emailError} h={['75px']}>
               <Input type='email' bgColor='white' textColor='black' placeholder='Email' value={email} onChange={handleEmailChange} />
               {emailError &&
                 <FormErrorMessage zIndex='3'>Please input a valid email</FormErrorMessage> 
               }
             </FormControl>
-            <Button w={['60%', null, null, '300px']} h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523' mt={['50px', null, '0px']} onClick={() => handleClick(name, email)}>
+            <Button w={['60%', null, null, '300px']} h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523' mt={['10px', null, '0px']} onClick={() => handleClick(name, email)}>
               Sign Up
             </Button>
           </Box>
