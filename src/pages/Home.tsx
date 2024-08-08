@@ -58,12 +58,11 @@ function Home() {
       setEmailError(true)
     }
 
-    let { data, error } = await supabase.rpc('add_email', {name: name, email: email})
+    let response = await supabase.rpc('add_email', {p_name: name, p_email: email})
     
-    if (error) {
-      alert("here")
+    if (response.error != null) {
       // alert("there was an error sending your information. Please try again in a bit.")
-      alert(data.statusText)
+      alert(JSON.stringify(response.error))
     }
     setName('')
     setNameError(false)
