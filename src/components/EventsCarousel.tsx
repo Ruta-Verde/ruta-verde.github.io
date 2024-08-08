@@ -3,18 +3,14 @@ import {
     Flex,
     Text,
     Card,
-    HStack,
     Heading,
     Image,
     Link,
     Button,
-    IconButton,
   } from '@chakra-ui/react'
 import Carousel from './Carousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import pic from '../assets/research.png';
-import arrowLeftImg from '../assets/ArrowL.svg';
-import arrowRightImg from '../assets/ArrowR.svg';
 
 const dateOptions: Intl.DateTimeFormatOptions = { 
     weekday: "long",
@@ -30,7 +26,7 @@ function EventsCarousel() {
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
         >
-            <Carousel viewWidth={{base: '100%', sm: '70%'}}>
+            <Carousel cardWidthPx={250} numCards={3} cardSpacingPx={40}>
                 {eventList.map( event => 
                     <Card
                     h='500px' w='250px' 
