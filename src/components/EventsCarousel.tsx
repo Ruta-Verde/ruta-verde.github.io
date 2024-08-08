@@ -8,7 +8,8 @@ import {
     Link,
     Button,
   } from '@chakra-ui/react'
-import Carousel from './Carousel.tsx'
+import { Carousel } from './Carousel.tsx'
+import { CarouselProps } from './Carousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import pic from '../assets/research.png';
 
@@ -19,6 +20,12 @@ const dateOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric'
 }
 
+const carouselProps: CarouselProps = {
+    numCards: 3,
+    cardSpacingPx: 40,
+    cardWidthPx: 250,
+}
+
 function EventsCarousel() {
     return (
         <Flex 
@@ -26,7 +33,7 @@ function EventsCarousel() {
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
         >
-            <Carousel cardWidthPx={250} numCards={3} cardSpacingPx={40}>
+            <Carousel carouselProps={carouselProps}>
                 {eventList.map( event => 
                     <Card
                     h='500px' w='250px' 

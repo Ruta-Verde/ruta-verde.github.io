@@ -5,7 +5,7 @@ import {
     IconButton,
   } from '@chakra-ui/react'
 
-import { useState, useEffect } from 'react';
+import {ReactNode, useState, useEffect } from 'react';
 import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
 
@@ -25,11 +25,11 @@ function scrollRight(id: string) {
     }
 }
 
-function useMediaQuery(query) {
+function useMediaQuery(query:string) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
     const matchQueryList = window.matchMedia(query);
-    function handleChange(e) {
+    function handleChange(e:MediaQueryListEvent) {
       setMatches(e.matches);
     }
 
@@ -43,15 +43,25 @@ function useMediaQuery(query) {
   return matches;
 }
 
+export interface CarouselProps {
+    numCards: number,
+    cardWidthPx: number,
+    cardSpacingPx: number
+}
+
 // be sure to apply "flexShrink: 0" and "scrollSnapAlign: center" to cards inside the carousel
-function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
+export function Carousel( {carouselProps, children} : { carouselProps: CarouselProps, children: ReactNode}) {
+    let cardWidthPx = carouselProps.cardWidthPx;
+    let numCards = carouselProps.numCards;
+    let cardSpacingPx = carouselProps.cardSpacingPx;
+
     let fitsNumCards;
     let spaceNeeded;
     if (cardWidthPx && numCards) {
         spaceNeeded = cardWidthPx * numCards + cardSpacingPx * numCards;
 
-        // add 100 to account for 100px taken up by arrows and margins on sides
-        fitsNumCards = useMediaQuery('(min-width:' + (spaceNeeded + 100) + 'px)');
+        // add 100 to account for 120px taken up by arrows and margins on sides
+        fitsNumCards = useMediaQuery('(min-width:' + (spaceNeeded + 120) + 'px)');
     }
 
     return (
@@ -62,6 +72,7 @@ function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
             overflow='hidden'
             >
                 <IconButton
+                    aria-label='Left Scroll Button'
                     mr={{base: '0', sm: '60px'}}
                     opacity={{base: '50%', sm: '100%'}}
                     position={{base: 'absolute', sm:'relative'}}
@@ -84,6 +95,7 @@ function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
                     {children}
                 </HStack>
                 <IconButton
+                    aria-label='Right Scroll Button'
                     ml={{base: '0', sm: '40px'}}
                     opacity={{base: '50%', sm: '100%'}}
                     position={{base: 'absolute', sm: 'relative'}}
@@ -94,5 +106,3 @@ function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
             </Flex>
     )
 }
-
- export default Carousel; 
