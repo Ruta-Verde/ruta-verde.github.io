@@ -53,12 +53,14 @@ function Home() {
   async function handleClick(name: string, email: string) {
     if (name === '') {
       setNameError(true)
+      return
     }
     if (email === '' || !validateEmail(email)) {
       setEmailError(true)
+      return
     }
 
-    let response = await supabase.rpc('add_email', {p_name: name, p_email: email})
+    let response = await supabase.rpc('new_email', {p_name: name, p_email: email})
     
     if (response.error != null) {
       // alert("there was an error sending your information. Please try again in a bit.")
