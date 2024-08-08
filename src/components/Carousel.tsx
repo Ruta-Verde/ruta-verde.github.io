@@ -5,6 +5,7 @@ import {
     IconButton,
   } from '@chakra-ui/react'
 
+import { useState, useEffect } from 'react';
 import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
 
@@ -24,7 +25,34 @@ function scrollRight(id: string) {
     }
 }
 
-const Carousel = ({viewWidth, children}) => {
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    const matchQueryList = window.matchMedia(query);
+    function handleChange(e) {
+      setMatches(e.matches);
+    }
+
+    setMatches(matchQueryList.matches);
+
+    matchQueryList.addEventListener("change", handleChange);
+    return () => {
+      matchQueryList.removeEventListener("change", handleChange);
+    };
+  }, [query]);
+  return matches;
+}
+
+function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
+    let fitsNumCards;
+    let spaceNeeded;
+    if (cardWidthPx && numCards) {
+        spaceNeeded = cardWidthPx * numCards + cardSpacingPx * numCards;
+
+        // add 100 to account for 100px taken up by arrows and margins on sides
+        fitsNumCards = useMediaQuery('(min-width:' + (spaceNeeded + 100) + 'px)');
+    }
+
     return (
             <Flex 
             flexDir='row'
@@ -38,15 +66,15 @@ const Carousel = ({viewWidth, children}) => {
                     position={{base: 'absolute', sm:'relative'}}
                     left='0'
                     zIndex='1'
-                    icon={<Image src={arrowLeftImg}/>}
+                    icon={<Image w='40px' src={arrowLeftImg}/>}
                     onClick={() => scrollLeft('carousel')}
                 >
                 </IconButton>
                 <HStack 
                 id='carousel'
                 height='110%' 
-                width={viewWidth}
-                spacing='60px' 
+                width={fitsNumCards ? spaceNeeded : cardWidthPx}
+                spacing={cardSpacingPx + 'px'}
                 padding='40px'
                 overflow='auto' 
                 overscrollBehaviorX='contain'
@@ -59,7 +87,7 @@ const Carousel = ({viewWidth, children}) => {
                     opacity={{base: '50%', sm: '100%'}}
                     position={{base: 'absolute', sm: 'relative'}}
                     right='0'
-                    icon={<Image src={arrowRightImg}/>}
+                    icon={<Image w='40px' src={arrowRightImg}/>}
                     onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>
