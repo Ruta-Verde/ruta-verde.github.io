@@ -8,6 +8,7 @@ import {
 import {ReactNode, useState, useEffect } from 'react';
 import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
+import { useFetcher } from 'react-router-dom';
 
 function scrollLeft(id: string) {
     let element = document.getElementById(id);
@@ -44,16 +45,23 @@ function useMediaQuery(query:string) {
 }
 
 export interface CarouselProps {
-    numCards: number,
-    cardWidthPx: number,
+    numCards?: number,
+    cardWidthPx?: number,
     cardSpacingPx: number
+    viewWidth?: string
 }
 
-// be sure to apply "flexShrink: 0" and "scrollSnapAlign: center" to cards inside the carousel
+// Be sure to apply "flexShrink: 0" and "scrollSnapAlign: center" to cards inside the carousel
+
+// If viewWidth is defined, then the size of the viewing window will be set to viewWidth.
+// In order to view a numCards amount in the carousel view window, 
+// numCards and cardWidthPx must be included in carouselProps, 
+// and viewWidth should NOT be defined. 
 export function Carousel( {carouselProps, children} : { carouselProps: CarouselProps, children: ReactNode}) {
     let cardWidthPx = carouselProps.cardWidthPx;
     let numCards = carouselProps.numCards;
     let cardSpacingPx = carouselProps.cardSpacingPx;
+    let viewWidth = carouselProps.viewWidth;
 
     let fitsNumCards;
     let spaceNeeded;
@@ -85,7 +93,7 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                 <HStack 
                 id='carousel'
                 height='110%' 
-                width={fitsNumCards ? spaceNeeded : cardWidthPx}
+                width={viewWidth? viewWidth : (fitsNumCards ? spaceNeeded : cardWidthPx)}
                 spacing={cardSpacingPx + 'px'}
                 padding='40px'
                 overflow='auto' 
