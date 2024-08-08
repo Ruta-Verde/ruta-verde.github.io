@@ -1,7 +1,5 @@
 import '../styles/home.css';
-import Slideshow from '../components/Slideshow.tsx';
-import Preview from '../components/Preview.tsx';
-import PreviewSlide from '../components/PreviewSlides.tsx';
+import { useState } from 'react'
 import {
   Box,
   Flex,
@@ -13,10 +11,15 @@ import {
   HStack,
   VStack,
   FormControl,
+  FormErrorMessage,
   Input
 } from '@chakra-ui/react';
+import Slideshow from '../components/Slideshow.tsx';
+import Preview from '../components/Preview.tsx';
+import PreviewSlide from '../components/PreviewSlides.tsx';
 import { filler } from '../components/constants/constants.tsx';
 import { previews } from '../components/constants/constants.tsx';
+import { createClient } from "@supabase/supabase-js";
 import sec2 from '../assets/sec2.png';
 import fade1 from '../assets/fade1.png';
 import fade2 from '../assets/fade2.png';
@@ -30,7 +33,44 @@ const slides = [
   { title: 'Reciprocity', text: filler, image: 'https://www.farmforum.net/gcdn/media/2021/04/26/FarmForum/882912dd9fbadaedfba8b9cc9dec197a.jpg?width=1200&disable=upscale&format=pjpg&auto=webp'},
 ];
 
+const supabase = createClient('https://qsgwjthppqjynzrggfxe.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3dqdGhwcHFqeW56cmdnZnhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjI4OTIzNzcsImV4cCI6MjAzODQ2ODM3N30.MIO_xSERAO5gZRyM9HnvDAAAkCBbb-xHdq04qm8DA_c')
+
 function Home() {
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [nameError, setNameError] = useState<boolean>(false)
+  const [emailError, setEmailError] = useState<boolean>(false)
+
+  const handleNameChange = (name: React.ChangeEvent<HTMLInputElement>) => setName(name.target.value)
+  const handleEmailChange = (email: React.ChangeEvent<HTMLInputElement>) => setEmail(email.target.value)
+
+  const validateEmail = (email: string) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
+
+  async function handleClick(name: string, email: string) {
+    if (name === '') {
+      setNameError(true)
+    }
+    if (email === '' || !validateEmail(email)) {
+      setEmailError(true)
+    }
+
+    let { data, error } = await supabase.rpc('add_email', {name: name, email: email})
+    
+    if (error) {
+      alert("here")
+      // alert("there was an error sending your information. Please try again in a bit.")
+      alert(data.statusText)
+    }
+    setName('')
+    setNameError(false)
+    setEmail('')
+    setEmailError(false)
+  }
+
   return (
     <Box>
       <Box>
@@ -181,13 +221,19 @@ function Home() {
             Sign up to receive information about sustainability and events
           </Text>
           <Box display={['inline', null, 'flex']} pt={['10px', null, null, '30px']} justifyContent='center' alignItems='center' w='100%'>
-            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']}>
-              <Input bgColor='white' placeholder='Name' />
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} isInvalid={nameError}>
+              <Input type='name' bgColor='white' textColor='black' placeholder='Name' value={name} onChange={handleNameChange} />
+              {nameError &&
+                <FormErrorMessage>Please input a name</FormErrorMessage> 
+              } 
             </FormControl>
-            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} mt={['10px', null, '0px']}>
-              <Input bgColor='white' placeholder='Email' />
+            <FormControl w={['100%', null, null, '500px']} mr={['0px', null, '10px', '50px']} mt={['10px', null, '0px']} isInvalid={emailError}>
+              <Input type='email' bgColor='white' textColor='black' placeholder='Email' value={email} onChange={handleEmailChange} />
+              {emailError &&
+                <FormErrorMessage zIndex='3'>Please input a valid email</FormErrorMessage> 
+              }
             </FormControl>
-            <Button w={['60%', null, null, '300px']} h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523' mt={['50px', null, '0px']}>
+            <Button w={['60%', null, null, '300px']} h='40px' borderRadius='10px' fontWeight='bold' bgColor='#E9D523' mt={['50px', null, '0px']} onClick={() => handleClick(name, email)}>
               Sign Up
             </Button>
           </Box>
