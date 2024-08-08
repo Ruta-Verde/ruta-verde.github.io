@@ -10,6 +10,8 @@ This uses React and ChakraUI
 - Navigate to repo `cd ruta-verde.github.io`
 - Install dependencies `npm install`
 - Run the site locally `npm run dev`
+- Check there are no errors before pushing with `npm run build`
+
 
 ## Getting started
 

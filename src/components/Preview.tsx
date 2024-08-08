@@ -5,6 +5,7 @@ function Preview({ title, text, img }: PreviewProps) {
   return (
     <VStack width='100%' spacing='20px'>
       <Image width={['240px', '275px']} height={['305px', '350px']} src={img} alt="Your Image" borderRadius="50px" overflow='hidden' />
+
       <>
         <Text fontSize="xl" fontWeight="bold">
           {title}
