@@ -43,6 +43,7 @@ function useMediaQuery(query) {
   return matches;
 }
 
+// be sure to apply "flexShrink: 0" and "scrollSnapAlign: center" to cards inside the carousel
 function Carousel({children, cardWidthPx, numCards, cardSpacingPx = 60}) {
     let fitsNumCards;
     let spaceNeeded;
