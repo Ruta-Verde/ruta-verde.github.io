@@ -3,13 +3,13 @@ import {
     Flex,
     Text,
     Card,
-    HStack,
     Heading,
     Image,
     Link,
     Button,
   } from '@chakra-ui/react'
-
+import { Carousel } from './Carousel.tsx'
+import { CarouselProps } from './Carousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import pic from '../assets/research.png';
 
@@ -20,27 +20,20 @@ const dateOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric'
 }
 
+const carouselProps: CarouselProps = {
+    numCards: 3,
+    cardSpacing: '40px',
+    cardWidth: '250px',
+}
+
 function EventsCarousel() {
     return (
         <Flex 
-        mt='20px' 
         height='700px' w='100%' 
         alignItems='center' justifyContent='center' 
         bg='#F0F0F0'
         >
-            {/* extra container to hide scrollbar */}
-            <Flex 
-            height='100%' w='100%' 
-            justifyContent='center' alignItems='center' 
-            >
-                <HStack 
-                height='150%' 
-                width='70%'
-                spacing='60px' 
-                overflowX='auto' 
-                overscrollBehaviorX='contain'
-                scrollSnapType='x mandatory'
-                > 
+            <Carousel carouselProps={carouselProps}>
                 {eventList.map( event => 
                     <Card
                     h='500px' w='250px' 
@@ -54,6 +47,7 @@ function EventsCarousel() {
                         <Flex
                         w='100%' h='200px'
                         >
+                            {/* corner date tag */}
                             <Flex 
                             flexDirection='column'
                             padding='5px'
@@ -143,9 +137,8 @@ function EventsCarousel() {
                             </Button>
                         </Flex>
                     </Card>
-        )}
-                </HStack>
-            </Flex>
+                )}
+            </Carousel>
         </Flex>
     )
 }
