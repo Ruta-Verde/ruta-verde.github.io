@@ -1,5 +1,6 @@
 import '../styles/home.css';
 import { useState } from 'react'
+import {Carousel} from '../components/Carousel.tsx'
 import {
   Box,
   Flex,
@@ -16,7 +17,6 @@ import {
 } from '@chakra-ui/react';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
-import PreviewSlide from '../components/PreviewSlides.tsx';
 import { filler } from '../components/constants/constants.tsx';
 import { previews } from '../components/constants/constants.tsx';
 import { createClient } from "@supabase/supabase-js";
@@ -70,7 +70,7 @@ function Home() {
   }
 
   return (
-    <Box>
+    <Box w='100vw'>
       <Box>
         <Slideshow slides={slides}/>
       </Box>
@@ -92,14 +92,34 @@ function Home() {
           future we must act together!
         </Text>
       </Box>
-      <SimpleGrid className='wide-prev' columns={[1, null, null, 3]} spacing='10px' px={['1rem', null, '8rem']} py='5rem'>
-        {previews.map( (preview) => (
-          <Preview title={preview.title} text={preview.text} img={preview.img} />
-        ))}
-      </SimpleGrid>
-      <Box className='mobile-prev' h='670px' py='50px'>
-        <PreviewSlide previews={previews}/>
-      </Box>
+      <Flex id='action-preview-cards'
+      alignItems='center' justifyContent='center'
+      height='800px' 
+      >
+        <Flex 
+        className='wide-prev' 
+        alignItems='center' justifyContent='center'
+        >
+          <SimpleGrid verticalAlign='top' columns={3} spacing='10px' py='5rem'>
+            {previews.map( (preview) => (
+              <Preview title={preview.title} text={preview.text} img={preview.img} />
+            ))}
+          </SimpleGrid>
+
+        </Flex>
+        <Flex className='mobile-prev' 
+        alignItems='center' justifyContent='center'
+        overflow='hidden'
+        height='80%'
+        >
+          <Carousel carouselProps={{cardSpacing:'50px', numCards: 1, cardWidth: '320px', align: 'top'}}>
+            {previews.map( (preview) => (
+              <Preview title={preview.title} text={preview.text} img={preview.img} />
+            ))}
+          </Carousel>
+        </Flex>
+
+      </Flex>
       <HStack position='relative' h={['550px', null, '500px']}>
         <Box
         w='100%'
