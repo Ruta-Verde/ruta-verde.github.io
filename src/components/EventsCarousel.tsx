@@ -22,8 +22,8 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
 const carouselProps: CarouselProps = {
     numCards: 3,
-    cardSpacingPx: 40,
-    cardWidthPx: 250,
+    cardSpacing: '40px',
+    cardWidth: '250px',
 }
 
 function EventsCarousel() {
