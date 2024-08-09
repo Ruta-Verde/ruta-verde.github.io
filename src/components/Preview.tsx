@@ -1,20 +1,34 @@
-import { Text, Image, VStack } from '@chakra-ui/react';
+import { Text, Image, Flex } from '@chakra-ui/react';
 import { PreviewProps } from './constants/constants.tsx';
 
 function Preview({ title, text, img }: PreviewProps) {
   return (
-    <VStack width='100%' spacing='20px'>
-      <Image width={['240px', '275px']} height={['305px', '350px']} src={img} alt="Your Image" borderRadius="50px" overflow='hidden' />
-
+    <Flex flexDirection='column' flexShrink='0' 
+        scrollSnapAlign='center' 
+        width='320px'
+        alignItems='center'
+    >
+      <Image 
+        width='275px' height='350px' 
+        objectFit='cover'
+        src={img} alt="Your Image" 
+        borderRadius="50px" 
+        overflow='hidden' 
+        />
       <>
+      <Flex 
+        flexDirection='column'
+        alignItems='center' 
+      >
         <Text fontSize="xl" fontWeight="bold">
           {title}
         </Text>
         <Text fontSize='lg' w='55%'>
           {text}
         </Text>
+      </Flex>
       </>
-    </VStack>
+    </Flex>
   );
 };
 
