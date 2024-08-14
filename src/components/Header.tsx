@@ -25,12 +25,11 @@ import Logo from '../assets/rutalogo.svg';
 
 function Header() {
   return (
-    <Flex className='header' height={['80px', null, '100px', null, '130px']} alignItems='center' justifyContent='center'>
+    <Flex className='header' height={['80px', null, '100px', null, '130px']} px={['10px', null, null, null, '150px']} alignItems='center' justifyContent='center'>
       <LinkBox
       display='flex'
       as={RouterLink}
       to="/"
-      marginLeft={['10px', null, null, null, '23px']}
       w={['90px', '100px', null, null, '119px']}
       h='100%'
       alignItems='center'
@@ -52,7 +51,7 @@ function Header() {
           Sustainability Nonprofit</Text>
       </LinkBox>
       <Spacer/>
-      <Flex className='navbar' h='100%' alignItems='center' justifyContent='center'>
+      <Flex className='navbar' h='100%' alignItems='center' justifyContent='center' right='50px'>
         <NavBar />
       </Flex>
     </Flex>
@@ -63,7 +62,7 @@ function NavBar() {
   return(
     <>
       <Box className='non-phone' alignContent='center' height='50px'>
-        <ButtonGroup spacing='60px'>
+        <ButtonGroup spacing='40px'>
         <Link as={RouterLink} to="/about">
           <Button variant='link' color='#385C40' height='100%'>
             About

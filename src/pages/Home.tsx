@@ -79,12 +79,11 @@ function Home() {
         <Text
         position='absolute'
         top={['17%', null, '20%', '25%']}
-        left='50%'
-        ml='-40%'
-        w='80%'
-        fontSize={['14px', null, '20px', '25px', '30px', '40px']}
+        left={['10%', null, null, null, '10.6%']}
+        w={['80%', null, null, null, '78.8%']}
+        fontSize={['14px', null, '20px', '25px', '30px', '38px']}
         lineHeight={['40px', '45px', '50px']}
-        textAlign={'center'}
+        textAlign={['center', null, null, 'center']}
         fontWeight='bold'
         >
           Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. 
@@ -135,7 +134,7 @@ function Home() {
           textColor='white' 
           w={['70%', null, null, '30%']}
           top={['13%', null, '16%']}
-          left={['17%', null, null, '15%']}
+          left={['17%', null, null, '166px']}
           h='80%'
           spacing='40px'
           >
@@ -194,11 +193,11 @@ function Home() {
           <VStack
           position='absolute'
           textAlign='left'
-          align='left'
+          align={['left', null, null, null, 'right']}
           textColor='white' 
           w={['70%', null, null, '30%']}
           top={['9%', null, '16%']}
-          left={['17%', null, null, '60%']}
+          right={['17%', null, null, '166px']}
           h='80%'
           spacing='30px'
           >
@@ -231,7 +230,7 @@ function Home() {
         </VStack>
       </Flex>
       <Flex bgColor='#385C40' h={['500px', null, '400px']} textColor='white' justifyContent='center' alignItems={['stretch', null, null, 'center']}>
-        <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '0px']}>
+        <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '0px']} px='13px'>
           <Heading fontSize={['4xl', null, '6xl']} justifyContent='center'>
             Stay Updated With Ruta Verde
           </Heading>
