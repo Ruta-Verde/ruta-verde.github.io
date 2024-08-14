@@ -52,7 +52,7 @@ function Slideshow({ slides }: SlideProps) {
           <Box className='slider' style={{
             translate: `${-100 * imageIndex}%`, filter: 'brightness(90%)'}}>
             <Image key={slide.image} src={slide.image} className='slider' w='100%' h={['350px', null, null, '500px', '600px', '700px']} objectFit='cover'/>
-            <Box position='absolute' top='30%' left='166px' textColor='white' textAlign='left'>
+            <Box position='absolute' top='30%' left={['50px', null, null, '76px', '166px']} textColor='white' textAlign='left'>
               <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b'>
                 {slide.title}
               </Text>

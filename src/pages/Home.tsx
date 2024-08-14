@@ -132,9 +132,9 @@ function Home() {
           textAlign='left'
           align='left'
           textColor='white' 
-          w={['70%', null, null, '30%']}
-          top={['13%', null, '16%']}
-          left={['17%', null, null, '166px']}
+          w={['70%', null, null, '50%', '30%']}
+          top={['13%', null, null, null, '16%']}
+          left={['17%', null, null, '76px', '166px']}
           h='80%'
           spacing='40px'
           >
@@ -149,9 +149,9 @@ function Home() {
       </HStack>
       <Box h={['770px', null, '650px', '500px']}>
         <HStack className='wide-prev' position='relative' h='80%' top='10%' spacing='100px'>
-          <Image src={joao} ml='25%' w='auto' h='100%' borderRadius='50px'/>
+          <Image src={joao} ml={['25%', null, null, '10%', '20%']} w='auto' h='100%' borderRadius='50px'/>
           <VStack
-          w='30%'
+          w={['30%', null, null, '40%', '30%']}
           h='100%'
           spacing='40px'
           textAlign='left'
@@ -195,9 +195,9 @@ function Home() {
           textAlign='left'
           align={['left', null, null, null, 'right']}
           textColor='white' 
-          w={['70%', null, null, '30%']}
-          top={['9%', null, '16%']}
-          right={['17%', null, null, '166px']}
+          w={['70%', null, null, '40%', '30%']}
+          top={['10%', null, null, '13%', '16%']}
+          right={['17%', null, null, '76px', '166px']}
           h='80%'
           spacing='30px'
           >
@@ -230,7 +230,7 @@ function Home() {
         </VStack>
       </Flex>
       <Flex bgColor='#385C40' h={['500px', null, '400px']} textColor='white' justifyContent='center' alignItems={['stretch', null, null, 'center']}>
-        <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '0px']} px='13px'>
+        <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '15px', '0px']} px='13px'>
           <Heading fontSize={['4xl', null, '6xl']} justifyContent='center'>
             Stay Updated With Ruta Verde
           </Heading>

@@ -25,7 +25,7 @@ import Logo from '../assets/rutalogo.svg';
 
 function Header() {
   return (
-    <Flex className='header' height={['80px', null, '100px', null, '130px']} px={['10px', null, null, null, '150px']} alignItems='center' justifyContent='center'>
+    <Flex className='header' height={['80px', null, '100px', null, '130px']} px={['10px', null, null, '60px', '150px']} alignItems='center' justifyContent='center'>
       <LinkBox
       display='flex'
       as={RouterLink}
