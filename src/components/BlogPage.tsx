@@ -3,6 +3,9 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
+// Import the PDF file
+import pdfFile from '../assets/magic.pdf';
+
 // Important: set the worker source
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -22,26 +25,26 @@ function BlogPage() {
   }
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
       {error ? (
-        <p>Error: {error}</p>
+        <p style={{ color: 'red', fontWeight: 'bold' }}>Error: {error}</p>
       ) : (
         <>
           <Document
-            file={'../assets/magic.pdf'}
+            file={pdfFile}
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentLoadError}
-            loading="Loading PDF..."
+            loading={<p>Loading PDF...</p>}
           >
-            <Page pageNumber={pageNumber} />
+            <Page pageNumber={pageNumber} width={600} />
           </Document>
           {numPages > 0 && (
-            <p>Page {pageNumber} of {numPages}</p>
+            <p style={{ marginTop: '10px' }}>Page {pageNumber} of {numPages}</p>
           )}
         </>
       )}
     </div>
   );
-};
+}
 
 export default BlogPage;
