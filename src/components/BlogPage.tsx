@@ -25,7 +25,7 @@ function BlogPage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       {error ? (
         <p style={{ color: 'red', fontWeight: 'bold' }}>Error: {error}</p>
       ) : (
@@ -39,7 +39,15 @@ function BlogPage() {
             <Page pageNumber={pageNumber} width={600} />
           </Document>
           {numPages > 0 && (
-            <p style={{ marginTop: '10px' }}>Page {pageNumber} of {numPages}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '10px' }}>
+              <button onClick={() => setPageNumber(prev => Math.max(prev - 1, 1))} disabled={pageNumber <= 1}>
+                Previous
+              </button>
+              <p>Page {pageNumber} of {numPages}</p>
+              <button onClick={() => setPageNumber(prev => Math.min(prev + 1, numPages))} disabled={pageNumber >= numPages}>
+                Next
+              </button>
+            </div>
           )}
         </>
       )}
