@@ -17,12 +17,15 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource-variable/josefin-sans": "^5.0.21",
     "@fontsource/josefin-sans": "^5.0.20",
+    "@react-pdf/renderer": "^3.4.4",
     "@supabase/supabase-js": "^2.45.1",
     "framer-motion": "^11.2.11",
     "node": "^20.15.0",
+    "pdfjs-dist": "^4.5.136",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
+    "react-pdf": "^9.1.0",
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
