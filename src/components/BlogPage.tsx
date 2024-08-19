@@ -9,7 +9,7 @@ import pdfFile from '../assets/magic.pdf';
 
 // Important: set the worker source
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
+  'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
 ).toString();
 
