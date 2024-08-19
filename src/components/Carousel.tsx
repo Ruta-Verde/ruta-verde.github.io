@@ -3,6 +3,7 @@ import {
     HStack,
     Image,
     IconButton,
+    LinkBox,
   } from '@chakra-ui/react'
 
 import {ReactNode, useState, useEffect } from 'react';
@@ -90,6 +91,8 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     position={aboveOneCardWidth ? 'relative' : 'absolute'}
                     left='0'
                     zIndex='1'
+                    _focus={{outline: "none", }}
+                    _hover={{borderWidth: "0"}}
                     icon={<Image w='40px' src={arrowLeftImg}/>}
                     onClick={() => scrollLeft('carousel')}
                 >
@@ -113,6 +116,8 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     opacity={aboveOneCardWidth ? '100%': '50%'}
                     position={aboveOneCardWidth ? 'relative' : 'absolute'}
                     right='0'
+                    _focus={{outline: "none", }}
+                    _hover={{borderWidth: "0"}}
                     icon={<Image w='40px' src={arrowRightImg}/>}
                     onClick={() => scrollRight('carousel')}
                 ></IconButton>
