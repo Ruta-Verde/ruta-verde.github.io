@@ -8,10 +8,7 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import pdfFile from '../assets/magic.pdf';
 
 // Important: set the worker source
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js`;
 
 function BlogPage() {
   const [numPages, setNumPages] = useState<number>(0);
