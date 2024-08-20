@@ -7,7 +7,8 @@ import About from './pages/About.tsx';
 import Donate from './pages/Donate.tsx';
 import SingleEventPage from './pages/SingleEventPage.tsx';
 import Events from './pages/Events.tsx';
-import BlogPage from './components/BlogPage.tsx'
+import Blog from './pages/Blog.tsx'
+import BlogPage from './pages/BlogPage.tsx';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from './theme.tsx'
@@ -25,7 +26,8 @@ function App() {
                 <Route path="/donate" element={<Donate />}/>
                 <Route path="/events" element={<Events />}/>
                 <Route path="/events/:slug" element={<SingleEventPage />}/>
-                <Route path="/blogtest" element={<BlogPage />}/>
+                <Route path='/blog' element={<Blog />}/>
+                <Route path="/blog/:slug" element={<BlogPage />}/>
             </Routes>
           </Flex>
           <Footer />

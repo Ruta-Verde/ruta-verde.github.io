@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Document, Page } from 'react-pdf';
+import { Box, HStack, Text, Avatar } from '@chakra-ui/react';
 import { pdfjs } from 'react-pdf';
+import { blogList } from '../blog_data/blogs.ts';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Import the PDF file
-import pdfFile from '../assets/magic.pdf';
 
 // Important: set the worker source
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.mjs`;
@@ -32,6 +32,9 @@ const navigationStyle = {
 };
 
 function BlogPage() {
+  const { slug } = useParams();
+  const blogPost = blogList.filter(blog => blog.slug === slug)[0];
+  
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
@@ -52,14 +55,33 @@ function BlogPage() {
         <p style={errorStyle}>Error: {error}</p>
       ) : (
         <>
-          <Document
-            file={pdfFile}
-            onLoadSuccess={onDocumentLoadSuccess}
-            onLoadError={onDocumentLoadError}
-            loading={<p>Loading PDF...</p>}
-          >
-            <Page pageNumber={pageNumber} width={600} />
-          </Document>
+          <Box outline='1px solid black'>
+            <HStack ml='130px' mt='50px'>
+              <Avatar size='sm' name='Joao Soto' />
+              <Text fontSize='sm'>
+                {blogPost.author}
+              </Text>
+              <Text fontSize='sm'>
+                {blogPost.date.toLocaleDateString('default', {month: "short" }) + ' '}
+                {blogPost.date.toLocaleDateString('default', {day: "2-digit" }) + ', '}
+                {blogPost.date.toLocaleDateString('default', {year: "numeric" })}
+              </Text>
+              <Text fontSize='sm'>
+                9 min read
+              </Text>
+            </HStack>
+              <Document
+                file={blogPost.src}
+                onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={onDocumentLoadError}
+                loading={<p>Loading PDF...</p>}
+              >
+                {Array.apply(null, Array(numPages))
+                .map((_, i)=>i+1)
+                .map(page => <Page pageNumber={page} width={1000}/>)}
+                {/* <Page pageNumber={pageNumber} width={600} /> */}
+              </Document>
+          </Box>
           {numPages > 0 && (
             <nav style={navigationStyle}>
               <button 
