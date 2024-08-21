@@ -3,10 +3,9 @@ import {
     HStack,
     Image,
     IconButton,
-    LinkBox,
   } from '@chakra-ui/react'
 
-import {ReactNode, useState, useEffect } from 'react';
+import {ReactNode, useState, useEffect} from 'react';
 import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
 
@@ -23,6 +22,15 @@ function scrollRight(id: string) {
     if (element) {
         element.scrollBy({left: element.clientWidth, 
             behavior: "smooth"})
+    }
+}
+
+function getMaxScrollLeft(id: string) {
+    let element = document.getElementById(id);
+    if (element) {
+        return element.scrollWidth - element.clientWidth; 
+    } else {
+        return -1;
     }
 }
 
@@ -70,12 +78,26 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
     if (cardWidth && numCards) {
         widthNeeded = `calc(${cardWidth} * ${numCards} + ${cardSpacing} * ${numCards})`;
 
-        // add 120 to account for 120px taken up by arrows and margins on sides
         fitsNumCards = useMediaQuery(`(min-width: calc(${widthNeeded} + ${totalArrowWidth}))`)
     }
-
     let aboveOneCardWidth = useMediaQuery(`(min-width: calc(${cardWidth} + ${totalArrowWidth}) )`);
 
+    const [scrollLeftPosition, setScrollLeftPosition] = useState(0);
+    useEffect(() => {
+        const carousel = document.getElementById('carousel');
+        if (carousel) {
+            const handleScroll = () => {
+                setScrollLeftPosition(carousel.scrollLeft);
+            };
+            carousel.addEventListener("scroll", handleScroll);
+            return () => {
+                carousel.removeEventListener("scroll", handleScroll);
+            };
+        }
+    }, []);
+
+    let carouselMaxScrollLeft = getMaxScrollLeft('carousel');
+    let carouselPaddingPx = 40;
 
     return (
             <Flex 
@@ -85,27 +107,38 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
             overflow='hidden'
             >
                 <IconButton
-                    aria-label='Left Scroll Button'
-                    mr={aboveOneCardWidth ? '40px' : '0'}
-                    opacity={aboveOneCardWidth ? '100%': '50%'}
-                    position={aboveOneCardWidth ? 'relative' : 'absolute'}
-                    left='0'
-                    zIndex='1'
-                    _focus={{outline: "none", }}
-                    _hover={{borderWidth: "0"}}
-                    icon={<Image w='40px' src={arrowLeftImg}/>}
-                    onClick={() => scrollLeft('carousel')}
+                aria-label='Left Scroll Button'
+                mr={aboveOneCardWidth ? '40px' : '0'}
+                opacity={aboveOneCardWidth ? '100%': '50%'}
+                position={aboveOneCardWidth ? 'relative' : 'absolute'}
+                left='0'
+                zIndex='1'
+                _focus={{outline: "none", }}
+                _hover={{borderWidth: "0"}}
+                icon={
+                    <Image 
+                    w='40px' 
+                    src={arrowLeftImg}
+                    style={scrollLeftPosition <= carouselPaddingPx ? 
+                        {filter: "grayscale(100%)", opacity: "0"} :
+                        {}
+                    }
+                    />
+                }
+                isDisabled={scrollLeftPosition <= carouselPaddingPx}
+                onClick={() => scrollLeft('carousel')}
                 >
                 </IconButton>
                 <HStack 
                 id='carousel'
                 width={viewWidth? viewWidth : (fitsNumCards ? widthNeeded : cardWidth)}
                 spacing={cardSpacing}
-                paddingX='40px'
+                paddingX={carouselPaddingPx + 'px'}
                 paddingY='100%'
                 overflowX='auto' 
                 overscrollBehaviorX='auto'
                 scrollSnapType='x mandatory'
+                boxSizing='border-box'
                 align={carouselProps.align ? carouselProps.align : 'center'}
                 > 
                     {children}
@@ -118,7 +151,17 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     right='0'
                     _focus={{outline: "none", }}
                     _hover={{borderWidth: "0"}}
-                    icon={<Image w='40px' src={arrowRightImg}/>}
+                    icon={
+                        <Image 
+                        w='40px' 
+                        src={arrowRightImg}
+                        style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx? 
+                            {filter: "grayscale(100%)", opacity: "0"} :
+                            {}
+                        }
+                        />
+                    }
+                    isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx}
                     onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>
