@@ -119,22 +119,24 @@ function EventsCarousel() {
                                 </Text>
                             </Flex>
 
-                            <Button 
-                                minHeight='40px' w='100%'
-                                marginTop='15px'
-                                borderRadius='15px'
-                                alignItems='center'
-                                justifyContent='center'
-                                bg='#E9D523'
-                                >
-                                    <Link 
-                                    href={'/#/events/' + event.slug} 
-                                    fontSize='15px' 
-                                    fontWeight='600'
-                                    _hover='none'>
-                                        More Information
-                                    </Link>
-                            </Button>
+                            <Link
+                                href={'/#/events/' + event.slug} 
+                            >
+                                <Button 
+                                    minHeight='40px' w='100%'
+                                    marginTop='15px'
+                                    borderRadius='15px'
+                                    alignItems='center'
+                                    justifyContent='center'
+                                    bg='#E9D523'
+                                    >
+                                        <Text 
+                                        fontSize='15px' 
+                                        fontWeight='600'>
+                                            More Information
+                                        </Text>
+                                </Button>
+                            </Link>
                         </Flex>
                     </Card>
                 )}
