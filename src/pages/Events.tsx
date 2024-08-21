@@ -53,7 +53,10 @@ function Events() {
                     </Heading>
                     <Flex flexDir='column' w='100%'>
                     {eventList.map( event =>
-                        <Flex 
+                        <LinkBox
+                        as={RouterLink}
+                        to={'/events/' + event.slug} 
+                        display='flex'
                         id='event-row'
                         flexDir='column'
                         w='100%'
@@ -88,17 +91,15 @@ function Events() {
                                     <Text textAlign='left' fontSize={{base: '18px', sm: '24px'}}>{event.location}</Text>
                                 </Flex>
                                 <Spacer/>
-                                <LinkBox
-                                as={RouterLink}
-                                to={'/events/' + event.slug} 
-                                display='flex' alignItems='center'>
+                                <Flex
+                                alignItems='center'>
                                     <Image
                                     h='50%'
                                     src={yellowRightArrow}
                                     />
-                                </LinkBox>
+                                </Flex>
                             </Flex>
-                        </Flex>
+                        </LinkBox>
                     )}
                 </Flex>
                 </Flex>    
