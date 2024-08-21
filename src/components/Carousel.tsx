@@ -108,6 +108,7 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
             >
                 <IconButton
                 aria-label='Left Scroll Button'
+                backgroundColor='transparent'
                 mr={aboveOneCardWidth ? '40px' : '0'}
                 opacity={aboveOneCardWidth ? '100%': '50%'}
                 position={aboveOneCardWidth ? 'relative' : 'absolute'}
@@ -144,25 +145,26 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     {children}
                 </HStack>
                 <IconButton
-                    aria-label='Right Scroll Button'
-                    ml={aboveOneCardWidth ? '40px' : '0'}
-                    opacity={aboveOneCardWidth ? '100%': '50%'}
-                    position={aboveOneCardWidth ? 'relative' : 'absolute'}
-                    right='0'
-                    _focus={{outline: "none", }}
-                    _hover={{borderWidth: "0"}}
-                    icon={
-                        <Image 
-                        w='40px' 
-                        src={arrowRightImg}
-                        style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx? 
-                            {filter: "grayscale(100%)", opacity: "0"} :
-                            {}
-                        }
-                        />
+                aria-label='Right Scroll Button'
+                backgroundColor='transparent'
+                ml={aboveOneCardWidth ? '40px' : '0'}
+                opacity={aboveOneCardWidth ? '100%': '50%'}
+                position={aboveOneCardWidth ? 'relative' : 'absolute'}
+                right='0'
+                _focus={{outline: "none", }}
+                _hover={{borderWidth: "0"}}
+                icon={
+                    <Image 
+                    w='40px' 
+                    src={arrowRightImg}
+                    style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx? 
+                        {filter: "grayscale(100%)", opacity: "0"} :
+                        {}
                     }
-                    isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx}
-                    onClick={() => scrollRight('carousel')}
+                    />
+                }
+                isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx}
+                onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>
     )
