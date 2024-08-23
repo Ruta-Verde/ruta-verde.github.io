@@ -145,7 +145,7 @@ function Home() {
             />
           </VStack>
         </Box>
-        <Image src={fade1} position='absolute' left={[null, null, null, '60%']} w={[null, null, null, '40%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
+        <Image src={fade1} position='absolute' left={[null, null, null, '25%', '50%']} w={[null, null, null, '75%', '50%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
       </HStack>
       <Box h={['770px', null, '650px', '500px']}>
         <HStack className='wide-prev' position='relative' h='80%' top='10%' spacing='100px'>
@@ -182,7 +182,7 @@ function Home() {
         </VStack>
       </Box>
       <HStack position='relative' h={['550px', null, '500px']}>
-        <Image src={fade2} position='absolute' left='0%' w={[null, null, null, '40%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
+        <Image src={fade2} position='absolute' left='0%' w={[null, null, null, '74%', '53%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden' />
         <Box
         w='100%'
         height='100%'
@@ -229,7 +229,7 @@ function Home() {
           </Button>
         </VStack>
       </Flex>
-      <Flex bgColor='#385C40' h={['500px', null, '400px']} textColor='white' justifyContent='center' alignItems={['stretch', null, null, 'center']}>
+      <Flex bgColor='#385C40' h={['575px', null, '400px']} textColor='white' justifyContent='center' alignItems={['stretch', null, null, 'center']}>
         <VStack w={['85%', null, '80%']} spacing={['15px', null, '20px']} mt={['40px', null, null, '15px', '0px']} px='13px'>
           <Heading fontSize={['4xl', null, '6xl']} justifyContent='center'>
             Stay Updated With Ruta Verde
