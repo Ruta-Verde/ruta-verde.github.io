@@ -1,3 +1,5 @@
+import file1 from '../assets/magic.pdf';
+
 type BlogInfo = {
   slug: string;
   author: string;
@@ -6,5 +8,5 @@ type BlogInfo = {
 }
 
 export const blogList: BlogInfo[] = [
-  {slug: 'test', author: 'Joao Vilca Soto', date: new Date(), src: 'src/assets/magic.pdf'}
+  {slug: 'test', author: 'Joao Vilca Soto', date: new Date(), src: file1}
 ]
