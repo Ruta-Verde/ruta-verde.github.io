@@ -9,7 +9,7 @@ function Preview({ title, text, img }: PreviewProps) {
         alignItems='center'
     >
       <Image 
-        width='275px' height='350px' 
+        width='100%' height='375px' 
         objectFit='cover'
         src={img} alt="Your Image" 
         borderRadius="50px" 
@@ -19,11 +19,21 @@ function Preview({ title, text, img }: PreviewProps) {
       <Flex 
         flexDirection='column'
         alignItems='center' 
+        w='100%'
       >
-        <Text fontSize="xl" fontWeight="bold">
+        <Text 
+        fontSize="30px" 
+        fontWeight="bold"
+        fontFamily='josefinSans'
+        color='#385C40'
+        mt='15px'
+        >
           {title}
         </Text>
-        <Text fontSize='lg' w='55%'>
+        <Text 
+        fontSize='20px' 
+        mt='10px'
+        w='100%'>
           {text}
         </Text>
       </Flex>

@@ -99,7 +99,7 @@ function Home() {
         className='wide-prev' 
         alignItems='center' justifyContent='center'
         >
-          <SimpleGrid verticalAlign='top' columns={3} spacing='10px' py='5rem'>
+          <SimpleGrid verticalAlign='top' columns={3} spacing='70px' py='5rem'>
             {previews.map( (preview) => (
               <Preview title={preview.title} text={preview.text} img={preview.img} />
             ))}
