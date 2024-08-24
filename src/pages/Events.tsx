@@ -11,9 +11,23 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import EventsCarousel from '../components/EventsCarousel.tsx'
 import { eventList } from '../events_data/events.ts';
+import { VolunteerEvent as Event } from '../events_data/events.ts';
 import yellowRightArrow from '../assets/YellowRightArrow.svg';
 
-function Events() {
+function compareDate(a:Event,b:Event) {
+  if (a.date < b.date)
+     return -1;
+  if (a.date > b.date)
+    return 1;
+  return 0;
+}
+
+var pastEventList: Event[] = eventList
+    .filter(event => event.isFinished === true)
+    .sort(compareDate);
+pastEventList = pastEventList.slice(-5);
+
+export function Events() {
     return (
         <Box w='100vw'>
             <Box
@@ -51,59 +65,67 @@ function Events() {
                     textTransform='uppercase'>
                         Past Events
                     </Heading>
-                    <Flex flexDir='column' w='100%'>
-                    {eventList.map( event =>
-                        <LinkBox
-                        as={RouterLink}
-                        to={'/events/' + event.slug} 
-                        display='flex'
-                        id='event-row'
-                        flexDir='column'
-                        w='100%'
-                        >
+                    {pastEventList.length === 0 ? (
+                        <Box w='100%'>
                             <Box h='2px' w='100%' bg='white'></Box>
-                            <Flex paddingY='22px'>
-                                <Box w='10px' h='100%' bg='yellow'> </Box>
-                                <Flex w='min(80px, 5%)'></Flex>
-                                <Flex
-                                id='event-date'
+                            <Text mt='40px'>
+                                No events
+                            </Text>
+                        </Box>
+                    ) : (
+                        <Flex flexDir='column' w='100%'>
+                            {pastEventList.map( event =>
+                                <LinkBox
+                                as={RouterLink}
+                                to={'/events/' + event.slug} 
+                                display='flex'
+                                id='event-row'
                                 flexDir='column'
-                                justifyContent='center'
-                                alignItems='center'
+                                w='100%'
                                 >
-                                    <Text fontSize={{base: '23px', sm: '30px'}} fontWeight='700'>
-                                        {event.date.toLocaleDateString('default', {month: "short" })}
-                                    </Text>
-                                    <Text marginTop='-15px' fontSize={{base: '45px', sm: '60px'}} fontWeight='700'>
-                                        {event.date.toLocaleDateString('default', {day: "2-digit" })}
-                                    </Text>
-                                </Flex>
-                                <Flex w='min(150px, 10%)'></Flex>
+                                    <Box h='2px' w='100%' bg='white'></Box>
+                                    <Flex paddingY='22px'>
+                                        <Box w='10px' h='100%' bg='yellow'> </Box>
+                                        <Flex w='min(80px, 5%)'></Flex>
+                                        <Flex
+                                        id='event-date'
+                                        flexDir='column'
+                                        justifyContent='center'
+                                        alignItems='center'
+                                        >
+                                            <Text fontSize={{base: '23px', sm: '30px'}} fontWeight='700'>
+                                                {event.date.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
+                                            </Text>
+                                            <Text marginTop='-15px' fontSize={{base: '45px', sm: '60px'}} fontWeight='700'>
+                                                {event.date.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
+                                            </Text>
+                                        </Flex>
+                                        <Flex w='min(150px, 10%)'></Flex>
 
-                                <Flex
-                                id='event-info'
-                                flexDirection='column'
-                                alignItems='flex-start'
-                                marginY='15px'
-                                >
-                                    <Text textAlign='left' lineHeight='30px' fontSize={{base: '30px', sm:'40px'}}>{event.title}</Text> 
-                                    <Spacer/>
-                                    <Text textAlign='left' fontSize={{base: '18px', sm: '24px'}}>{event.location}</Text>
-                                </Flex>
-                                <Spacer/>
-                                <Flex
-                                alignItems='center'>
-                                    <Image
-                                    h='50%'
-                                    src={yellowRightArrow}
-                                    />
-                                </Flex>
-                            </Flex>
-                        </LinkBox>
+                                        <Flex
+                                        id='event-info'
+                                        flexDirection='column'
+                                        alignItems='flex-start'
+                                        marginY='15px'
+                                        >
+                                            <Text textAlign='left' lineHeight='30px' fontSize={{base: '30px', sm:'40px'}}>{event.title}</Text> 
+                                            <Spacer/>
+                                            <Text textAlign='left' fontSize={{base: '18px', sm: '24px'}}>{event.location}</Text>
+                                        </Flex>
+                                        <Spacer/>
+                                        <Flex
+                                        alignItems='center'>
+                                            <Image
+                                            h='50%'
+                                            src={yellowRightArrow}
+                                            />
+                                        </Flex>
+                                    </Flex>
+                                </LinkBox>
+                            )}
+                        </Flex>
                     )}
-                </Flex>
                 </Flex>    
-
             </Flex>
         </Box>
     )

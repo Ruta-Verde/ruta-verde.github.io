@@ -120,13 +120,13 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     <Image 
                     w='40px' 
                     src={arrowLeftImg}
-                    style={scrollLeftPosition <= carouselPaddingPx ? 
+                    style={scrollLeftPosition <= carouselPaddingPx + 10? 
                         {filter: "grayscale(100%)", opacity: "0"} :
                         {}
                     }
                     />
                 }
-                isDisabled={scrollLeftPosition <= carouselPaddingPx}
+                isDisabled={scrollLeftPosition <= carouselPaddingPx + 10}
                 onClick={() => scrollLeft('carousel')}
                 >
                 </IconButton>
@@ -157,13 +157,13 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     <Image 
                     w='40px' 
                     src={arrowRightImg}
-                    style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx? 
+                    style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10? 
                         {filter: "grayscale(100%)", opacity: "0"} :
                         {}
                     }
                     />
                 }
-                isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx}
+                isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10}
                 onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>

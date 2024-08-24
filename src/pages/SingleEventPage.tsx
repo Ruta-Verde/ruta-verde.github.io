@@ -19,7 +19,8 @@ const event = eventList.filter(event => event.slug === slug)[0];
   const dateOptions: Intl.DateTimeFormatOptions = { 
     month: 'long',
     day: '2-digit',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC'
   }
 
 // If event doesn't exist show 404.
