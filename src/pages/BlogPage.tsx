@@ -4,7 +4,6 @@ import { Document, Page } from 'react-pdf';
 import { Box, HStack, Text, Avatar } from '@chakra-ui/react';
 import { pdfjs } from 'react-pdf';
 import { blogList } from '../blog_data/blogs.ts';
-import '../styles/blogPage.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
