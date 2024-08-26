@@ -17,20 +17,23 @@ import {
 } from '@chakra-ui/react';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
-import { filler } from '../components/constants/constants.tsx';
-import { previews } from '../components/constants/constants.tsx';
+import { action, filler, previews, whoWeAre } from '../components/constants/constants.tsx';
 import { createClient } from "@supabase/supabase-js";
 import sec2 from '../assets/sec2.png';
 import fade1 from '../assets/fade1.png';
 import fade2 from '../assets/fade2.png';
 import joao from '../assets/joao.png';
+import trees from '../assets/trees.jpg';
+import squad from '../assets/squad.jpg';
+import carrying from '../assets/carrying.jpg';
+import painting from '../assets/painting.jpg';
 
 const slides = [
-  { title: 'Who We Are', text: filler, image: 'https://creature-companions.in/wp-content/uploads/2024/02/Exploring-the-Fascinating-World-of-Cat-Breeds_-A-Guide-for-Indian-Cat-Lovers-1080x400.png'},
-  { title: 'Environmental Action', text: filler, image: 'https://creature-companions.in/wp-content/uploads/2024/03/Purrfect-Pals-for-Indian-Homes_-Top-Cat-Breeds-That-Thrive-in-Our-Climate-1080x400.png'},
-  { title: 'Research', text: filler, image: 'https://www.valleyvet.com/library/article-si_cat_vaccine.jpg'},
-  { title: 'Ways to Help', text: filler, image: 'https://www.valleyvet.com/library/article-cat-flea-tick-control-comparison.jpg'},
-  { title: 'Reciprocity', text: filler, image: 'https://www.farmforum.net/gcdn/media/2021/04/26/FarmForum/882912dd9fbadaedfba8b9cc9dec197a.jpg?width=1200&disable=upscale&format=pjpg&auto=webp'},
+  { title: 'Environmental Action', text: action, image: carrying},
+  { title: 'Who We Are', text: whoWeAre, image: squad},
+  { title: 'Reciprocity', text: filler, image: trees},
+  { title: 'Research', text: filler, image: painting},
+  { title: 'Ways to Help', text: filler, image: fade1},
 ];
 
 const supabase = createClient('https://qsgwjthppqjynzrggfxe.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZ3dqdGhwcHFqeW56cmdnZnhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjI4OTIzNzcsImV4cCI6MjAzODQ2ODM3N30.MIO_xSERAO5gZRyM9HnvDAAAkCBbb-xHdq04qm8DA_c')
