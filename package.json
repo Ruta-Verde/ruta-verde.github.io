@@ -16,7 +16,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource-variable/josefin-sans": "^5.0.21",
-    "@fontsource/josefin-sans": "^5.0.20",
+    "@fontsource/josefin-sans": "^5.0.21",
     "@react-pdf/renderer": "^3.4.4",
     "@supabase/supabase-js": "^2.45.1",
     "framer-motion": "^11.2.11",
