@@ -53,10 +53,10 @@ function Slideshow({ slides }: SlideProps) {
             translate: `${-100 * imageIndex}%`, filter: 'brightness(90%)'}}>
             <Image key={slide.image} src={slide.image} className='slider' w='100%' h={['350px', null, null, '500px', '600px', '700px']} objectFit='cover'/>
             <Box position='absolute' top='30%' left={['50px', null, null, '76px', '166px']} textColor='white' textAlign='left'>
-              <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b'>
+              <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b' textShadow={'1px 1px #000000'}>
                 {slide.title}
               </Text>
-              <Text fontSize={['xs', 'sm', 'md', 'lg', 'xl']} mt={4} width='20rem'>
+              <Text fontSize={['xs', 'sm', 'md', 'lg', 'xl']} mt={4} width='20rem' textShadow={'1px 1px #000000'}>
                 {slide.text}
               </Text>
             </Box>

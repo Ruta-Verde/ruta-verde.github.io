@@ -63,14 +63,9 @@ function NavBar() {
     <>
       <Box className='non-phone' alignContent='center' height='50px'>
         <ButtonGroup spacing='40px'>
-        <Link as={RouterLink} to="/about">
+        <Link as={RouterLink} to="/events">
           <Button variant='link' color='#385C40' height='100%'>
-            About
-          </Button>
-        </Link>
-        <Link as={RouterLink} to="/action">
-          <Button variant='link' color='#385C40' height='100%'>
-            Action
+            Events
           </Button>
         </Link>
         <Link as={RouterLink} to="/blog">
@@ -78,14 +73,19 @@ function NavBar() {
             Blog
           </Button>
         </Link>
-        <Link as={RouterLink} to="/events">
+        <Link as={RouterLink} to="/about">
           <Button variant='link' color='#385C40' height='100%'>
-            Events
+            About
           </Button>
         </Link>
         <Link as={RouterLink} to="/donate">
+          <Button variant='link' color='#385C40' height='100%'>
+           Donate 
+          </Button>
+        </Link>
+        <Link as={RouterLink} to="/getinvolved">
           <Button height='100%' variant='solid' bg='#E9D523' borderRadius='20px'>
-            Donate
+            Get Involved
           </Button>
         </Link>
         </ButtonGroup>
@@ -118,20 +118,20 @@ function SideNav() {
         <DrawerCloseButton />
         <DrawerBody>
           <VStack>
-            <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'>
-              About
-            </Link>
-            <Link as={RouterLink} to="/action" p={2} borderBottom='1px solid black' width='100%'>
-              Action
+            <Link as={RouterLink} to="/events" p={2} borderBottom='1px solid black' width='100%'>
+              Events
             </Link>
             <Link as={RouterLink} to="/blog" p={2} borderBottom='1px solid black' width='100%'>
               Blog
             </Link>
-            <Link as={RouterLink} to="/events" p={2} borderBottom='1px solid black' width='100%'>
-              Events
+            <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'>
+              About
             </Link>
             <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'>
               Donate
+            </Link>
+            <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}>
+              Get Involved
             </Link>
           </VStack>
         </DrawerBody>

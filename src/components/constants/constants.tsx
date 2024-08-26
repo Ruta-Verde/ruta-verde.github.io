@@ -8,6 +8,10 @@ export type PreviewProps = {
   img: string,
 };
 
+
+export const action = "Actively planting trees, building communities and helping the planet!";
+export const whoWeAre = "A group of environmentalists making a difference!";
+export const getInvolved = "";
 export const filler = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. \
                             Sed cursus ante dapibus diam. Sed nisi. \
                             Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.";
