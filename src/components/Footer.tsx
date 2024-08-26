@@ -3,7 +3,7 @@ import { Box, Text, Link } from '@chakra-ui/react';
 
 function Footer() {
   return (
-    <Box as="footer" bg="teal.500" color="white" textAlign="center">
+    <Box as="footer" bg="#143343" color="white" textAlign="center">
       <Box p={4}> 
         <Text>Ruta Verde Sustainability Nonprofit</Text>
       </Box>
