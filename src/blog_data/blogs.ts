@@ -10,5 +10,5 @@ export type BlogInfo = {
 }
 
 export const blogList: BlogInfo[] = [
-  {slug: 'test', author: 'Joao Vilca Soto', title: 'Testing', summary: 'Testing a thing out', date: new Date(), src: file1}
+  {slug: 'test', author: 'Joao Vilca Soto', title: 'Testing', summary: 'Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out Testing a thing out ', date: new Date(), src: file1}
 ]

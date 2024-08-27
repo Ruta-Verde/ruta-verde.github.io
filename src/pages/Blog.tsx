@@ -10,8 +10,7 @@ import {
   Card,
   CardBody,
   Stack,
-  Link,
-  Divider
+  Link
 } from '@chakra-ui/react';
 import { blogList } from '../blog_data/blogs.ts';
 
@@ -23,10 +22,10 @@ function Blog() {
         <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
         <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Ruta Verde Blog</Text>
       </Box>
-      <Flex h='80px' alignItems='center' justifyContent='center'>
-        <Heading position='relative' textColor='#E9D523' fontSize='2xl' fontWeight='bold'>Latest From Ruta Verde</Heading>
+      <Flex h='80px' alignItems='center' justifyContent='center' pt='15px'>
+        <Heading textColor='#E9D523' fontSize='2xl' fontWeight='bold'>Latest From Ruta Verde</Heading>
       </Flex>
-      <Flex w='100%' h='400px' pb='50px' alignItems='center' justifyContent='center'>
+      <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center'>
         <MainCard post={blogList[0]}/>
       </Flex>
     </Box>
@@ -46,20 +45,20 @@ function MainCard( {post} : {post: BlogInfo} ) {
   }
 
   return(
-    <Flex w='80%'>
-      <Link href={'/#/blog/' + post.slug}>
-        <Card direction='row' h='300px' overflow='hidden' variant='filled' bgColor='#385C40'>
-          <Image w='50%' objectFit='cover' src={redwood} alt='Image'></Image>
-          <Stack textColor='white' spacing='10'>
+    <Flex w={['80%', null, null, '70%']}>
+      <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w='100%' borderRadius={'10px'}>
+        <Card direction='row' h={['300px', null, null, '400px']} overflow='hidden' variant='filled' bgColor='#385C40' borderRadius={'10px'}>
+          <Image w={['0', null, '50%']} objectFit='cover' src={redwood} alt='Image'></Image>
+          <Stack textColor='white' spacing='10' w='100%'>
             <CardBody textAlign='left'>
               <Text>
                 {dateToString(post.date)}
               </Text>
-              <Heading>
+              <Heading py='10px' pb='20px'>
                 {post.title}
               </Heading>
-              <Divider size='20' />
-              <Text>
+              <Box h='5px' w={['100%', null, '50%']} borderBottom='5px solid #E9D523' />
+              <Text py='20px' w={['100%', null, '50%']}>
                 {post.summary}
               </Text>
             </CardBody>
