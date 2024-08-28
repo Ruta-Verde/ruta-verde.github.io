@@ -9,6 +9,14 @@ export type PreviewProps = {
 };
 
 
+export const getInvolvedDonate = 
+  "We are a 501(c)(3) nonprofit and your donation will be tax-deductible.";
+export const getInvolvedEvents = "Volunteer at one of our events!";
+export const getInvolvedInternships = 
+  "Want to volunteer long-term? Check out our internships.";
+export const getInvolvedMmerch =
+  "Buy merchandise from our partner Inca Merch. 50% of all profits go straight to Ruta Verde!";
+
 export const action = "Actively planting trees, building communities and helping the planet!";
 export const whoWeAre = "A group of environmentalists making a difference!";
 export const getInvolved = "";

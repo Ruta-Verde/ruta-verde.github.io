@@ -17,12 +17,13 @@ function GetInvolvedCard({header, text, imageUrl, buttonUrl, isButtonExternal=fa
         overflow='hidden'
         variant='outline'
       >
-        <Image
-          objectFit='cover'
-          maxW={{ base: '100%', sm: '200px' }}
-          src={imageUrl}
-          alt='Cat Img'
-        />
+            <Image
+            objectFit='cover'
+            width={{ base: '400px', sm: '200px' }}
+            height={{ base: '533px', sm: '266px' }}
+            src={imageUrl}
+            alt='Get Involved Image'
+            />
         <Stack>
           <CardBody width='80%'>
             <Heading size='md'>{header}</Heading>
