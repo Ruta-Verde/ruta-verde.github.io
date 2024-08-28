@@ -25,7 +25,6 @@ function Blog() {
   )
 
   const hiddenHeight = (blogList.length - 4) * (160)
-
   useEffect(() => {
     window
     .matchMedia("(min-width: 768px)")
