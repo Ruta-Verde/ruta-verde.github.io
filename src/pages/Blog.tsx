@@ -24,6 +24,8 @@ function Blog() {
     window.matchMedia("(min-width: 768px)").matches
   )
 
+  const hiddenHeight = (blogList.length - 4) * (160)
+
   useEffect(() => {
     window
     .matchMedia("(min-width: 768px)")
@@ -50,7 +52,7 @@ function Blog() {
         }
       </SimpleGrid>
       {show && 
-      <SimpleGrid bgColor='#F0F0F0' pb='50px' columns={1}>
+      <SimpleGrid bgColor='#F0F0F0' columns={1} h={hiddenHeight}>
         {blogList.filter((_, index) => index > 3).map((card) => <BlogCard post={card}/>)}
       </SimpleGrid>
       }
