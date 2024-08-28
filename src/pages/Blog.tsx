@@ -1,6 +1,7 @@
 import blogheader from '../assets/blogheader.jpg';
 import redwood from '../assets/redwood.png';
 import { BlogInfo } from '../blog_data/blogs.ts';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -10,11 +11,24 @@ import {
   Card,
   CardBody,
   Stack,
-  Link
+  Link,
+  SimpleGrid,
+  Button,
+  useBoolean
 } from '@chakra-ui/react';
 import { blogList } from '../blog_data/blogs.ts';
 
 function Blog() {
+  const [show, setShow] = useBoolean(false);
+  const [matches, setMatches] = useState(
+    window.matchMedia("(min-width: 768px)").matches
+  )
+
+  useEffect(() => {
+    window
+    .matchMedia("(min-width: 768px)")
+    .addEventListener('change', e => setMatches( e.matches ));
+  }, []);
   return (
     <Box w='100%'>
       <Box h='100px' position='relative'>
@@ -28,9 +42,25 @@ function Blog() {
       <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>
         <MainCard post={blogList[0]}/>
       </Flex>
-      <Flex bgColor='#F0F0F0' w='100%' h={['500px', null, '800px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>
-        <BlogCard post={blogList[0]}/>
+      <Heading bgColor='#F0F0F0' textColor='#143343' fontSize='4xl' fontWeight='bold' alignSelf='center' pt='50px'>Read More</Heading>
+      <SimpleGrid bgColor='#F0F0F0' w='100%' h={['500px', null, '800px']} pb={[null, null,'50px']} pt='20px' columns={[1, null, 3]} px={['10px', null, null, '60px', '150px']}>
+        {matches ?
+        blogList.filter((_, index) => index > 0).map((card) => <BlogCard post={card}/>) :
+        blogList.filter((_, index) => index >= 1 && index <=3).map((card) => <BlogCard post={card}/>)
+        }
+      </SimpleGrid>
+      {show && 
+      <SimpleGrid bgColor='#F0F0F0' pb='50px' columns={1}>
+        {blogList.filter((_, index) => index > 3).map((card) => <BlogCard post={card}/>)}
+      </SimpleGrid>
+      }
+      {!matches &&
+      <Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
+        <Button onClick={setShow.toggle} bgColor='#E9D523'>
+          {show ? "Collapse" : "Show more"}
+        </Button>
       </Flex>
+      }
     </Box>
   )
 }
@@ -43,10 +73,10 @@ function dateToString(date: Date) {
 
 function BlogCard( {post} : {post: BlogInfo} ) {
   return (
-    <Flex>
-      <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w={['300px', null, '225px']} h={['100px', null, '350px']} borderRadius={'10px'}>
+    <Flex justifySelf={'center'} alignSelf={'center'}>
+      <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w={['300px', null, '225px', null, '300px']} h={['100px', null, '350px']} borderRadius={'10px'}>
         <Card direction='column' overflow='hidden' borderRadius={'10px'}>
-          <Image h={['0px', null, '206.25px']} objectFit='cover' src={redwood} alt='Image'/>
+          <Image h={['0px', null, '206.25px', '225px']} objectFit='cover' src={redwood} alt='Image'/>
           <Stack textColor='#385C40' h='125px' w='100%'>
             <CardBody textAlign='left'>
               <Text>
