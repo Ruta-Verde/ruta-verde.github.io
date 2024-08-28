@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Document, Page } from 'react-pdf';
-import { Box, HStack, Text, Avatar } from '@chakra-ui/react';
+import { Box, HStack, Text, Avatar, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 import { pdfjs } from 'react-pdf';
 import { blogList } from '../blog_data/blogs.ts';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -63,26 +63,31 @@ function BlogPage() {
       ) : (
         <>
           <Box outline='1px solid black' w={['300px', null, null, '1000px']}>
-            <HStack ml={['20px', null, null, '130px']} mt={['10px', null, null, '50px']}>
-              <Avatar size={['xs', null, null, 'sm']} name='Joao Soto' />
-              <Text fontSize={['xs', null, null, 'sm']}>
-                {blogPost.author}
-              </Text>
-              <Text fontSize={['xs', null, null, 'sm']}>
-                {blogPost.date.toLocaleDateString('default', {month: "short" }) + ' '}
-                {blogPost.date.toLocaleDateString('default', {day: "2-digit" }) + ', '}
-                {blogPost.date.toLocaleDateString('default', {year: "numeric" })}
-              </Text>
-              <Text fontSize={['xs', null, null, 'sm']}>
-                9 min read
-              </Text>
-            </HStack>
               <Document
                 file={blogPost.src}
                 onLoadSuccess={onDocumentLoadSuccess}
                 onLoadError={onDocumentLoadError}
-                loading={<p>Loading PDF...</p>}
+                loading={
+                <Box padding='6' boxShadow='lg' bg='white'>
+                  <SkeletonCircle size='10' />
+                  <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+                </Box>
+                }
               >
+                <HStack ml={['20px', null, null, '130px']} mt={['10px', null, null, '50px']}>
+                  <Avatar size={['xs', null, null, 'sm']} name='Joao Soto' />
+                  <Text fontSize={['xs', null, null, 'sm']}>
+                    {blogPost.author}
+                  </Text>
+                  <Text fontSize={['xs', null, null, 'sm']}>
+                    {blogPost.date.toLocaleDateString('default', {month: "short" }) + ' '}
+                    {blogPost.date.toLocaleDateString('default', {day: "2-digit" }) + ', '}
+                    {blogPost.date.toLocaleDateString('default', {year: "numeric" })}
+                  </Text>
+                  <Text fontSize={['xs', null, null, 'sm']}>
+                    9 min read
+                  </Text>
+                </HStack>
                 {Array.apply(null, Array(numPages))
                 .map((_, i)=>i+1)
                 .map(page => <Page className='pages' pageNumber={page} width={matches ? 1000 : 300}/>)}

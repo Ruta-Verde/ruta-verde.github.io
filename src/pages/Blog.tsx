@@ -28,6 +28,9 @@ function Blog() {
       <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center'>
         <MainCard post={blogList[0]}/>
       </Flex>
+      <Flex bgColor='#F0F0F0' w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center'>
+
+      </Flex>
     </Box>
   )
 }
