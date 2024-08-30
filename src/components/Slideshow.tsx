@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, Image, Button, ButtonGroup, Flex, Text } from '@chakra-ui/react';
 import '../styles/slideshow.css';
 
@@ -11,46 +11,79 @@ interface SlideProps {
 }
 
 function Slideshow({ slides }: SlideProps) {
-  const [imageIndex, setCurrentImageIndex] = useState(0);
+  const [scrollLeftPos, setScrollLeftPos] = useState(0);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const scrollRef = useRef(null);
+
+  let imageScrollLeftPosition = Array(slides.length);
+  if (scrollRef.current) {
+    const {clientWidth} = scrollRef.current;
+    imageScrollLeftPosition = (Array.from(Array(slides.length).keys()))
+      .map((element) => element * clientWidth);
+  }
+  
+  // Update scrollLeft variable on scroll
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const {scrollLeft} = scrollRef.current;
+      setScrollLeftPos(scrollLeft);
+    }
+  }
+
+  // Scroll specific element to scrollLeft value
+  const scrollLeftTo = (scrollLeft: number, id: string) => {
+    let element = document.getElementById(id);
+    if (element) {
+      element.scrollTo({left: scrollLeft, behavior: 'smooth'});
+    }
+    setScrollLeftPos(scrollLeft);
+  }
 
   // Function to handle dot clicks
   const handleDotClick = (index: number) => {
-    setCurrentImageIndex(index);
-
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-
-    const newIntervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex == slides.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-
-    setIntervalId(newIntervalId);
+    let newScrollLeft:number = imageScrollLeftPosition[index];
+    setScrollLeftPos(newScrollLeft);
+    scrollLeftTo(newScrollLeft, 'scroller');
   };
 
   // Effect to automatically change slides
   useEffect(() => {
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    
     const timer = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change slide every 5 seconds
+      if (scrollRef.current) {
+        const {clientWidth, scrollWidth} = scrollRef.current;
+        let newScrollLeft = scrollLeftPos + clientWidth >= scrollWidth ? 
+          0 
+          : scrollLeftPos + clientWidth
+        setScrollLeftPos(newScrollLeft);
+        scrollLeftTo(newScrollLeft, 'scroller');
+        }
+
+    }, 5000);
 
     setIntervalId(timer);
 
     return () => clearInterval(timer); // Cleanup on unmount
-  }, [slides]);
+  }, [scrollLeftPos]);
 
   return (
-    <Box position='relative' w='100%'>
+    <Flex position='relative'  w='100%'
+    >
     {/* Display current image */}
-      <Flex w='100%' h='100%' overflow='hidden'>
+      <Flex w='100%' h='100%' 
+      overflow='auto' ref={scrollRef} id='scroller'
+      scrollSnapType='x mandatory'
+      onScroll={handleScroll}
+      style={{scrollbarWidth: 'none'}}
+      >
         {slides.map( (slide) => (
-          <Box className='slider' style={{
-            translate: `${-100 * imageIndex}%`, filter: 'brightness(90%)'}}>
+          <Box className='slider' 
+          style={{filter: 'brightness(90%)'}}
+          scrollSnapAlign='center'
+          >
             <Image key={slide.image} src={slide.image} className='slider' w='100%' h={['350px', null, null, '500px', '600px', '700px']} objectFit='cover'/>
             <Box position='absolute' top='30%' left={['50px', null, null, '76px', '166px']} textColor='white' textAlign='left'>
               <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b' textShadow={'1px 1px #000000'}>
@@ -64,9 +97,18 @@ function Slideshow({ slides }: SlideProps) {
         ))}
       </Flex>
       {/* Navigation dots */}
-      <ButtonGroup spacing={1} mt='10' position='absolute' bottom='30px' left='50%' transform='translate(-50%)' zIndex={3}>
-        {slides.map((_, index) => (
-          index === imageIndex ? 
+      <ButtonGroup spacing={1} 
+      mt='10' 
+      position='absolute' 
+      bottom='30px' 
+      left='50%' 
+      transform='translate(-50%)' 
+      zIndex={3}
+      >
+        {imageScrollLeftPosition.map((_, index) => (
+          scrollLeftPos >= imageScrollLeftPosition[index] 
+          && (scrollLeftPos < imageScrollLeftPosition[index + 1] 
+          || index === imageScrollLeftPosition.length - 1) ? 
           <Button
             key={index}
             onClick={() => handleDotClick(index)}
@@ -90,7 +132,7 @@ function Slideshow({ slides }: SlideProps) {
           />
         ))}
       </ButtonGroup>
-  </Box>
+  </Flex>
   );
 };
 
