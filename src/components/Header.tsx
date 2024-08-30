@@ -6,11 +6,11 @@ import {
   Spacer,
   Image,
   VStack,
+  HStack,
   Link,
   LinkBox,
   Button,
   IconButton,
-  ButtonGroup,
   Drawer,
   DrawerBody,
   DrawerOverlay,
@@ -62,33 +62,42 @@ function NavBar() {
   return(
     <>
       <Box className='non-phone' alignContent='center' height='50px'>
-        <ButtonGroup spacing='40px'>
-        <Link as={RouterLink} to="/events">
-          <Button variant='link' color='#385C40' height='100%'>
-            Events
-          </Button>
-        </Link>
-        <Link as={RouterLink} to="/blog">
-          <Button variant='link' color='#385C40' height='100%'>
-            Blog
-          </Button>
-        </Link>
-        <Link as={RouterLink} to="/about">
-          <Button variant='link' color='#385C40' height='100%'>
-            About
-          </Button>
-        </Link>
-        <Link as={RouterLink} to="/donate">
-          <Button variant='link' color='#385C40' height='100%'>
-           Donate 
-          </Button>
-        </Link>
-        <Link as={RouterLink} to="/getinvolved">
-          <Button height='100%' variant='solid' bg='#E9D523' borderRadius='20px'>
-            Get Involved
-          </Button>
-        </Link>
-        </ButtonGroup>
+        <HStack spacing='40px' height='100%'>
+          <Link as={RouterLink} to="/events" 
+          color='#385C40'
+          _hover={{filter: 'brightness(1.5)'}}
+          _focus={{fontWeight: 'bold'}}>
+              Events
+          </Link>
+          <Link as={RouterLink} to="/blog"
+          color='#385C40'
+          _hover={{filter: 'brightness(1.5)'}}
+          _focus={{fontWeight: 'bold'}}>
+              Blog
+          </Link>
+          <Link as={RouterLink} to="/about"
+          color='#385C40'
+          _hover={{filter: 'brightness(1.5)'}}
+          _focus={{fontWeight: 'bold'}}>
+              About
+          </Link>
+          <Link as={RouterLink} to="/donate"
+          color='#385C40'
+          _hover={{filter: 'brightness(1.5)'}}
+          _focus={{fontWeight: 'bold'}}>
+            Donate 
+          </Link>
+          <Link as={RouterLink} to="/getinvolved" h='100%'>
+            <Button 
+            height='100%' 
+            _focus={{outline: 'none',}} 
+            variant='solid' 
+            bg='#E9D523' 
+            borderRadius='20px'>
+              Get Involved
+            </Button>
+          </Link>
+        </HStack>
       </Box>
       <Box className='phone-nav' h='100%'>
         <SideNav/>
