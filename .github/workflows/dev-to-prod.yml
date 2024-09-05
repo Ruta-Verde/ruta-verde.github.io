@@ -24,4 +24,5 @@ jobs:
         run: |
           git checkout prod
           git pull origin dev
+          git commit -m "Weekly Sync"
           git push origin prod
