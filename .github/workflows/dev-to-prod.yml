@@ -20,6 +20,7 @@ jobs:
           git checkout -b auto-merge-dev-to-prod
 
       - name: Pull new changes
+        run: |
           git pull dev auto-merge-dev-to-prod
       
       - name: Push the new branch
