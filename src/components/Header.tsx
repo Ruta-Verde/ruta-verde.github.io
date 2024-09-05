@@ -23,8 +23,6 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import React from 'react';
 import Logo from '../assets/rutalogo.svg';
 
-// testing
-
 function Header() {
   return (
     <Flex className='header' height={['80px', null, '100px', null, '130px']} px={['10px', null, null, '60px', '150px']} alignItems='center' justifyContent='center'>
