@@ -1,0 +1,32 @@
+name: Merge dev to prod
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight UTC
+  
+jobs:
+  merge_dev_to_prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Create a new branch from dev
+        run: |
+          git fetch origin dev
+          git checkout dev
+          git checkout -b auto-merge-dev-to-prod
+
+      - name: Push the new branch
+        run: |
+          git push origin auto-merge-dev-to-prod
+        
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: prod
+          head: auto-merge-dev-to-prod
+          title: 'Weekly merge of dev into prod'
+          body: 'This PR merges all changes from dev into prod.'
+          commit-message: 'Weekly sync from dev to prod'
+          branch: auto-merge-dev-to-prod
