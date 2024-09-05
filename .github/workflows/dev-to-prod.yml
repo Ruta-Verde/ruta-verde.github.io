@@ -1,29 +1,27 @@
-name: Weekly Prod Sync
+name: Weekly PR from dev to prod
 
 on:
   schedule:
     # Runs at 00:00 every Monday
     - cron: '0 0 * * 1'
-  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  sync-prod:
+  create-pull-request:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Fetch all history for all branches and tags
+          fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
-      - name: Sync prod with dev
-        run: |
-          git checkout prod
-          git pull origin dev
-          git add .
-          git commit -m "Weekly Sync" || echo "No changes to commit"
-          git push origin prod
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: prod
+          base: dev
+          title: 'Weekly merge from dev to prod'
+          body: |
+            This is an automated pull request to merge changes from the dev branch into the prod branch.
+            Please review the changes and merge if everything looks good.
+          labels: automated-pr
