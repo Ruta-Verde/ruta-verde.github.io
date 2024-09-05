@@ -20,16 +20,27 @@ import { blogList } from '../blog_data/blogs.ts';
 
 function Blog() {
   const [show, setShow] = useBoolean(false);
+  const [hiddenHeight, setHiddenHeight] = useState(0)
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
   )
 
-  const hiddenHeight = (blogList.length - 4) * (160)
+
   useEffect(() => {
     window
     .matchMedia("(min-width: 768px)")
     .addEventListener('change', e => setMatches( e.matches ));
+    let height = 0
+    if (matches) {
+      height = ((800 - 20) / 2)
+      let rows = Math.max(Math.floor((blogList.length - 7) / 3), 1)
+      setHiddenHeight(height * rows)
+    } else {
+      height = ((500 - 20) / 3) * (blogList.length - 4)
+      setHiddenHeight(height)
+    }
   }, []);
+
   return (
     <Box w='100%'>
       <Box h='100px' position='relative'>
@@ -44,24 +55,25 @@ function Blog() {
         <MainCard post={blogList[0]}/>
       </Flex>
       <Heading bgColor='#F0F0F0' textColor='#143343' fontSize='4xl' fontWeight='bold' alignSelf='center' pt='50px'>Read More</Heading>
-      <SimpleGrid bgColor='#F0F0F0' w='100%' h={['500px', null, '800px']} pb={[null, null,'50px']} pt='20px' columns={[1, null, 3]} px={['10px', null, null, '60px', '150px']}>
+      <SimpleGrid bgColor='#F0F0F0' w='100%' h={['500px', null, '800px']} pb={[null, null,'50px', '0px']} pt='20px' columns={[1, null, 3]} px={['10px', null, null, '60px', '150px']}>
         {matches ?
-        blogList.filter((_, index) => index > 0).map((card) => <BlogCard post={card}/>) :
-        blogList.filter((_, index) => index >= 1 && index <=3).map((card) => <BlogCard post={card}/>)
+        blogList.filter((_, index) => index >= 1 && index <= 6).map((card) => <BlogCard post={card}/>) :
+        blogList.filter((_, index) => index >= 1 && index <= 3).map((card) => <BlogCard post={card}/>)
         }
       </SimpleGrid>
       {show && 
-      <SimpleGrid bgColor='#F0F0F0' columns={1} h={hiddenHeight}>
-        {blogList.filter((_, index) => index > 3).map((card) => <BlogCard post={card}/>)}
+      <SimpleGrid bgColor='#F0F0F0' columns={[1, null, 3]} h={hiddenHeight} px={['10px', null, null, '60px', '150px']}>
+        {matches ?
+        blogList.filter((_, index) => index > 6).map((card) => <BlogCard post={card}/>) :
+        blogList.filter((_, index) => index > 3).map((card) => <BlogCard post={card}/>)
+        }
       </SimpleGrid>
       }
-      {!matches &&
       <Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
         <Button onClick={setShow.toggle} bgColor='#E9D523'>
           {show ? "Collapse" : "Show more"}
         </Button>
       </Flex>
-      }
     </Box>
   )
 }
