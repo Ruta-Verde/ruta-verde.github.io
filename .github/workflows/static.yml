@@ -4,9 +4,9 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: [prod]
+    branches: ['prod']
   pull_request:
-    branches: [prod]
+    branches: ['prod']
     types: [opened, synchronize]
   
 
