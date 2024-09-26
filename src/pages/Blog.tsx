@@ -1,5 +1,4 @@
 import blogheader from '../assets/blogheader.jpg';
-import redwood from '../assets/redwood.png';
 import { BlogInfo } from '../blog_data/blogs.ts';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import {
@@ -107,7 +106,7 @@ function BlogCard( {post} : {post: BlogInfo} ) {
     <Flex justifySelf={'center'} alignSelf={'center'}>
       <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w={['300px', null, '225px', null, '300px']} h={['100px', null, '350px']} borderRadius={'10px'}>
         <Card direction='column' overflow='hidden' borderRadius={'10px'}>
-          <Image h={['0px', null, '206.25px', '225px']} objectFit='cover' src={redwood} alt='Image'/>
+          <Image h={['0px', null, '206.25px', '225px']} objectFit='cover' src={post.img} alt='Image'/>
           <Stack textColor='#385C40' h='125px' w='100%'>
             <CardBody textAlign='left'>
               <Text>
