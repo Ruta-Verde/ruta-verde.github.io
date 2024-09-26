@@ -5,7 +5,7 @@ on:
   # Runs on pushes targeting the default branch
   workflow_run:
     workflows: ["Weekly PR from dev to prod"]
-    branches: [prod]
+    branches: ["prod"]
     types:
       - completed
   
