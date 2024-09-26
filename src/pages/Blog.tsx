@@ -1,7 +1,7 @@
 import blogheader from '../assets/blogheader.jpg';
 import redwood from '../assets/redwood.png';
 import { BlogInfo } from '../blog_data/blogs.ts';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import {
   Box,
   Flex,
@@ -25,6 +25,9 @@ function Blog() {
     window.matchMedia("(min-width: 768px)").matches
   )
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   useEffect(() => {
     window

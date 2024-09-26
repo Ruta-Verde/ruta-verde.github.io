@@ -13,6 +13,7 @@ import EventsCarousel from '../components/EventsCarousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import { VolunteerEvent as Event } from '../events_data/events.ts';
 import yellowRightArrow from '../assets/YellowRightArrow.svg';
+import { useLayoutEffect } from 'react';
 
 function compareDate(a:Event,b:Event) {
   if (a.date < b.date)
@@ -28,6 +29,10 @@ var pastEventList: Event[] = eventList
 pastEventList = pastEventList.slice(-5);
 
 export function Events() {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+    
     return (
         <Box w='100vw'>
             <Box

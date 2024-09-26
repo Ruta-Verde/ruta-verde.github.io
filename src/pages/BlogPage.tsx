@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Document, Page } from 'react-pdf';
 import { Box, HStack, Text, Avatar, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
@@ -39,6 +39,10 @@ function BlogPage() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 800px)").matches)
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   useEffect(() => {
     window

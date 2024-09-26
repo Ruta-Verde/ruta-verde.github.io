@@ -1,10 +1,11 @@
-import {SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import GetInvolvedCard from '../components/GetInvolvedCard';
 import { GetInvolvedInfo } from '../components/GetInvolvedCard';
 import { getInvolvedDonate, getInvolvedEvents, getInvolvedInternships, getInvolvedMmerch } from '../components/constants/constants';
 import research from '../assets/research.png';
 import will from '../assets/profiles/will.png';
 import incamerch from '../assets/incamerch.png';
+import { useLayoutEffect } from 'react';
 
 
 const cards:GetInvolvedInfo[] = [
@@ -33,6 +34,10 @@ const cards:GetInvolvedInfo[] = [
 ]
 
 function GetInvolved() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
+
   return (
       <SimpleGrid px={['10px', null, null, '60px', '150px']} columns={[1, null, 2]} spacing={5} my={12}>
         {cards.map((card) => 
