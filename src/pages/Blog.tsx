@@ -21,6 +21,8 @@ import { blogList } from '../blog_data/blogs.ts';
 function Blog() {
   const [show, setShow] = useBoolean(false);
   const [hiddenHeight, setHiddenHeight] = useState(0)
+  const [visibleHeight, setVisibleHeight] = useState(0)
+  const [mVisibleHeight, setmVisibleHeight] = useState(0)
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
   )
@@ -42,6 +44,16 @@ function Blog() {
       height = ((500 - 20) / 3) * (blogList.length - 4)
       setHiddenHeight(height)
     }
+    if (blogList.length < 2) {
+      setmVisibleHeight(0)
+      setVisibleHeight(0)
+    } else if (blogList.length < 5) {
+      setmVisibleHeight(500)
+      setVisibleHeight(400)
+    } else {
+      setmVisibleHeight(500)
+      setVisibleHeight(800)
+    }
   }, []);
 
   return (
@@ -54,11 +66,14 @@ function Blog() {
       <Flex h='80px' alignItems='center' justifyContent='center' pt='15px' px={['10px', null, null, '60px', '150px']}>
         <Heading textColor='#E9D523' fontSize='2xl' fontWeight='bold'>Latest From Ruta Verde</Heading>
       </Flex>
-      <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>
-        <MainCard post={blogList[0]}/>
-      </Flex>
-      <Heading bgColor='#F0F0F0' textColor='#143343' fontSize='4xl' fontWeight='bold' alignSelf='center' pt='50px'>Read More</Heading>
-      <SimpleGrid bgColor='#F0F0F0' w='100%' h={['500px', null, '800px']} pb={[null, null,'50px', '0px']} pt='20px' columns={[1, null, 3]} px={['10px', null, null, '60px', '150px']}>
+      {blogList.length > 0 ? 
+        <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>
+          {<MainCard post={blogList[0]}/>}
+        </Flex> :
+        <Text fontSize={'3xl'} fontWeight='bold'> Nothing yet, stay tuned!</Text>
+      }
+      {blogList.length > 1 && <Heading bgColor='#F0F0F0' textColor='#143343' fontSize='4xl' fontWeight='bold' alignSelf='center' pt='50px'>Read More</Heading>}
+      <SimpleGrid bgColor='#F0F0F0' w='100%' h={[mVisibleHeight, null, visibleHeight]} pb={[null, null,'50px', '0px']} pt='20px' columns={[1, null, 3]} px={['10px', null, null, '60px', '150px']}>
         {matches ?
         blogList.filter((_, index) => index >= 1 && index <= 6).map((card) => <BlogCard post={card}/>) :
         blogList.filter((_, index) => index >= 1 && index <= 3).map((card) => <BlogCard post={card}/>)
@@ -72,11 +87,11 @@ function Blog() {
         }
       </SimpleGrid>
       }
-      <Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
+      {<Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
         <Button onClick={setShow.toggle} bgColor='#E9D523'>
           {show ? "Collapse" : "Show more"}
         </Button>
-      </Flex>
+      </Flex> && blogList.length > 7}
     </Box>
   )
 }
@@ -117,7 +132,7 @@ function MainCard( {post} : {post: BlogInfo} ) {
     <Flex w={['80%', null, null, '70%']}>
       <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w='100%' borderRadius={'10px'}>
         <Card direction='row' h={['300px', null, null, '400px']} overflow='hidden' variant='filled' bgColor='#385C40' borderRadius={'10px'}>
-          <Image w={['0', null, '50%']} objectFit='cover' src={redwood} alt='Image'/>
+          <Image w={['0', null, '50%']} objectFit='cover' src={post.img} alt='Image'/>
           <Stack textColor='white' spacing='10' w='100%'>
             <CardBody textAlign='left'>
               <Text>
