@@ -7,7 +7,7 @@ const cards:GetInvolvedInfo[] = [
   text:
   'We are a 501(c)(3) nonprofit and your donation will be tax-deductible.', 
   imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
-   buttonUrl: 'https://www.iatspayments.com/saaura/PA9ACE27D2159C5D04?fbclid=IwAR20hCOzgY97-Gg5nX5oTeQT62TfWgwECUHjDR6wVAgixHHwxQR898UdPZY',
+   buttonUrl: 'https://donate.stripe.com/bIYcNY7yY9whe2I4gg',
    isButtonExternal: true,
   },
   {header: 'Events', 
@@ -38,6 +38,6 @@ function GetInvolved() {
         )}
       </SimpleGrid>
   );
-};
+}
 
 export default GetInvolved;

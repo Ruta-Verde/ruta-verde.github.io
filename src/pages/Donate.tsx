@@ -31,7 +31,7 @@ function Donate() {
     
           <CardFooter>
             <Button variant='solid' colorScheme='teal'>
-            <Link href='https://www.iatspayments.com/saaura/PA9ACE27D2159C5D04?fbclid=IwAR20hCOzgY97-Gg5nX5oTeQT62TfWgwECUHjDR6wVAgixHHwxQR898UdPZY' isExternal>
+            <Link href='https://donate.stripe.com/bIYcNY7yY9whe2I4gg' isExternal>
               Click Here
             </Link>
             </Button>
@@ -40,6 +40,6 @@ function Donate() {
       </Card>
     </Box>
   );
-};
+}
 
 export default Donate;
