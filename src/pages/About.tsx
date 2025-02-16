@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import {
   Box,
   Heading,
@@ -28,6 +29,10 @@ import saherProfilePic from '../assets/profiles/saher.jpg';
 import aboutPic from '../assets/about2.jpg'
 
 function About() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
+  
   return (
     <Box py={16} maxW="90vw" mx={4}>
       <VStack spacing={12} position='relative' align="center">

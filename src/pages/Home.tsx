@@ -10,6 +10,7 @@ import {
   Heading,
   HStack,
   VStack,
+  Link
 } from '@chakra-ui/react';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
@@ -105,6 +106,7 @@ function Home() {
             title='Local Events'
             text='Interested in attending Ruta Verde’s next event? Check out our Events Page to see what’s happening in your area.'
             btntext='Events'
+            link='/#/events'
             />
           </VStack>
         </Box>
@@ -125,9 +127,11 @@ function Home() {
             <Text fontSize={['2xl', null, null, 'xl']} w='80%'>
               Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
             </Text>
-            <Button fontSize='xl' w='50%' h='17%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
-              Our Story
-            </Button>
+            <Link href='/#/about' w='50%' h='17%' borderRadius='25px' bgColor='#E9D523'>
+              <Button bgColor='#E9D523' h='100%' w='100%' fontSize='xl' fontWeight='bold' borderRadius='25px'>
+                Our Story
+              </Button>
+            </Link>
           </VStack>
         </HStack>
         <VStack className='mobile-prev' position='relative' h='90%' top='5%' spacing='20px'>
@@ -138,9 +142,11 @@ function Home() {
           <Text fontSize='xl' w='80%'>
           Joao founded Ruta Verde after noticing a lack of green jobs in the area. Along with graduates from Cascadia college, he started building an organization that could help sustainable solutions come to life.
           </Text>
-          <Button fontSize='xl' w={['70%', null, '35%']} h={['10%', null, '12%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
-            Our Story
-          </Button>
+          <Link href='/#/about' w={['70%', null, '35%']} h={['10%', null, '12%']} borderRadius='25px' bgColor='#E9D523'>
+            <Button fontSize='xl' w='100%' h='100%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+              Our Story
+            </Button>
+          </Link>
         </VStack>
       </Box>
       <HStack position='relative' h={['550px', null, '500px']}>
@@ -166,6 +172,7 @@ function Home() {
             title='Join Us'
             text='We can stop the climate crisis. But we must act now, together, to save our home, our world. Join our cause today!'
             btntext='Get Involved'
+            link='/#/getinvolved'
             />
           </VStack>
         </Box>
@@ -186,9 +193,11 @@ function Home() {
           <Text fontSize='lg'>
             Thanks to generous donors like you, Ruta Verde has been able to donate over $10,000 to other sustainability non-profits.
           </Text>
-          <Button w='45%' h='65px' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
-            Donate Now
-          </Button>
+          <Link w='45%' h='65px' borderRadius='25px' bgColor='#E9D523'>
+            <Button w='100%' h='100%' borderRadius='25px' fontSize='xl' fontWeight='bold' bgColor='#E9D523'>
+              Donate Now
+            </Button>
+          </Link>
         </VStack>
       </Flex>
     </Box>
@@ -196,7 +205,7 @@ function Home() {
   );
 };
 
-function ButtonPreview( {title, text, btntext}: {title: string, text: string, btntext: string} ) {
+function ButtonPreview( {title, text, btntext, link}: {title: string, text: string, btntext: string, link: string} ) {
   return(
     <>
       <Heading fontSize='6xl'>
@@ -205,9 +214,11 @@ function ButtonPreview( {title, text, btntext}: {title: string, text: string, bt
       <Text fontSize={['xl', null, '2xl']} w='90%'>
         {text}
       </Text>
-      <Button fontSize={'xl'} w={['90%', null, '50%']} h={['15%', null, '17%']} borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
-        {btntext}
-      </Button>
+      <Link href={link} w={['90%', null, '50%']} h={['15%', null, '17%']} borderRadius='25px' bgColor='#E9D523'>
+        <Button fontSize={'xl'} w='100%' h='100%' borderRadius='25px' fontWeight='bold' bgColor='#E9D523'>
+          {btntext}
+        </Button>
+      </Link>
     </>
   )
 }

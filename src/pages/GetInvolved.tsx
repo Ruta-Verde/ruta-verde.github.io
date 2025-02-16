@@ -1,36 +1,43 @@
-import {SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import GetInvolvedCard from '../components/GetInvolvedCard';
 import { GetInvolvedInfo } from '../components/GetInvolvedCard';
+import { getInvolvedDonate, getInvolvedEvents, getInvolvedInternships, getInvolvedMmerch } from '../components/constants/constants';
+import research from '../assets/research.png';
+import will from '../assets/profiles/will.png';
+import incamerch from '../assets/incamerch.png';
+import { useLayoutEffect } from 'react';
+
 
 const cards:GetInvolvedInfo[] = [
+  {header: 'Events', 
+   text: getInvolvedEvents,
+   imageUrl: will, 
+   buttonUrl: '/events',
+  },
   {header: 'Donate', 
-  text:
-  'We are a 501(c)(3) nonprofit and your donation will be tax-deductible.', 
-  imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
+   text: getInvolvedDonate,
+   imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
    buttonUrl: 'https://donate.stripe.com/bIYcNY7yY9whe2I4gg',
    isButtonExternal: true,
   },
-  {header: 'Events', 
-   text: 'Volunteer at one of our events!',
-   imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
-   buttonUrl: '/events',
-  },
   {header: 'Internships', 
-  text:
-  'Want to volunteer long-term? Check out our internships.', 
-  imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
+   text: getInvolvedInternships,
+   imageUrl: research,
    buttonUrl: '/internships',
   },
   {header: 'Buy Merchandise', 
-  text:
-  'Buy merchandise from one of our partners. 50% of all profits go straight to Ruta Verde!',
-  imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
-   buttonUrl: '/',
+  text: getInvolvedMmerch,
+   imageUrl: incamerch,
+   buttonUrl: 'https://www.incamerch.com/',
    isButtonExternal: true,
   },
 ]
 
 function GetInvolved() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
+
   return (
       <SimpleGrid px={['10px', null, null, '60px', '150px']} columns={[1, null, 2]} spacing={5} my={12}>
         {cards.map((card) => 

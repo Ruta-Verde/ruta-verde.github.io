@@ -11,6 +11,7 @@ import {
 import {useParams} from 'react-router-dom';
 import { eventList } from '../events_data/events.ts';
 import event1 from '../assets/event1.png';
+import { useLayoutEffect } from 'react';
 
 function SingleEventPage() {
 const { slug } = useParams();
@@ -22,6 +23,9 @@ const event = eventList.filter(event => event.slug === slug)[0];
     year: 'numeric',
     timeZone: 'UTC'
   }
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
 // If event doesn't exist show 404.
   return (
