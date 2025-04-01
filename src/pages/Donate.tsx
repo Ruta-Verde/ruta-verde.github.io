@@ -1,5 +1,7 @@
 import { Box, Heading, Text, Button, Link, Card, Image, Stack, CardBody, CardFooter } from '@chakra-ui/react';
 
+import trees from '../assets/redwood.png';
+
 function Donate() {
   return (
     <Box margin='auto'>
@@ -13,8 +15,8 @@ function Donate() {
         <Image
           objectFit='cover'
           maxW={{ base: '100%', sm: '200px' }}
-          src='https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480'
-          alt='Cat Img'
+          src={trees}
+          alt='Trees Img'
         />
   
         <Stack>
@@ -25,7 +27,7 @@ function Donate() {
             Every dollar donated helps us tremendously as we grow. We are a 501(c)(3) nonprofit and 
             your donation will be tax-deductible. If you require a donation receipt, please email us 
             at info@rutaverde.org and we will get you one. You can make a donation through our processor 
-            iATS payments with the button below:
+            Stripe with the button below:
             </Text>
           </CardBody>
     

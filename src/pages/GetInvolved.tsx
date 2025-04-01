@@ -5,6 +5,7 @@ import { getInvolvedDonate, getInvolvedEvents, getInvolvedInternships, getInvolv
 import research from '../assets/research.png';
 import will from '../assets/profiles/will.png';
 import incamerch from '../assets/incamerch.png';
+import trees from '../assets/redwood.png';
 import { useLayoutEffect } from 'react';
 
 
@@ -16,7 +17,7 @@ const cards:GetInvolvedInfo[] = [
   },
   {header: 'Donate', 
    text: getInvolvedDonate,
-   imageUrl: 'https://www.lismore.nsw.gov.au/files/assets/public/v/1/1.-households/4.-pets-amp-animals/images/kitten.jpg?dimension=pageimage&w=480', 
+   imageUrl: trees,
    buttonUrl: 'https://donate.stripe.com/bIYcNY7yY9whe2I4gg',
    isButtonExternal: true,
   },
