@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
-import { action, filler, previews, whoWeAre } from '../components/constants/constants.tsx';
+import { action, previews, reciprocity, researchText, waysToHelp, whoWeAre } from '../components/constants/constants.tsx';
 import sec2 from '../assets/sec2.png';
 import fade1 from '../assets/fade1.png';
 import fade2 from '../assets/fade2.png';
@@ -27,9 +27,9 @@ import painting from '../assets/painting.jpg';
 const slides = [
   { title: 'Environmental Action', text: action, image: carrying},
   { title: 'Who We Are', text: whoWeAre, image: squad},
-  { title: 'Reciprocity', text: filler, image: trees},
-  { title: 'Research', text: filler, image: painting},
-  { title: 'Ways to Help', text: filler, image: fade1},
+  { title: 'Reciprocity', text: reciprocity, image: trees},
+  { title: 'Research', text: researchText, image: painting},
+  { title: 'Ways to Help', text: waysToHelp, image: fade1},
 ];
 
 function Home() {
@@ -203,7 +203,7 @@ function Home() {
     </Box>
     
   );
-};
+}
 
 function ButtonPreview( {title, text, btntext, link}: {title: string, text: string, btntext: string, link: string} ) {
   return(

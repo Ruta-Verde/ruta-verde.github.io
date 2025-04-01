@@ -20,6 +20,9 @@ export const getInvolvedMmerch =
 export const action = "Actively planting trees, building communities and helping the planet!";
 export const whoWeAre = "A group of environmentalists making a difference!";
 export const getInvolved = "";
+export const reciprocity = "We strive towards treating the planet with respect. We feel its our responsibility to help when needed!";
+export const researchText = "Ruta Verde is actively working on research projects promoting environmental sustainability. Read more on our research page!";
+export const waysToHelp = "Join us in helping the planet! Get involved in our events or donate!";
 export const filler = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. \
                             Sed cursus ante dapibus diam. Sed nisi. \
                             Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.";
