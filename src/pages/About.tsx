@@ -23,7 +23,7 @@ import willProfilePic from '../assets/profiles/will.png';
 import markProfilePic from '../assets/profiles/mark.jpg';
 import thomasProfilePic from '../assets/profiles/thomas.jpg';
 import ericProfilePic from '../assets/profiles/eric.png';
-import sarahProfilePic from '../assets/profiles/sarah.jpg';
+import alexProfilePic from '../assets/profiles/alex.jpeg';
 import colinProfilePic from '../assets/profiles/colin.jpg';
 import saherProfilePic from '../assets/profiles/saher.jpg';
 
@@ -107,9 +107,9 @@ function About() {
               { name: "Mark Matsui", role: "Board Member", image: markProfilePic },
               { name: "Thomas Deiner", role: "Board Member", image: thomasProfilePic},
               { name: "Eric Lee", role: "CFO & Board Member", image: ericProfilePic},
-              { name: "Sarah McDonald", role: "Board Member", image: sarahProfilePic},
               { name: "Colin Edwards", role: "Board Member", image: colinProfilePic },
-              { name: "Saher Ishaq", role: "Project Manager", image: saherProfilePic },
+              { name: "Saher Ishaq", role: "Board Member", image: saherProfilePic },
+              { name: "Alexander Gebru", role: "Board Member", image: alexProfilePic },
             ].map((member, index) => (
               <VStack key={index} align="center" p={4} bg="gray.50" borderRadius="md" boxShadow="sm">
                 <ProfileCard {...member}></ProfileCard>
