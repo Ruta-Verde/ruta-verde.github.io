@@ -32,7 +32,7 @@ function Slideshow({ slides }: SlideProps) {
 
   // Scroll specific element to scrollLeft value
   const scrollLeftTo = (scrollLeft: number, id: string) => {
-    let element = document.getElementById(id);
+    const element = document.getElementById(id);
     if (element) {
       element.scrollTo({left: scrollLeft, behavior: 'smooth'});
     }
@@ -41,7 +41,7 @@ function Slideshow({ slides }: SlideProps) {
 
   // Function to handle dot clicks
   const handleDotClick = (index: number) => {
-    let newScrollLeft:number = imageScrollLeftPosition[index];
+    const newScrollLeft:number = imageScrollLeftPosition[index];
     setScrollLeftPos(newScrollLeft);
     scrollLeftTo(newScrollLeft, 'scroller');
   };
@@ -55,7 +55,7 @@ function Slideshow({ slides }: SlideProps) {
     const timer = setInterval(() => {
       if (scrollRef.current) {
         const {clientWidth, scrollWidth} = scrollRef.current;
-        let newScrollLeft = scrollLeftPos + clientWidth >= scrollWidth ? 
+        const newScrollLeft = scrollLeftPos + clientWidth >= scrollWidth ? 
           0 
           : scrollLeftPos + clientWidth
         setScrollLeftPos(newScrollLeft);
@@ -67,7 +67,7 @@ function Slideshow({ slides }: SlideProps) {
     setIntervalId(timer);
 
     return () => clearInterval(timer); // Cleanup on unmount
-  }, [scrollLeftPos]);
+  }, [intervalId, scrollLeftPos]);
 
   return (
     <Flex position='relative'  w='100%'
@@ -87,10 +87,10 @@ function Slideshow({ slides }: SlideProps) {
           >
             <Image key={slide.image} src={slide.image} className='slider' w='100%' h={['350px', null, null, '500px', '600px', '700px']} objectFit='cover'/>
             <Box position='absolute' top='30%' left={['50px', null, null, '76px', '166px']} textColor='white' textAlign='left'>
-              <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b' textShadow={'1px 1px #000000'}>
+              <Text fontSize={['xl', '2xl', '3xl', '4xl', '5xl']} as='b' textShadow={'2px 2px #000000'}>
                 {slide.title}
               </Text>
-              <Text fontSize={['xs', 'sm', 'md', 'lg', 'xl']} mt={4} width='20rem' textShadow={'1px 1px #000000'}>
+              <Text fontSize={['xs', 'sm', 'md', 'lg', 'xl']} mt={4} width='20rem' textShadow={'2px 2px #000000'}>
                 {slide.text}
               </Text>
             </Box>
@@ -135,6 +135,6 @@ function Slideshow({ slides }: SlideProps) {
       </ButtonGroup>
   </Flex>
   );
-};
+}
 
 export default Slideshow;

@@ -7,6 +7,7 @@ import {
     Image,
     Link,
     Button,
+    VStack,
   } from '@chakra-ui/react'
 import { Carousel } from './Carousel.tsx'
 import { CarouselProps } from './Carousel.tsx'
@@ -42,8 +43,10 @@ const upcomingEventList: Event[] = eventList
 function EventsCarousel() {
     return (
         <Flex 
-        height='700px' w='100%' 
-        alignItems='center' justifyContent='center' 
+        // height='700px'
+        w='100%' 
+        alignItems='center' 
+        justifyContent='center' 
         bg='#F0F0F0'
         >
             {upcomingEventList.length === 0 ? (
@@ -51,6 +54,12 @@ function EventsCarousel() {
                     No upcoming events at the moment
                 </Text>
             ) : (
+                <>
+                <VStack>
+                <Text 
+                bg='#F0F0F0'
+                pt={'20px'}
+                fontSize='xl'>Email <Link href='mailto:info@rutaverde.org'>info@rutaverde.org</Link> to join open events!</Text>
                 <Carousel carouselProps={carouselProps}>
                     {upcomingEventList.map( event => 
                         <Card
@@ -83,13 +92,31 @@ function EventsCarousel() {
                                         {event.date.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
                                     </Text>
                                 </Flex>
-                                <Image
-                                objectFit='cover'
-                                minW='100%'
-                                alt="event"
-                                src={event.image}/>
-                            </Flex>
 
+                                {/* corner open icon */}
+                                { event.open && <Flex 
+                                flexDirection='column'
+                                padding='5px'
+                                position='absolute'
+                                w='80px' h='40px'
+                                bg='#23d5e9'
+                                top='0'
+                                right='0'
+                                borderRadius='15px 15px 15px 15px'
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                                >
+                                    <Text fontSize='15px' fontWeight='700'>
+                                        Open
+                                    </Text>
+                                </Flex> }
+                            <Image
+                            objectFit='cover'
+                            minW='100%'
+                            alt="event"
+                            src={event.image}/>
+                        </Flex>
+                            
                             {/* card header and body text */}
                             <Flex
                             padding='20px'
@@ -159,6 +186,8 @@ function EventsCarousel() {
                         </Card>
                     )}
                 </Carousel>
+                </VStack>
+                </>
             )}
         </Flex>
     )

@@ -9,13 +9,14 @@ export type VolunteerEvent = {
     location: string;
     about: string;
     isFinished: boolean;
+    open?: boolean;
 }
 
 export const eventList:VolunteerEvent[] = [
     {slug: "tree-giveaway", title:"Tree Giveaway", image: event1, date: new Date("2025-04-02"), location: "Bellevue, WA", about: "Ruta Verde is giving away tree saplings to individuals and organizations!", isFinished: true},
     {slug: "chelan-trip", title:"Lake Chelan Property Volunteering", image: event1, date: new Date("2025-04-26"), location: "Lake Chelan, WA", about: "A group of volunteers from Ruta Verde and other organiations are driving up to the property in Lake Chelan. During this time they'll be planting trees, foraging the land, studying bio-diversity and more.", isFinished: true},
-    {slug: "cascadia-biofi", title:"Cascadia BioFi Conference", image: cascadia_biofi, date: new Date("2025-05-16"), location: "Georgetown Steamplant", about: "Ruta Verde will be tabling at the Cascadia BioFi Conference. Learn more at www.cascadiabiofi.org/", isFinished: false},
-    {slug: "meeting", title:"Ruta Verde Board", image: event1, date: new Date("2025-06-01"), location: "Online", about: "Monthly Ruta Verde meeting. Join and learn what Ruta Verde has accomplished this month and what our future plans are.", isFinished: false},
+    {slug: "cascadia-biofi", title:"Cascadia BioFi Conference", image: cascadia_biofi, date: new Date("2025-05-16"), location: "Georgetown Steamplant", about: "Ruta Verde will be tabling at the Cascadia BioFi Conference. Learn more at www.cascadiabiofi.org/", isFinished: false, open: true},
+    {slug: "meeting", title:"Ruta Verde Meeting", image: event1, date: new Date("2025-06-01"), location: "Online", about: "Monthly Ruta Verde meeting. Join and learn what Ruta Verde has accomplished this month and what our future plans are.", isFinished: false},
 /*     {slug: "filler12", title:"Past Event", date: new Date('2023-01-18'), location: "Some Place", about: "this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event.", isFinished: true},
     {slug: "filler13", title:"Past Event", date: new Date("2023-10-28"), location: "Some Place", about: "this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event.", isFinished: true},
     {slug: "filler14", title:"Past Event", date: new Date("2023-08-11"), location: "Some Place", about: "this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event this is an example event.", isFinished: true},

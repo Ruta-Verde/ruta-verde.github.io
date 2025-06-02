@@ -17,8 +17,8 @@ export const getInvolvedInternships =
 export const getInvolvedMmerch =
   "Buy merchandise from our partner Inca Merch. 50% of all profits go straight to Ruta Verde!";
 
-export const action = "Actively planting trees, building communities and helping the planet!";
-export const whoWeAre = "A group of environmentalists making a difference!";
+export const action = "Ruta Verde is a non-profit making the future green. Actively planting trees, building communities and helping the planet!";
+export const whoWeAre = "A community of environmentalists making a difference!";
 export const getInvolved = "";
 export const reciprocity = "We strive towards treating the planet with respect. We feel its our responsibility to help when needed!";
 export const researchText = "Ruta Verde is actively working on research projects promoting environmental sustainability. Read more on our research page!";
