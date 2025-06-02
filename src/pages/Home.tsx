@@ -38,6 +38,23 @@ function Home() {
       <Box>
         <Slideshow slides={slides}/>
       </Box>
+      <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
+        <Image src={sec2} w='100%' h={['350px', null, null, '400px']} opacity='35%' />
+        <Text
+        position='absolute'
+        top={['17%', null, '20%', '25%']}
+        left={['10%', null, null, null, '10.6%']}
+        w={['80%', null, null, null, '78.8%']}
+        fontSize={['14px', null, '20px', '25px', '30px', '38px']}
+        lineHeight={['40px', '45px', '50px']}
+        textAlign={['center', null, null, 'center']}
+        fontWeight='bold'
+        >
+          Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. 
+          From building community forests to urban plantings to sponsoring events, we know that to build a greener 
+          future we must act together!
+        </Text>
+      </Box>
       <HStack position='relative' h={['550px', null, '500px']}>
         <Box
         w='100%'
@@ -67,23 +84,6 @@ function Home() {
         </Box>
         <Image src={fade1} position='absolute' left={[null, null, null, '25%', '50%']} w={[null, null, null, '75%', '50%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
       </HStack>
-      <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
-        <Image src={sec2} w='100%' h={['350px', null, null, '400px']} opacity='35%' />
-        <Text
-        position='absolute'
-        top={['17%', null, '20%', '25%']}
-        left={['10%', null, null, null, '10.6%']}
-        w={['80%', null, null, null, '78.8%']}
-        fontSize={['14px', null, '20px', '25px', '30px', '38px']}
-        lineHeight={['40px', '45px', '50px']}
-        textAlign={['center', null, null, 'center']}
-        fontWeight='bold'
-        >
-          Founded in 2020, Ruta Verde has been supporting Environmental Action and Research for a Greener Future. 
-          From building community forests to urban plantings to sponsoring events, we know that to build a greener 
-          future we must act together!
-        </Text>
-      </Box>
       <Flex id='action-preview-cards'
       alignItems='center' justifyContent='center'
       height='800px' 

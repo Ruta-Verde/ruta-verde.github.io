@@ -104,11 +104,13 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
 
     const carouselMaxScrollLeft = getMaxScrollLeft('carousel');
     const carouselPaddingPx = 40;
+    const carouselPaddingPy = 40;
 
     return (
             <Flex 
             flexDir='row'
-            height='100%' w='100%' 
+            height='100%' 
+            w='100%' 
             justifyContent='center' alignItems='center' 
             overflow='hidden'
             >
@@ -141,7 +143,7 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                 width={viewWidth? viewWidth : (fitsNumCards ? widthNeeded : cardWidth)}
                 spacing={cardSpacing}
                 paddingX={carouselPaddingPx + 'px'}
-                paddingY='100%'
+                paddingY={carouselPaddingPy + 'px'}
                 overflowX='auto' 
                 overscrollBehaviorX='auto'
                 scrollSnapType='x mandatory'

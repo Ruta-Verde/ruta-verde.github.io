@@ -6,7 +6,7 @@ import {
     Heading,
     Spacer,
     Image,
-    LinkBox
+    LinkBox,
   } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom';
 import EventsCarousel from '../components/EventsCarousel.tsx'
@@ -14,7 +14,6 @@ import { eventList } from '../events_data/events.ts';
 import { VolunteerEvent as Event } from '../events_data/events.ts';
 import yellowRightArrow from '../assets/YellowRightArrow.svg';
 import { useLayoutEffect } from 'react';
-import Linkify from 'linkify-react';
 import blogheader from '../assets/blogheader.jpg';
 
 function compareDate(a:Event,b:Event) {
@@ -36,7 +35,6 @@ export function Events() {
     });
     
     return (
-        <Linkify>
             <Box w='100vw'>
                     <Box h='100px' position='relative'>
                     <Image position='absolute' src={blogheader} h='100px' w='100%' objectFit='cover' zIndex='0'/>
@@ -130,7 +128,6 @@ export function Events() {
                     </Flex>    
                 </Flex>
             </Box>
-        </Linkify>
     )
 }
 
