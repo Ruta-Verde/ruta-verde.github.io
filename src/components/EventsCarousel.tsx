@@ -12,7 +12,6 @@ import { Carousel } from './Carousel.tsx'
 import { CarouselProps } from './Carousel.tsx'
 import { eventList } from '../events_data/events.ts';
 import { VolunteerEvent as Event } from '../events_data/events.ts';
-import pic from '../assets/research.png';
 
 const dateOptions: Intl.DateTimeFormatOptions = { 
     weekday: "long",
@@ -36,7 +35,7 @@ function compareDate(a:Event,b:Event) {
   return 0;
 }
 
-var upcomingEventList: Event[] = eventList
+const upcomingEventList: Event[] = eventList
     .filter(event => event.isFinished === false)
     .sort(compareDate);
 
@@ -88,7 +87,7 @@ function EventsCarousel() {
                                 objectFit='cover'
                                 minW='100%'
                                 alt="event"
-                                src={pic}/>
+                                src={event.image}/>
                             </Flex>
 
                             {/* card header and body text */}

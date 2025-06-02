@@ -92,7 +92,7 @@ function BlogPage() {
                     9 min read
                   </Text>
                 </HStack>
-                {Array.apply(null, Array(numPages))
+                {[...Array(numPages)]
                 .map((_, i)=>i+1)
                 .map(page => <Page className='pages' pageNumber={page} width={matches ? 1000 : 300}/>)}
               </Document>

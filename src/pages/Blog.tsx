@@ -37,7 +37,7 @@ function Blog() {
     let height = 0
     if (matches) {
       height = ((800 - 20) / 2)
-      let rows = Math.max(Math.floor((blogList.length - 7) / 3), 1)
+      const rows = Math.max(Math.floor((blogList.length - 7) / 3), 1)
       setHiddenHeight(height * rows)
     } else {
       height = ((500 - 20) / 3) * (blogList.length - 4)
@@ -86,11 +86,12 @@ function Blog() {
         }
       </SimpleGrid>
       }
-      {<Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
+      {blogList.length > 7 &&
+        <Flex justifyContent='center' bgColor='#F0F0F0' p='20px'>
         <Button onClick={setShow.toggle} bgColor='#E9D523'>
           {show ? "Collapse" : "Show more"}
         </Button>
-      </Flex> && blogList.length > 7}
+      </Flex> }
     </Box>
   )
 }

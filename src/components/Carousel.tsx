@@ -10,7 +10,7 @@ import arrowLeftImg from '../assets/ArrowL.svg';
 import arrowRightImg from '../assets/ArrowR.svg';
 
 function scrollLeft(id: string) {
-    let element = document.getElementById(id);
+    const element = document.getElementById(id);
     if (element) {
         element.scrollBy({left: -element.clientWidth, 
             behavior: "smooth"})
@@ -18,7 +18,7 @@ function scrollLeft(id: string) {
 }
 
 function scrollRight(id: string) {
-    let element = document.getElementById(id);
+    const element = document.getElementById(id);
     if (element) {
         element.scrollBy({left: element.clientWidth, 
             behavior: "smooth"})
@@ -26,7 +26,7 @@ function scrollRight(id: string) {
 }
 
 function getMaxScrollLeft(id: string) {
-    let element = document.getElementById(id);
+    const element = document.getElementById(id);
     if (element) {
         return element.scrollWidth - element.clientWidth; 
     } else {
@@ -67,20 +67,26 @@ export interface CarouselProps {
 // numCards and cardWidth must be included in carouselProps, 
 // and viewWidth should NOT be defined. 
 export function Carousel( {carouselProps, children} : { carouselProps: CarouselProps, children: ReactNode}) {
-    let cardWidth = carouselProps.cardWidth;
-    let numCards = carouselProps.numCards;
-    let cardSpacing = carouselProps.cardSpacing? carouselProps.cardSpacing : 0;
-    let viewWidth = carouselProps.viewWidth;
+    const cardWidth = carouselProps.cardWidth;
+    const numCards = carouselProps.numCards;
+    const cardSpacing = carouselProps.cardSpacing? carouselProps.cardSpacing : 0;
+    const viewWidth = carouselProps.viewWidth;
 
-    let fitsNumCards;
     let widthNeeded;
-    let totalArrowWidth = '160px' // total width of arrows and margin for arrows
+    const totalArrowWidth = '160px' // total width of arrows and margin for arrows
+    
+    // Calculate width needed outside the conditional
     if (cardWidth && numCards) {
         widthNeeded = `calc(${cardWidth} * ${numCards} + ${cardSpacing} * ${numCards})`;
-
-        fitsNumCards = useMediaQuery(`(min-width: calc(${widthNeeded} + ${totalArrowWidth}))`)
     }
-    let aboveOneCardWidth = useMediaQuery(`(min-width: calc(${cardWidth} + ${totalArrowWidth}) )`);
+    
+    // Move hooks outside of conditionals to satisfy React's rules of hooks
+    const fitsNumCardsQuery = cardWidth && numCards 
+        ? `(min-width: calc(${widthNeeded} + ${totalArrowWidth}))`
+        : `(min-width: 9999px)`; // Fallback query that won't match
+    
+    const fitsNumCards = useMediaQuery(fitsNumCardsQuery);
+    const aboveOneCardWidth = useMediaQuery(`(min-width: calc(${cardWidth} + ${totalArrowWidth}) )`);
 
     const [scrollLeftPosition, setScrollLeftPosition] = useState(0);
     useEffect(() => {
@@ -96,8 +102,8 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
         }
     }, []);
 
-    let carouselMaxScrollLeft = getMaxScrollLeft('carousel');
-    let carouselPaddingPx = 40;
+    const carouselMaxScrollLeft = getMaxScrollLeft('carousel');
+    const carouselPaddingPx = 40;
 
     return (
             <Flex 

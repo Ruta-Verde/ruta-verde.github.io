@@ -10,8 +10,8 @@ import {
 } from '@chakra-ui/react';
 import {useParams} from 'react-router-dom';
 import { eventList } from '../events_data/events.ts';
-import event1 from '../assets/event1.png';
 import { useLayoutEffect } from 'react';
+import Linkify from 'linkify-react';
 
 function SingleEventPage() {
 const { slug } = useParams();
@@ -29,6 +29,7 @@ const event = eventList.filter(event => event.slug === slug)[0];
 
 // If event doesn't exist show 404.
   return (
+    <Linkify>
     <Box py={16} margin="auto">
         <>
       <VStack spacing={12} position='relative' align="center">
@@ -38,7 +39,7 @@ const event = eventList.filter(event => event.slug === slug)[0];
         <Flex direction={{ base: 'column', md: 'row' }}  justifyContent="center" maxW={"80%"}>
             <Box pr={{ base: 0, md: 8 }} maxW={{md: "35%", base: "100%"}}>
                 <Image 
-                    src={event1}
+                    src={event.image}
                     alt="Team" 
                     borderRadius="md" 
                     boxShadow="lg"
@@ -68,7 +69,8 @@ const event = eventList.filter(event => event.slug === slug)[0];
         </VStack>
         </>
     </Box>
+    </Linkify>
   );
-};
+}
 
 export default SingleEventPage;
