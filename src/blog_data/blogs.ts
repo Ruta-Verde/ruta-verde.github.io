@@ -17,7 +17,7 @@ export type BlogInfo = {
 }
 
 export const blogList: BlogInfo[] = [
-  {slug: 'blog-douglas', author: 'Joao Vilca Soto', title: 'Trees: Douglas Fir', summary: 'Ruta Verde\'s brochure on Douglas Fir trees. Click to learn more about them! From our founder and CEO, Joao.', date: new Date('2025-04-02'), src: blogDouglas, img: douglas},
-  {slug: 'blog-spruce', author: 'Joao Vilca Soto', title: 'Trees: Sitka Spruce', summary: '', date: new Date('2025-04-02'), src: blogSpruce, img: sitka},
-  {slug: 'blog-cedar', author: 'Joao Vilca Soto', title: 'Trees: Western Red Cedar', summary: '', date: new Date('2025-04-02'), src: blogCedar, img: redwood},
+  {slug: 'blog-douglas', author: 'Joao Vilca Soto', title: 'Douglas Fir', summary: 'Ruta Verde\'s brochure on Douglas Fir trees. Click to learn more about them! From our founder and CEO, Joao.', date: new Date('2025-04-02'), src: blogDouglas, img: douglas},
+  {slug: 'blog-spruce', author: 'Joao Vilca Soto', title: 'Sitka Spruce', summary: '', date: new Date('2025-04-02'), src: blogSpruce, img: sitka},
+  {slug: 'blog-cedar', author: 'Joao Vilca Soto', title: 'Red Cedar', summary: '', date: new Date('2025-04-02'), src: blogCedar, img: redwood},
 ]
