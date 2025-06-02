@@ -25,8 +25,8 @@ import carrying from '../assets/carrying.jpg';
 import painting from '../assets/painting.jpg';
 
 const slides = [
-  { title: 'Environmental Action', text: action, image: carrying},
-  { title: 'Who We Are', text: whoWeAre, image: squad},
+  { title: 'Environmental Action', text: action, image: squad},
+  { title: 'Who We Are', text: whoWeAre, image: carrying},
   { title: 'Reciprocity', text: reciprocity, image: trees},
   { title: 'Research', text: researchText, image: painting},
   { title: 'Ways to Help', text: waysToHelp, image: fade1},
@@ -38,6 +38,35 @@ function Home() {
       <Box>
         <Slideshow slides={slides}/>
       </Box>
+      <HStack position='relative' h={['550px', null, '500px']}>
+        <Box
+        w='100%'
+        height='100%'
+        zIndex='2'
+        bgGradient={['linear(to-r, rgba(56, 92, 64, 0.95) 100%, rgba(56, 92, 64, 0))', null, null, 'linear(to-r, rgba(56, 92, 64, 1) 60%, rgba(56, 92, 64, 0))']}
+        position='relative'
+        >
+          <VStack
+          position='absolute'
+          textAlign='left'
+          align='left'
+          textColor='white' 
+          w={['70%', null, null, '50%', '30%']}
+          top={['13%', null, null, null, '16%']}
+          left={['17%', null, null, '76px', '166px']}
+          h='80%'
+          spacing='40px'
+          >
+            <ButtonPreview
+            title='Join Us'
+            text='We can stop the climate crisis. But we must act now, together, to save our home, our world. Join our cause today!'
+            btntext='Get Involved'
+            link='/#/getinvolved'
+            />
+          </VStack>
+        </Box>
+        <Image src={fade1} position='absolute' left={[null, null, null, '25%', '50%']} w={[null, null, null, '75%', '50%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
+      </HStack>
       <Box className='sec2' position='relative' h={['350px', null, null, '400px']}>
         <Image src={sec2} w='100%' h={['350px', null, null, '400px']} opacity='35%' />
         <Text
@@ -149,35 +178,6 @@ function Home() {
           </Link>
         </VStack>
       </Box>
-      <HStack position='relative' h={['550px', null, '500px']}>
-        <Box
-        w='100%'
-        height='100%'
-        zIndex='2'
-        bgGradient={['linear(to-r, rgba(56, 92, 64, 0.95) 100%, rgba(56, 92, 64, 0))', null, null, 'linear(to-r, rgba(56, 92, 64, 1) 60%, rgba(56, 92, 64, 0))']}
-        position='relative'
-        >
-          <VStack
-          position='absolute'
-          textAlign='left'
-          align='left'
-          textColor='white' 
-          w={['70%', null, null, '50%', '30%']}
-          top={['13%', null, null, null, '16%']}
-          left={['17%', null, null, '76px', '166px']}
-          h='80%'
-          spacing='40px'
-          >
-            <ButtonPreview
-            title='Join Us'
-            text='We can stop the climate crisis. But we must act now, together, to save our home, our world. Join our cause today!'
-            btntext='Get Involved'
-            link='/#/getinvolved'
-            />
-          </VStack>
-        </Box>
-        <Image src={fade1} position='absolute' left={[null, null, null, '25%', '50%']} w={[null, null, null, '75%', '50%']} h='100%' transform='scaleX(-1)' zIndex='0' overflow='hidden'/>
-      </HStack>
       <Flex className='wide-prev' height='550px' bgColor='#ADB9B8' justifyContent='center' alignItems='center'>
         <VStack
         w='30%'
