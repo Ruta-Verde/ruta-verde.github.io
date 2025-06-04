@@ -31,7 +31,7 @@ const navigationStyle = {
   marginTop: '10px'
 };
 
-function BlogPage() {
+function SingleBlogPage() {
   const { slug } = useParams();
   const blogPost = blogList.filter(blog => blog.slug === slug)[0];
   
@@ -122,4 +122,4 @@ function BlogPage() {
   );
 }
 
-export default BlogPage;
+export default SingleBlogPage;

@@ -63,7 +63,7 @@ function Blog() {
         <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Ruta Verde Blog</Text>
       </Box>
       <Flex h='80px' alignItems='center' justifyContent='center' pt='15px' px={['10px', null, null, '60px', '150px']}>
-        <Heading textColor='#E9D523' fontSize='2xl' fontWeight='bold'>Latest From Ruta Verde</Heading>
+        <Heading fontSize='4xl' fontWeight='bold'>Latest</Heading>
       </Flex>
       {blogList.length > 0 ? 
         <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>

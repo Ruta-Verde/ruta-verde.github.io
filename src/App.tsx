@@ -5,10 +5,11 @@ import Footer from './components/Footer.tsx';
 import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
 import Projects from './pages/Projects.tsx';
+import SingleProjectPage from './pages/SingleProjectPage.tsx';
 import SingleEventPage from './pages/SingleEventPage.tsx';
 import Events from './pages/Events.tsx';
 import Blog from './pages/Blog.tsx'
-import BlogPage from './pages/BlogPage.tsx';
+import SingleBlogPage from './pages/SingleBlogPage.tsx';
 import GetInvolved from './pages/GetInvolved.tsx';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -25,11 +26,12 @@ function App() {
                 <Route path="/" element={<Home />}/>
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />}/>
+                <Route path="/projects/:slug" element={<SingleProjectPage />}/>
                 <Route path="/getinvolved" element={<GetInvolved />}/>
                 <Route path="/events" element={<Events />}/>
                 <Route path="/events/:slug" element={<SingleEventPage />}/>
                 <Route path='/blog' element={<Blog />}/>
-                <Route path="/blog/:slug" element={<BlogPage />}/>
+                <Route path="/blog/:slug" element={<SingleBlogPage />}/>
             </Routes>
           </Flex>
           <Footer />
