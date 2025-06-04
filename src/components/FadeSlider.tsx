@@ -12,7 +12,7 @@ const previews = [
   { title: 'Reciprocity', text: filler},
 ];
 
-function fadeslider() {
+function FadeSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
 
@@ -59,4 +59,4 @@ function fadeslider() {
   );
 }
 
-export default fadeslider;
+export default FadeSlider;

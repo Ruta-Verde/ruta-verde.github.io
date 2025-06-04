@@ -40,6 +40,6 @@ function Preview({ title, text, img }: PreviewProps) {
       </>
     </Flex>
   );
-};
+}
 
 export default Preview

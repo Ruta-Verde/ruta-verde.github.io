@@ -21,6 +21,6 @@ function FeatureSection() {
       </SimpleGrid>
     </Box>
   );
-};
+}
 
 export default FeatureSection;

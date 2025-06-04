@@ -53,7 +53,7 @@ function Blog() {
       setmVisibleHeight(500)
       setVisibleHeight(800)
     }
-  }, []);
+  }, [matches]);
 
   return (
     <Box w='100%'>

@@ -18,6 +18,6 @@ function Testimonials() {
       </SimpleGrid>
     </Box>
   );
-};
+}
 
 export default Testimonials;
