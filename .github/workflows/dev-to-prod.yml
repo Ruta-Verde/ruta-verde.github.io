@@ -2,8 +2,8 @@ name: Weekly PR from dev to prod
 
 on:
   schedule:
-    # Runs at 00:00 every Monday
-    - cron: '0 0 * * 1'
+    # Runs at 08:00 everyday
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 jobs:
