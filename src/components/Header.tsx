@@ -81,11 +81,11 @@ function NavBar() {
           _focus={{fontWeight: 'bold'}}>
               About
           </Link>
-          <Link as={RouterLink} to="/donate"
+          <Link as={RouterLink} to="/projects"
           color='#385C40'
           _hover={{filter: 'brightness(1.5)'}}
           _focus={{fontWeight: 'bold'}}>
-            Donate 
+            Projects 
           </Link>
           <Link as={RouterLink} to="/getinvolved" h='100%'>
             <Button 
@@ -141,9 +141,9 @@ function SideNav() {
             onClick={onClose}>
               About
             </Link>
-            <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'
+            <Link as={RouterLink} to="/Projects" p={2} borderBottom='1px solid black' width='100%'
             onClick={onClose}>
-              Donate
+              Projects
             </Link>
             <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}
             onClick={onClose}>

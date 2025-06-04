@@ -4,7 +4,7 @@ import Header from './components/Header.tsx';
 import Footer from './components/Footer.tsx';
 import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';
-import Donate from './pages/Donate.tsx';
+import Projects from './pages/Projects.tsx';
 import SingleEventPage from './pages/SingleEventPage.tsx';
 import Events from './pages/Events.tsx';
 import Blog from './pages/Blog.tsx'
@@ -24,7 +24,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />}/>
                 <Route path="/about" element={<About />} />
-                <Route path="/donate" element={<Donate />}/>
+                <Route path="/projects" element={<Projects />}/>
                 <Route path="/getinvolved" element={<GetInvolved />}/>
                 <Route path="/events" element={<Events />}/>
                 <Route path="/events/:slug" element={<SingleEventPage />}/>

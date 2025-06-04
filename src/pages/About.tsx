@@ -40,9 +40,9 @@ function About() {
     <Box h='100px' position='relative'>
       <Image position='absolute' src={blogheader} h='100px' w='100%' objectFit='cover' zIndex='0'/>
       <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
-      <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>About</Text>
+      <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>About Us</Text>
     </Box>
-    <Box py={16} maxW="90vw" mx={4}>
+    <Box py={16} position='relative' maxW="90vw" mx="auto">
       <VStack spacing={12} position='relative' align="center">
         <Flex direction={{ base: 'column', md: 'row' }} align="center" justify="space-between">
           <Box flex={1} pr={{ base: 0, md: 8 }}>
