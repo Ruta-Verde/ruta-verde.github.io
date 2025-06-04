@@ -56,7 +56,7 @@ function Header() {
       </Flex>
     </Flex>
   );
-};
+}
 
 function NavBar() {
   return(
@@ -120,6 +120,8 @@ function SideNav() {
       isOpen={isOpen}
       placement='right'
       onClose={onClose}
+      onOverlayClick={onClose}
+      onEsc={onClose}
       finalFocusRef={btnRef}
       >
         <DrawerOverlay />
@@ -127,19 +129,24 @@ function SideNav() {
         <DrawerCloseButton />
         <DrawerBody>
           <VStack>
-            <Link as={RouterLink} to="/events" p={2} borderBottom='1px solid black' width='100%'>
+            <Link as={RouterLink} to="/events" p={2} borderBottom='1px solid black' width='100%' 
+            onClick={onClose}>
               Events
             </Link>
-            <Link as={RouterLink} to="/blog" p={2} borderBottom='1px solid black' width='100%'>
+            <Link as={RouterLink} to="/blog" p={2} borderBottom='1px solid black' width='100%'
+            onClick={onClose}>
               Blog
             </Link>
-            <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'>
+            <Link as={RouterLink} to="/about" p={2} borderBottom='1px solid black' width='100%'
+            onClick={onClose}>
               About
             </Link>
-            <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'>
+            <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'
+            onClick={onClose}>
               Donate
             </Link>
-            <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}>
+            <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}
+            onClick={onClose}>
               Get Involved
             </Link>
           </VStack>

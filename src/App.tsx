@@ -37,6 +37,6 @@ function App() {
       </Box>
     </ChakraProvider>
   );
-};
+}
 
 export default App
