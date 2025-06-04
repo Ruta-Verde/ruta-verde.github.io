@@ -58,7 +58,7 @@ export function Events() {
                     <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
                     <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Upcoming Events</Text>
                     </Box>
-                <EventsCarousel events={upcomingEventList} />
+                <EventsCarousel events={upcomingEventList}/>
                 <Flex 
                 id='past-events'
                 w='100vw'
@@ -99,6 +99,7 @@ export function Events() {
                                     id='event-row'
                                     flexDir='column'
                                     w='100%'
+                                    key={event.slug}
                                     >
                                         <Box h='2px' w='100%' bg='white'></Box>
                                         <Flex paddingY='22px'>

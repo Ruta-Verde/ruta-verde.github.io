@@ -10,7 +10,6 @@ import {
     VStack,
   } from '@chakra-ui/react'
 import { Carousel } from './Carousel.tsx'
-import { CarouselProps } from './Carousel.tsx'
 import { VolunteerEvent as Event } from '../events_data/events.ts';
 
 const dateOptions: Intl.DateTimeFormatOptions = { 
@@ -21,11 +20,10 @@ const dateOptions: Intl.DateTimeFormatOptions = {
     timeZone: 'UTC',
 }
 
-const carouselProps: CarouselProps = {
-    numCards: 3,
-    cardSpacing: '40px',
-    cardWidth: '250px',
-}
+// Constants for caraousel props.
+const numCardsToView = 3;
+const cardSpacing = '40px';
+const cardWidth = '250px';
 
 export interface EventCarouselProps {
     events: Event[];
@@ -51,7 +49,12 @@ function EventsCarousel({ events }: EventCarouselProps) {
                 bg='#F0F0F0'
                 pt={'20px'}
                 fontSize='xl'>Email <Link href='mailto:info@rutaverde.org'>info@rutaverde.org</Link> to join open events!</Text>
-                <Carousel carouselProps={carouselProps}>
+                <Carousel carouselProps={
+                    {numCardsToView: numCardsToView,
+                     numCardsTotal: events.length,
+                     cardWidth: cardWidth,
+                     cardSpacing: cardSpacing,
+                    }}>
                     {events.map( event => 
                         <Card
                         h='500px' w='250px' 
@@ -61,6 +64,7 @@ function EventsCarousel({ events }: EventCarouselProps) {
                         flexShrink='0' 
                         boxShadow='0px 4px 10px 0px rgba(0, 0, 0, 0.15)'
                         overflow='hidden'
+                        key={event.slug}
                         >
                             <Flex
                             w='100%' h='200px'

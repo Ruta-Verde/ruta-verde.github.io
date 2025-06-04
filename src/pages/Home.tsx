@@ -104,7 +104,7 @@ function Home() {
         overflow='hidden'
         height='80%'
         >
-          <Carousel carouselProps={{cardSpacing:'50px', numCards: 1, cardWidth: '320px', align: 'top'}}>
+          <Carousel carouselProps={{cardSpacing:'50px', numCardsToView: 1, numCardsTotal: 3, cardWidth: '320px', align: 'top'}}>
             {previews.map( (preview) => (
               <Preview title={preview.title} text={preview.text} img={preview.img} />
             ))}
