@@ -63,6 +63,9 @@ const event = eventList.filter(event => event.slug === slug)[0];
                         <Flex direction={'column'} alignItems={"start"}>
                             <Text as={"b"}>DATE</Text>
                             <Text>{event.date.toLocaleDateString('default', dateOptions)}</Text>
+                            {event.endDate ? 
+                            <Text>- {event.endDate.toLocaleDateString('default', dateOptions)}</Text>
+                            : <></>}
                         </Flex>
                     </Flex>
                     <Flex flex={1} mt="8">
