@@ -53,7 +53,8 @@ function useMediaQuery(query:string) {
 }
 
 export interface CarouselProps {
-    numCards?: number,
+    numCardsToView: number,
+    numCardsTotal: number,
     cardWidth: string,
     cardSpacing?: string,
     viewWidth?: string,
@@ -68,7 +69,8 @@ export interface CarouselProps {
 // and viewWidth should NOT be defined. 
 export function Carousel( {carouselProps, children} : { carouselProps: CarouselProps, children: ReactNode}) {
     const cardWidth = carouselProps.cardWidth;
-    const numCards = carouselProps.numCards;
+    const numCards = carouselProps.numCardsToView;
+    const numCardsTotal = carouselProps.numCardsTotal;
     const cardSpacing = carouselProps.cardSpacing? carouselProps.cardSpacing : 0;
     const viewWidth = carouselProps.viewWidth;
 
@@ -106,13 +108,25 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
     const carouselPaddingPx = 40;
     const carouselPaddingPy = 40;
 
+
+    // Disable scrolling to the right when the total number of cards is
+    // less than or equal to the amount to be viewed.
+    const cantScrollLeft = scrollLeftPosition <= carouselPaddingPx + 10;
+    const cantScrollRight = 
+        numCards >= numCardsTotal ||
+        scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10;
+
+    const hideLeftArrow = scrollLeftPosition <= carouselPaddingPx + 10;
+    const hideRightArrow = 
+        numCards >= numCardsTotal ||
+        scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10;
+
     return (
             <Flex 
             flexDir='row'
             height='100%' 
             w='100%' 
             justifyContent='center' alignItems='center' 
-            overflow='hidden'
             >
                 <IconButton
                 aria-label='Left Scroll Button'
@@ -128,13 +142,13 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     <Image 
                     w='40px' 
                     src={arrowLeftImg}
-                    style={scrollLeftPosition <= carouselPaddingPx + 10? 
+                    style={hideLeftArrow ?
                         {filter: "grayscale(100%)", opacity: "0"} :
                         {}
                     }
                     />
                 }
-                isDisabled={scrollLeftPosition <= carouselPaddingPx + 10}
+                isDisabled={cantScrollLeft}
                 onClick={() => scrollLeft('carousel')}
                 >
                 </IconButton>
@@ -165,13 +179,13 @@ export function Carousel( {carouselProps, children} : { carouselProps: CarouselP
                     <Image 
                     w='40px' 
                     src={arrowRightImg}
-                    style={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10? 
+                    style={hideRightArrow ? 
                         {filter: "grayscale(100%)", opacity: "0"} :
                         {}
                     }
                     />
                 }
-                isDisabled={scrollLeftPosition >= carouselMaxScrollLeft - carouselPaddingPx - 10}
+                isDisabled={cantScrollRight}
                 onClick={() => scrollRight('carousel')}
                 ></IconButton>
             </Flex>
