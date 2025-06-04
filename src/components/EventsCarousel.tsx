@@ -11,7 +11,6 @@ import {
   } from '@chakra-ui/react'
 import { Carousel } from './Carousel.tsx'
 import { CarouselProps } from './Carousel.tsx'
-import { eventList } from '../events_data/events.ts';
 import { VolunteerEvent as Event } from '../events_data/events.ts';
 
 const dateOptions: Intl.DateTimeFormatOptions = { 
@@ -28,19 +27,11 @@ const carouselProps: CarouselProps = {
     cardWidth: '250px',
 }
 
-function compareDate(a:Event,b:Event) {
-  if (a.date < b.date)
-     return -1;
-  if (a.date > b.date)
-    return 1;
-  return 0;
+export interface EventCarouselProps {
+    events: Event[];
 }
 
-const upcomingEventList: Event[] = eventList
-    .filter(event => event.isFinished === false)
-    .sort(compareDate);
-
-function EventsCarousel() {
+function EventsCarousel({ events }: EventCarouselProps) {
     return (
         <Flex 
         // height='700px'
@@ -49,7 +40,7 @@ function EventsCarousel() {
         justifyContent='center' 
         bg='#F0F0F0'
         >
-            {upcomingEventList.length === 0 ? (
+            {events.length === 0 ? (
                 <Text>
                     No upcoming events at the moment
                 </Text>
@@ -61,7 +52,7 @@ function EventsCarousel() {
                 pt={'20px'}
                 fontSize='xl'>Email <Link href='mailto:info@rutaverde.org'>info@rutaverde.org</Link> to join open events!</Text>
                 <Carousel carouselProps={carouselProps}>
-                    {upcomingEventList.map( event => 
+                    {events.map( event => 
                         <Card
                         h='500px' w='250px' 
                         scrollSnapAlign='center' 
@@ -137,7 +128,7 @@ function EventsCarousel() {
                                     </Heading>
                                 </Flex>
 
-                                <Flex>
+                                <Flex direction="column">
                                     <Text 
                                     color='#385C40'
                                     fontSize='15px'
@@ -145,6 +136,13 @@ function EventsCarousel() {
                                     >
                                         {event.date.toLocaleDateString('default', dateOptions)}
                                     </Text>
+                                    {event.endDate ? 
+                                    <Text
+                                    color='#385C40'
+                                    fontSize='15px'
+                                    fontWeight='700'
+                                    >- {event.endDate.toLocaleDateString('default', dateOptions)}</Text>
+                                    : <></>}
                                 </Flex>
                                 <Flex marginBottom='20px'>
                                     <Text 

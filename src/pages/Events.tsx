@@ -16,24 +16,41 @@ import yellowRightArrow from '../assets/YellowRightArrow.svg';
 import { useLayoutEffect } from 'react';
 import blogheader from '../assets/blogheader.jpg';
 
+function isBeforeToday(targetDate: Date): boolean {
+    const now = new Date();
+    
+    // Zero out the time components
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const compareDate = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+    
+    return compareDate < today;
+  }
+
+// Events that happen sooner should be first.
 function compareDate(a:Event,b:Event) {
   if (a.date < b.date)
-     return -1;
+     return 1;
   if (a.date > b.date)
-    return 1;
+    return -1;
   return 0;
 }
 
-let pastEventList: Event[] = eventList
-    .filter(event => event.isFinished === true)
-    .sort(compareDate);
-pastEventList = pastEventList.slice(-5);
 
 export function Events() {
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     });
+
+    const pastEventList: Event[] = eventList
+        .filter(event => isBeforeToday(event.date))
+        .sort(compareDate)
+        .slice(-5);
     
+    const upcomingEventList = eventList
+        .filter(event => !isBeforeToday(event.date))
+        .sort(compareDate)
+        .reverse();
+
     return (
             <Box w='100vw'>
                     <Box h='100px' position='relative'>
@@ -41,7 +58,7 @@ export function Events() {
                     <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
                     <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Upcoming Events</Text>
                     </Box>
-                <EventsCarousel />
+                <EventsCarousel events={upcomingEventList} />
                 <Flex 
                 id='past-events'
                 w='100vw'
