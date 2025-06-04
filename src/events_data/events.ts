@@ -1,6 +1,7 @@
 import event1 from '../assets/event1.png';
 import cascadia_biofi from '../assets/cadcadia-biofi.jpg';
 import climate_week from '../assets/climateweek.png';
+import steamplant from '../assets/steamplant.jpg';
 
 export type VolunteerEvent = {
     slug: string;
@@ -52,5 +53,18 @@ export const eventList:VolunteerEvent[] = [
         location: "Vancouver BC / Portland OR", 
         open: true,
         about: "Ruta Verde will be speaking at the Pacific Northwest Climate week event. Find out more at https://pnwclimateweek.org/."
+        },
+    {slug: "meeting-august", 
+        title:"Ruta Verde Meeting", 
+        image: event1, date: new Date("2025-08-03"), 
+        location: "Online", 
+        about: "Monthly Ruta Verde meeting. Join and learn what Ruta Verde has accomplished this month and what our future plans are."
+        },
+    {slug: "georgetown-science-fair", 
+        title:"Georgetown Science Fair", 
+        image: steamplant, date: new Date("2025-09-20"), 
+        location: "Georgetown Steamplant",
+        open: true, 
+        about: "Ruta Verde will be tabling at the Georgetown Science Fair! Click https://www.georgetownsteamplant.org/break-the-system to learn more."
         },
 ]
