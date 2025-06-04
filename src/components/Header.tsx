@@ -18,7 +18,7 @@ import {
   DrawerCloseButton,
   useDisclosure 
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React from 'react';
 import Logo from '../assets/rutalogo.svg';
@@ -59,37 +59,43 @@ function Header() {
 }
 
 function NavBar() {
+  const location = useLocation();
   return(
     <>
       <Box className='non-phone' alignContent='center' height='50px'>
         <HStack spacing='40px' height='100%'>
-          <Link as={RouterLink} to="/events" 
+          <Link as={RouterLink} to="/events"
+          fontWeight={location.pathname === '/events' ? 'bold' : 'normal'} 
           color='#385C40'
           _hover={{filter: 'brightness(1.5)'}}
           _focus={{fontWeight: 'bold'}}>
               Events
           </Link>
           <Link as={RouterLink} to="/blog"
+          fontWeight={location.pathname === '/blog' ? 'bold' : 'normal'} 
           color='#385C40'
           _hover={{filter: 'brightness(1.5)'}}
           _focus={{fontWeight: 'bold'}}>
               Blog
           </Link>
           <Link as={RouterLink} to="/about"
+          fontWeight={location.pathname === '/about' ? 'bold' : 'normal'} 
           color='#385C40'
           _hover={{filter: 'brightness(1.5)'}}
           _focus={{fontWeight: 'bold'}}>
               About
           </Link>
           <Link as={RouterLink} to="/projects"
+          fontWeight={location.pathname === '/projects' ? 'bold' : 'normal'} 
           color='#385C40'
           _hover={{filter: 'brightness(1.5)'}}
           _focus={{fontWeight: 'bold'}}>
-            Projects 
+            Donate 
           </Link>
           <Link as={RouterLink} to="/getinvolved" h='100%'>
             <Button 
             height='100%' 
+            fontWeight={location.pathname === '/getinvolved' ? 'bold' : 'normal'} 
             _focus={{outline: 'none',}} 
             variant='solid' 
             bg='#E9D523' 
@@ -141,9 +147,9 @@ function SideNav() {
             onClick={onClose}>
               About
             </Link>
-            <Link as={RouterLink} to="/Projects" p={2} borderBottom='1px solid black' width='100%'
+            <Link as={RouterLink} to="/donate" p={2} borderBottom='1px solid black' width='100%'
             onClick={onClose}>
-              Projects
+              Donate
             </Link>
             <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}
             onClick={onClose}>
