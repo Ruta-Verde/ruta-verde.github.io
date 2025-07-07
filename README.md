@@ -8,9 +8,9 @@ This uses React and ChakraUI
 
 - Pull `git clone git@github.com:Ruta-Verde/ruta-verde.github.io.git`
 - Navigate to repo `cd ruta-verde.github.io`
-- Install dependencies `npm install`
-- Run the site locally `npm run dev`
-- Check there are no errors before pushing with `npm run build`
+- Install dependencies `pnpm install`
+- Run the site locally `pnpm run dev`
+- Check there are no errors before pushing with `pnpm run build`
 
 
 ## Getting started
@@ -18,7 +18,7 @@ This uses React and ChakraUI
 First, run the development server:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Open the localhost port provided by Vite on your browser
