@@ -8,6 +8,7 @@ export type PreviewProps = {
   img: string,
 };
 
+export const donateLink = "https://donate.stripe.com/bIYcNY7yY9whe2I4gg";
 
 export const getInvolvedDonate = 
   "We are a 501(c)(3) nonprofit and your donation will be tax-deductible.";

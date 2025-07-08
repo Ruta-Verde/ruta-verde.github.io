@@ -14,7 +14,15 @@ import {
 } from '@chakra-ui/react';
 import Slideshow from '../components/Slideshow.tsx';
 import Preview from '../components/Preview.tsx';
-import { action, previews, reciprocity, researchText, waysToHelp, whoWeAre } from '../components/constants/constants.tsx';
+import { 
+  action,
+  previews,
+  reciprocity,
+  researchText,
+  waysToHelp,
+  whoWeAre,
+  donateLink
+} from '../components/constants/constants.tsx';
 import sec2 from '../assets/sec2.png';
 import fade1 from '../assets/fade1.png';
 import fade2 from '../assets/fade2.png';
@@ -193,7 +201,7 @@ function Home() {
           <Text fontSize='lg'>
             Thanks to generous donors like you, Ruta Verde has been able to donate over $10,000 to other sustainability non-profits.
           </Text>
-          <Link w='45%' h='65px' borderRadius='25px' bgColor='#E9D523'>
+          <Link href={donateLink} w='45%' h='65px' borderRadius='25px' bgColor='#E9D523' isExternal>
             <Button w='100%' h='100%' borderRadius='25px' fontSize='xl' fontWeight='bold' bgColor='#E9D523'>
               Donate Now
             </Button>

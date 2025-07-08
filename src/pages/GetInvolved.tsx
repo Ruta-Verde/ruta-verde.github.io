@@ -2,7 +2,7 @@ import blogheader from '../assets/blogheader.jpg';
 import { Box, Image, Text, SimpleGrid } from '@chakra-ui/react';
 import GetInvolvedCard from '../components/GetInvolvedCard';
 import { GetInvolvedInfo } from '../components/GetInvolvedCard';
-import { getInvolvedDonate, getInvolvedEvents, getInvolvedInternships, getInvolvedMmerch } from '../components/constants/constants';
+import { getInvolvedDonate, getInvolvedEvents, getInvolvedInternships, getInvolvedMmerch, donateLink } from '../components/constants/constants';
 import research from '../assets/research.png';
 import will from '../assets/profiles/will.png';
 import incamerch from '../assets/incamerch.png';
@@ -19,7 +19,7 @@ const cards:GetInvolvedInfo[] = [
   {header: 'Donate', 
    text: getInvolvedDonate,
    imageUrl: trees,
-   buttonUrl: 'https://donate.stripe.com/bIYcNY7yY9whe2I4gg',
+   buttonUrl: donateLink,
    isButtonExternal: true,
   },
   {header: 'Internships', 
