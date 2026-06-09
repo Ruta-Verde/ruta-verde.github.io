@@ -22,6 +22,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React from 'react';
 import Logo from '../assets/rutalogo.svg';
+import { useAuth } from '../contexts/AuthContext';
 
 function Header() {
   return (
@@ -60,6 +61,7 @@ function Header() {
 
 function NavBar() {
   const location = useLocation();
+  const { user } = useAuth();
   return(
     <>
       <Box className='non-phone' alignContent='center' height='50px'>
@@ -92,6 +94,26 @@ function NavBar() {
           _focus={{fontWeight: 'bold'}}>
             Donate 
           </Link>
+          {user ? 
+            (
+              <Link as={RouterLink} to="/dashboard"
+                fontWeight={location.pathname === '/dashboard' ? 'bold' : 'normal'}
+                color='#385C40'
+                _hover={{ filter: 'brightness(1.5)' }}
+                _focus={{ fontWeight: 'bold' }}>
+                Dashboard
+              </Link>
+            ) : (
+              <Link as={RouterLink} to="/loginpage"
+                fontWeight={location.pathname === '/loginpage' ? 'bold' : 'normal'}
+                color='#385C40'
+                _hover={{ filter: 'brightness(1.5)' }}
+                _focus={{ fontWeight: 'bold' }}>
+                Login / Signup
+              </Link>
+            )
+          }
+
           <Link as={RouterLink} to="/getinvolved" h='100%'>
             <Button 
             height='100%' 
@@ -115,6 +137,7 @@ function NavBar() {
 function SideNav() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef(null)
+  const { user } = useAuth();
 
   return (
     <>
@@ -151,8 +174,18 @@ function SideNav() {
             onClick={onClose}>
               Donate
             </Link>
-            <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor={'#E9D523'}
-            onClick={onClose}>
+            {user ? 
+              (
+                <Link as={RouterLink} to="/dashboard" p={2} borderBottom='1px solid black' width='100%' onClick={onClose}>
+                  Dashboard
+                </Link>
+              ) : (
+                <Link as={RouterLink} to="/loginpage" p={2} borderBottom='1px solid black' width='100%' onClick={onClose}>
+                  Login / Signup
+                </Link>
+              )
+            }
+            <Link as={RouterLink} to="/getinvolved" p={2} borderBottom='1px solid black' width='100%' textColor='#E9D523' onClick={onClose}>
               Get Involved
             </Link>
           </VStack>
