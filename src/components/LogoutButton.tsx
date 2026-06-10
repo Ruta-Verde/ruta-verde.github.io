@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../lib/supabaseclient'
+import { supabase } from '../lib/supabaseClient'
 
 
 export default function LogoutButton() {

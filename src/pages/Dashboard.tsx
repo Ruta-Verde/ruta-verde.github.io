@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box, Text, VStack } from '@chakra-ui/react'
 import LogoutButton from '../components/LogoutButton'
-import { supabase } from '../lib/supabaseclient'
+import { supabase } from '../lib/supabaseClient'
 
 export default function Dashboard() {
   const [displayName, setDisplayName] = useState<string | null>(null)

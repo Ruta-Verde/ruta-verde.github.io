@@ -1,5 +1,4 @@
-// lib/auth.ts
-import { supabase } from './supabaseclient'
+import { supabase } from './supabaseClient'
 
 export const signInWithGoogle = async (): Promise<void> => {
   await supabase.auth.signInWithOAuth({
