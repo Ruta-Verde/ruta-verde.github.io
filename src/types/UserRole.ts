@@ -1,0 +1,1 @@
+export type UserRole = 'admin' | 'event-organizer' | 'volunteer'
