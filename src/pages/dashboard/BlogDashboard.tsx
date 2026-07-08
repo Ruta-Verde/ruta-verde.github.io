@@ -18,7 +18,6 @@ import {
   Grid,
   GridItem,
   VStack,
-  HStack,
   Heading,
   Text,
   Image,
