@@ -6,6 +6,7 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_f51_JUTRBLUv4ss-ezHcgA_YS_tSsRL
 
 export const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
+    flowType: 'pkce',
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
