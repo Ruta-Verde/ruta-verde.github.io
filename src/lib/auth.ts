@@ -4,7 +4,7 @@ export const signInWithGoogle = async (): Promise<void> => {
   await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: 'https://rutaverde.org/#/auth/callback'
+      redirectTo: 'https://rutaverde.org/#/dashboard'
     },
   })
 }
