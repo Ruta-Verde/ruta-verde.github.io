@@ -60,7 +60,7 @@ function App() {
               <Route path="/loginpage"     element={<LoginPage />} />
               <Route path="/getinvolved"   element={<GetInvolved />} />
               <Route path="/events"        element={<Events />} />
-              <Route path="/events/:slug"  element={<SingleEventPage />} />
+              <Route path="/events/:id"    element={<SingleEventPage />} />
               <Route path="/blog"          element={<Blog />} />
               <Route path="/blog/:slug"    element={<BlogPage />} />
               <Route path="/dashboard" element={<DashboardLayout />}>
