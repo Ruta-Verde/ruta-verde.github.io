@@ -5,9 +5,11 @@
  * Navigates to /dashboard/events/:id on click (stub — swap with real slug later).
  *
  * Status badge coloring:
- *   in-progress  → green
- *   upcoming     → blue
- *   past         → gray
+ *   draft      → purple
+ *   scheduled  → blue
+ *   active     → green
+ *   completed  → gray
+ *   cancelled  → red
  *
  * The card intentionally avoids heavy imagery — the dashboard should feel
  * data-dense, not like the public events page.
@@ -27,29 +29,21 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { MdLocationOn, MdCalendarToday, MdPeople } from 'react-icons/md'
+import type { DashboardEvent } from '../../types/DashboardEvent'
+import type { EventStatus } from '../../types/EventStatus'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
-export type EventStatus = 'in-progress' | 'upcoming' | 'past'
 
-export interface DashboardEvent {
-  id: string
-  title: string
-  status: EventStatus
-  date: string          // ISO string
-  location: string
-  organizerName: string
-  attendeeCount: number
-  /** stub — real app pulls from Supabase storage */
-  attendeeAvatars?: string[]
-}
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 const statusConfig: Record<EventStatus, { label: string; colorScheme: string }> = {
-  'in-progress': { label: 'In Progress', colorScheme: 'green' },
-  upcoming:      { label: 'Upcoming',    colorScheme: 'blue'  },
-  past:          { label: 'Past',        colorScheme: 'gray'  },
+  draft:     { label: 'Draft',     colorScheme: 'purple' },
+  scheduled: { label: 'Upcoming',  colorScheme: 'blue'   },
+  active:    { label: 'In Progress', colorScheme: 'green' },
+  completed: { label: 'Past',      colorScheme: 'gray'   },
+  cancelled: { label: 'Cancelled', colorScheme: 'red'    },
 }
 
 function formatDate(iso: string) {
@@ -126,7 +120,7 @@ export default function EventCard({ event }: EventCardProps) {
         </HStack>
       </VStack>
 
-      {/* Attendee avatar cluster — stub, real app pulls profile_picture_url */}
+      {/* Attendee avatar cluster — stub, real app pulls profile_picture_url
       <Flex justify="space-between" align="center">
         <Text fontSize="xs" color="gray.400" fontFamily="'Josefin Sans', sans-serif">
           Organized by {event.organizerName}
@@ -140,7 +134,7 @@ export default function EventCard({ event }: EventCardProps) {
             </AvatarGroup>
           </Tooltip>
         )}
-      </Flex>
+      </Flex> */}
     </Box>
   )
 }

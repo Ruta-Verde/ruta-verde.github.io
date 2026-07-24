@@ -10,7 +10,7 @@ import {
     VStack,
   } from '@chakra-ui/react'
 import { Carousel } from './Carousel.tsx'
-import { VolunteerEvent as Event } from '../events_data/events.ts';
+import type { PublicEvent } from '../types/PublicEvent.ts';
 
 const dateOptions: Intl.DateTimeFormatOptions = { 
     weekday: "long",
@@ -26,7 +26,7 @@ const cardSpacing = '40px';
 const cardWidth = '250px';
 
 export interface EventCarouselProps {
-    events: Event[];
+    events: PublicEvent[];
 }
 
 function EventsCarousel({ events }: EventCarouselProps) {
@@ -55,22 +55,24 @@ function EventsCarousel({ events }: EventCarouselProps) {
                      cardWidth: cardWidth,
                      cardSpacing: cardSpacing,
                     }}>
-                    {events.map( event => 
+                    {events.map( event => {
+                        const eventDate = new Date(event.date);
+                        return (
                         <Card
-                        h='500px' w='250px' 
-                        scrollSnapAlign='center' 
+                        h='500px' w='250px'
+                        scrollSnapAlign='center'
                         borderRadius='15px'
                         bg='#FFF'
-                        flexShrink='0' 
+                        flexShrink='0'
                         boxShadow='0px 4px 10px 0px rgba(0, 0, 0, 0.15)'
                         overflow='hidden'
-                        key={event.slug}
+                        key={event.id}
                         >
                             <Flex
                             w='100%' h='200px'
                             >
                                 {/* corner date tag */}
-                                <Flex 
+                                <Flex
                                 flexDirection='column'
                                 padding='5px'
                                 position='absolute'
@@ -81,35 +83,17 @@ function EventsCarousel({ events }: EventCarouselProps) {
                                 borderRadius='15px 0px 15px 0px'
                                 >
                                     <Text fontSize='15px' fontWeight='700'>
-                                        {event.date.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
+                                        {eventDate.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
                                     </Text>
                                     <Text marginTop='-15px' fontSize='40px' fontWeight='700'>
-                                        {event.date.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
+                                        {eventDate.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
                                     </Text>
                                 </Flex>
-
-                                {/* corner open icon */}
-                                { event.open && <Flex 
-                                flexDirection='column'
-                                padding='5px'
-                                position='absolute'
-                                w='80px' h='40px'
-                                bg='#23d5e9'
-                                top='0'
-                                right='0'
-                                borderRadius='15px 15px 15px 15px'
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                                >
-                                    <Text fontSize='15px' fontWeight='700'>
-                                        Open
-                                    </Text>
-                                </Flex> }
                             <Image
                             objectFit='cover'
                             minW='100%'
                             alt="event"
-                            src={event.image}/>
+                            src={event.imageUrl ?? undefined}/>
                         </Flex>
                             
                             {/* card header and body text */}
@@ -133,20 +117,13 @@ function EventsCarousel({ events }: EventCarouselProps) {
                                 </Flex>
 
                                 <Flex direction="column">
-                                    <Text 
-                                    color='#385C40'
-                                    fontSize='15px'
-                                    fontWeight='700'
-                                    >
-                                        {event.date.toLocaleDateString('default', dateOptions)}
-                                    </Text>
-                                    {event.endDate ? 
                                     <Text
                                     color='#385C40'
                                     fontSize='15px'
                                     fontWeight='700'
-                                    >- {event.endDate.toLocaleDateString('default', dateOptions)}</Text>
-                                    : <></>}
+                                    >
+                                        {eventDate.toLocaleDateString('default', dateOptions)}
+                                    </Text>
                                 </Flex>
                                 <Flex marginBottom='20px'>
                                     <Text 
@@ -167,9 +144,9 @@ function EventsCarousel({ events }: EventCarouselProps) {
                                 </Flex>
 
                                 <Link
-                                    href={'/#/events/' + event.slug} 
+                                    href={'/#/events/' + event.id}
                                 >
-                                    <Button 
+                                    <Button
                                         minHeight='40px' w='100%'
                                         marginTop='15px'
                                         borderRadius='15px'
@@ -177,8 +154,8 @@ function EventsCarousel({ events }: EventCarouselProps) {
                                         justifyContent='center'
                                         bg='#E9D523'
                                         >
-                                            <Text 
-                                            fontSize='15px' 
+                                            <Text
+                                            fontSize='15px'
                                             fontWeight='600'>
                                                 More Information
                                             </Text>
@@ -186,7 +163,8 @@ function EventsCarousel({ events }: EventCarouselProps) {
                                 </Link>
                             </Flex>
                         </Card>
-                    )}
+                        );
+                    })}
                 </Carousel>
                 </VStack>
                 </>

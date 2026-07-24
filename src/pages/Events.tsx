@@ -10,24 +10,24 @@ import {
   } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom';
 import EventsCarousel from '../components/EventsCarousel.tsx'
-import { eventList } from '../events_data/events.ts';
-import { VolunteerEvent as Event } from '../events_data/events.ts';
+import { usePublicEvents } from '../hooks/usePublicEvents.ts';
+import type { PublicEvent } from '../types/PublicEvent.ts';
 import yellowRightArrow from '../assets/YellowRightArrow.svg';
 import { useLayoutEffect } from 'react';
 import blogheader from '../assets/blogheader.jpg';
 
 function isBeforeToday(targetDate: Date): boolean {
     const now = new Date();
-    
+
     // Zero out the time components
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const compareDate = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
-    
+
     return compareDate < today;
   }
 
 // Events that happen sooner should be first.
-function compareDate(a:Event,b:Event) {
+function compareDate(a:PublicEvent,b:PublicEvent) {
   if (a.date < b.date)
      return 1;
   if (a.date > b.date)
@@ -41,13 +41,15 @@ export function Events() {
         window.scrollTo(0, 0)
     });
 
-    const pastEventList: Event[] = eventList
-        .filter(event => isBeforeToday(event.date))
+    const { events, loading, error } = usePublicEvents();
+
+    const pastEventList: PublicEvent[] = events
+        .filter(event => isBeforeToday(new Date(event.date)))
         .sort(compareDate)
-        .slice(-5);
-    
-    const upcomingEventList = eventList
-        .filter(event => !isBeforeToday(event.date))
+        .slice(0, 10);
+
+    const upcomingEventList = events
+        .filter(event => !isBeforeToday(new Date(event.date)))
         .sort(compareDate)
         .reverse();
 
@@ -58,7 +60,14 @@ export function Events() {
                     <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
                     <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Upcoming Events</Text>
                     </Box>
-                <EventsCarousel events={upcomingEventList}/>
+                {error && (
+                    <Text textAlign='center' color='red.600' py={4}>Couldn't load events: {error}</Text>
+                )}
+                {loading ? (
+                    <Text textAlign='center' py={8}>Loading events…</Text>
+                ) : (
+                    <EventsCarousel events={upcomingEventList}/>
+                )}
                 <Flex 
                 id='past-events'
                 w='100vw'
@@ -91,15 +100,17 @@ export function Events() {
                             </Box>
                         ) : (
                             <Flex flexDir='column' w='100%'>
-                                {pastEventList.map( event =>
+                                {pastEventList.map( event => {
+                                    const eventDate = new Date(event.date);
+                                    return (
                                     <LinkBox
                                     as={RouterLink}
-                                    to={'/events/' + event.slug} 
+                                    to={'/events/' + event.id}
                                     display='flex'
                                     id='event-row'
                                     flexDir='column'
                                     w='100%'
-                                    key={event.slug}
+                                    key={event.id}
                                     >
                                         <Box h='2px' w='100%' bg='white'></Box>
                                         <Flex paddingY='22px'>
@@ -112,10 +123,10 @@ export function Events() {
                                             alignItems='center'
                                             >
                                                 <Text fontSize={{base: '23px', sm: '30px'}} fontWeight='700'>
-                                                    {event.date.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
+                                                    {eventDate.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
                                                 </Text>
                                                 <Text marginTop='-15px' fontSize={{base: '45px', sm: '60px'}} fontWeight='700'>
-                                                    {event.date.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
+                                                    {eventDate.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
                                                 </Text>
                                             </Flex>
                                             <Flex w='min(150px, 10%)'></Flex>
@@ -140,7 +151,8 @@ export function Events() {
                                             </Flex>
                                         </Flex>
                                     </LinkBox>
-                                )}
+                                    );
+                                })}
                             </Flex>
                         )}
                     </Flex>    
