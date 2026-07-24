@@ -23,9 +23,6 @@ import {
   VStack,
   Icon,
   Flex,
-  Avatar,
-  AvatarGroup,
-  Tooltip,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { MdLocationOn, MdCalendarToday, MdPeople } from 'react-icons/md'
