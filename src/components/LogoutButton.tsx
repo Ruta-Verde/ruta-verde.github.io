@@ -15,7 +15,17 @@ export default function LogoutButton() {
   }
 
   return (
-    <Button variant="ghost" size="sm" isLoading={loading} onClick={handleSignOut}>
+    <Button
+      variant="link"
+      size="xs"
+      fontWeight="500"
+      color="gray.500"
+      whiteSpace="normal"
+      textAlign="left"
+      h="auto"
+      isLoading={loading}
+      onClick={handleSignOut}
+    >
       Sign out
     </Button>
   )
