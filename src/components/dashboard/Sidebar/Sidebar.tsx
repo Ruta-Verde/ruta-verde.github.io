@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { dashboardNavConfig } from '../../../config/dashboardNav.config'
 import SidebarNavItem from './SidebarNavItem'
+import LogoutButton from '../../LogoutButton'
 
 const BRAND = '#385C40'
 
@@ -56,7 +57,7 @@ export default function Sidebar() {
 
       <Divider mb={4} />
 
-      <VStack spacing={1} align="stretch" flex={1}>
+      <VStack spacing={1} align="stretch">
         {visibleNav.map(item => (
           <SidebarNavItem
             key={item.to}
@@ -68,6 +69,12 @@ export default function Sidebar() {
           />
         ))}
       </VStack>
+
+      <Divider my={4} />
+
+      <Box px={3} textAlign="center">
+        <LogoutButton />
+      </Box>
     </Box>
   )
 }
