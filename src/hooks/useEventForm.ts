@@ -4,22 +4,12 @@ import { useToast } from '@chakra-ui/react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabaseClient'
 import type { EventStatus } from '../types/EventStatus'
-import type { EventCategory } from '../types/EventCategory'
+import type { EventFormState } from '../types/EventFormState'
 
 const IMAGE_BUCKET = 'public-assets'
 const IMAGE_FOLDER = 'events'
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024
 const DEFAULT_IMAGE_PATH = 'events/event1.png'
-
-export interface EventFormState {
-  title: string
-  description: string
-  location: string
-  startDate: string
-  endDate: string
-  capacity?: number
-  eventType: EventCategory | ''
-}
 
 const INITIAL_STATE: EventFormState = {
   title: '',

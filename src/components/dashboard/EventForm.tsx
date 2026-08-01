@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react'
 import type { RefObject } from 'react'
 import { MdUpload, MdDelete } from 'react-icons/md'
-import type { EventFormState } from '../../hooks/useEventForm'
+import type { EventFormState } from '../../types/EventFormState'
 import type { EventCategory } from '../../types/EventCategory'
 
 const EVENT_CATEGORIES: { value: EventCategory; label: string }[] = [
