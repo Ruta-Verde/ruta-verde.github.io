@@ -2,7 +2,7 @@
  * EventCard.tsx
  *
  * Clickable card representing a single event in the dashboard Events tab.
- * Navigates to /dashboard/events/:id on click (stub — swap with real slug later).
+ * Opens the event detail modal on click.
  *
  * Status badge coloring:
  *   draft      → purple
@@ -24,7 +24,6 @@ import {
   Icon,
   Flex,
 } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
 import { MdLocationOn, MdCalendarToday, MdPeople } from 'react-icons/md'
 import type { DashboardEvent } from '../../types/DashboardEvent'
 import type { EventStatus } from '../../types/EventStatus'
@@ -55,10 +54,10 @@ function formatDate(iso: string) {
 
 interface EventCardProps {
   event: DashboardEvent
+  onClick: () => void
 }
 
-export default function EventCard({ event }: EventCardProps) {
-  const navigate = useNavigate()
+export default function EventCard({ event, onClick }: EventCardProps) {
   const { label, colorScheme } = statusConfig[event.status]
 
   return (
@@ -75,7 +74,7 @@ export default function EventCard({ event }: EventCardProps) {
         borderColor: '#385C40',
         transform: 'translateY(-2px)',
       }}
-      onClick={() => navigate(`/dashboard/events/${event.id}`)} // stub route
+      onClick={onClick}
     >
       <Flex justify="space-between" align="flex-start" mb={3}>
         <Text
