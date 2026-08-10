@@ -22,11 +22,20 @@ import type { RefObject } from 'react'
 import { MdUpload, MdDelete } from 'react-icons/md'
 import type { EventFormState } from '../../types/EventFormState'
 import type { EventCategory } from '../../types/EventCategory'
+import type { EventStatus } from '../../types/EventStatus'
 
 const EVENT_CATEGORIES: { value: EventCategory; label: string }[] = [
   { value: 'tree_planting', label: 'Tree Planting' },
   { value: 'conference', label: 'Conference' },
   { value: 'meeting', label: 'Meeting' },
+]
+
+const EVENT_STATUSES: { value: EventStatus; label: string }[] = [
+  { value: 'draft', label: 'Draft' },
+  { value: 'scheduled', label: 'Upcoming' },
+  { value: 'active', label: 'In Progress' },
+  { value: 'completed', label: 'Past' },
+  { value: 'cancelled', label: 'Cancelled' },
 ]
 
 const FIELD_LABEL_PROPS = {
@@ -50,6 +59,8 @@ interface EventFormProps {
   fileInputRef: RefObject<HTMLInputElement>
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onRemoveImage: () => void
+  status?: EventStatus
+  onStatusChange?: (status: EventStatus) => void
 }
 
 export default function EventForm({
@@ -60,6 +71,8 @@ export default function EventForm({
   fileInputRef,
   onFileChange,
   onRemoveImage,
+  status,
+  onStatusChange,
 }: EventFormProps) {
   return (
     <VStack spacing={6} align="stretch">
@@ -74,6 +87,22 @@ export default function EventForm({
           {...FIELD_INPUT_PROPS}
         />
       </FormControl>
+
+      {/* Status — edit mode only (status is set by which button you press when creating) */}
+      {status !== undefined && onStatusChange && (
+        <FormControl isRequired>
+          <FormLabel {...FIELD_LABEL_PROPS}>Status</FormLabel>
+          <Select
+            value={status}
+            onChange={e => onStatusChange(e.target.value as EventStatus)}
+            {...FIELD_INPUT_PROPS}
+          >
+            {EVENT_STATUSES.map(({ value, label }) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </Select>
+        </FormControl>
+      )}
 
       {/* Description */}
       <FormControl isRequired>
