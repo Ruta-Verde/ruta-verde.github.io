@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { DASHBOARD_EVENT_COLUMNS, mapDashboardEventRow, type DashboardEventRow } from '../lib/dashboardEvents'
 import type { DashboardEvent } from '../types/DashboardEvent'
-import type { EventStatus } from '../types/EventStatus'
-import type { EventCategory } from '../types/EventCategory'
 
 export type EventFilter = 'all' | 'mine'
 
@@ -17,38 +16,6 @@ interface UseEventsResult {
   error: string | null
   refetch: () => void
 }
-
-interface EventRow {
-  event_id: string
-  event_name: string
-  about: string | null
-  start_date: string
-  end_date: string
-  status: EventStatus
-  location: string
-  created_by: string
-  event_type: EventCategory | null
-  capacity: number | null
-  image_path: string | null
-  organizer: { username: string } | null
-  attendees: { count: number }[] | null
-}
-
-const EVENTS_SELECT = `
-  event_id,
-  event_name,
-  about,
-  start_date,
-  end_date,
-  status,
-  location,
-  created_by,
-  event_type,
-  capacity,
-  image_path,
-  organizer:profiles!created_by ( username ),
-  attendees:event_participants ( count )
-`
 
 export function useEvents({ filter, userId }: UseEventsArgs): UseEventsResult {
   const [events, setEvents] = useState<DashboardEvent[]>([])
@@ -67,7 +34,7 @@ export function useEvents({ filter, userId }: UseEventsArgs): UseEventsResult {
 
     let query = supabase
       .from('events')
-      .select(EVENTS_SELECT)
+      .select(DASHBOARD_EVENT_COLUMNS)
       .order('start_date', { ascending: true })
 
     if (filter === 'mine') {
@@ -83,26 +50,8 @@ export function useEvents({ filter, userId }: UseEventsArgs): UseEventsResult {
       return
     }
 
-    const rows = (data ?? []) as unknown as EventRow[]
-
-    const mapped: DashboardEvent[] = rows.map(row => ({
-      id: row.event_id,
-      title: row.event_name,
-      status: row.status,
-      date: row.start_date,
-      endDate: row.end_date,
-      location: row.location,
-      organizerName: row.organizer?.username ?? 'Unknown organizer',
-      attendeeCount: row.attendees?.[0]?.count ?? 0,
-      description: row.about,
-      eventType: row.event_type,
-      capacity: row.capacity,
-      imageUrl: row.image_path
-        ? supabase.storage.from('public-assets').getPublicUrl(row.image_path).data.publicUrl
-        : null,
-    }))
-
-    setEvents(mapped)
+    const rows = (data ?? []) as unknown as DashboardEventRow[]
+    setEvents(rows.map(mapDashboardEventRow))
     setLoading(false)
   }, [filter, userId])
 
