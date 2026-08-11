@@ -7,9 +7,10 @@ interface EventSectionProps {
   events: DashboardEvent[]
   loading: boolean
   badgeColor: string
+  onSelectEvent: (event: DashboardEvent) => void
 }
 
-export default function EventSection({ title, events, loading, badgeColor }: EventSectionProps) {
+export default function EventSection({ title, events, loading, badgeColor, onSelectEvent }: EventSectionProps) {
   return (
     <Box>
       <HStack spacing={3} mb={4}>
@@ -36,7 +37,7 @@ export default function EventSection({ title, events, loading, badgeColor }: Eve
       ) : (
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
           {events.map(event => (
-            <EventCard key={event.id} event={event} />
+            <EventCard key={event.id} event={event} onClick={() => onSelectEvent(event)} />
           ))}
         </Grid>
       )}
