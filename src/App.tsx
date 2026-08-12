@@ -11,6 +11,8 @@
  *   /dashboard/impact                → MyRutaImpact        (all roles)
  *   /dashboard/events                → DashboardEvents     (admin | event-organizer)
  *   /dashboard/events/create         → CreateEvent         (admin | event-organizer)
+ *   /dashboard/events/:eventId/manage → ManageEvent        (admin | event-organizer)
+ *   /dashboard/events/:eventId/edit   → EditEvent          (admin | event-organizer)
  *   /dashboard/blog                  → DashboardBlog       (admin)
  *
  * RouteGuard sits INSIDE DashboardLayout's children, so the sidebar
@@ -39,6 +41,8 @@ import DashboardLayout from './components/dashboard/DashboardLayout.tsx'
 import RutaImpact from './pages/dashboard/RutaImpact.tsx'
 import DashboardEvents from './pages/dashboard/EventsDashboard.tsx'
 import CreateEvent from './pages/dashboard/CreateEvent.tsx'
+import ManageEvent from './pages/dashboard/ManageEvent.tsx'
+import EditEvent from './pages/dashboard/EditEvent.tsx'
 import BlogDashboard from './pages/dashboard/BlogDashboard.tsx'
 import RouteGuard from './components/RouteGuard.tsx'
 
@@ -86,6 +90,22 @@ function App() {
                   element={
                     <RouteGuard allowed={['admin', 'event-organizer']}>
                       <CreateEvent />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="events/:eventId/manage"
+                  element={
+                    <RouteGuard allowed={['admin', 'event-organizer']}>
+                      <ManageEvent />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="events/:eventId/edit"
+                  element={
+                    <RouteGuard allowed={['admin', 'event-organizer']}>
+                      <EditEvent />
                     </RouteGuard>
                   }
                 />

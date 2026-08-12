@@ -1,11 +1,13 @@
-import { Box, Button, Divider, Flex, HStack, Heading, Icon, Select, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, HStack, Heading, Icon, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MdAdd } from 'react-icons/md'
 import { useAuth } from '../../contexts/AuthContext'
 import EventSection from '../../components/dashboard/EventSection'
+import EventDetailModal from '../../components/dashboard/EventDetailModal'
 import { useEvents, type EventFilter } from '../../hooks/useEvents'
 import { groupEventsByStatus } from '../../utils/eventStatus'
+import type { DashboardEvent } from '../../types/DashboardEvent'
 
 export default function EventsDashboard() {
   const { user, activeRole } = useAuth()
@@ -16,6 +18,14 @@ export default function EventsDashboard() {
 
   const { events, loading, error, refetch } = useEvents({ filter, userId: user?.id })
   const { drafts, inProgress, upcoming, past } = useMemo(() => groupEventsByStatus(events), [events])
+
+  const [selectedEvent, setSelectedEvent] = useState<DashboardEvent | null>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  function handleSelectEvent(event: DashboardEvent) {
+    setSelectedEvent(event)
+    onOpen()
+  }
 
   return (
     <VStack align="stretch" spacing={8}>
@@ -73,13 +83,15 @@ export default function EventsDashboard() {
         </Flex>
       )}
 
-      <EventSection title="Drafts" events={drafts} loading={loading} badgeColor="purple" />
+      <EventSection title="Drafts" events={drafts} loading={loading} badgeColor="purple" onSelectEvent={handleSelectEvent} />
       <Divider />
-      <EventSection title="In Progress" events={inProgress} loading={loading} badgeColor="green" />
+      <EventSection title="In Progress" events={inProgress} loading={loading} badgeColor="green" onSelectEvent={handleSelectEvent} />
       <Divider />
-      <EventSection title="Upcoming" events={upcoming} loading={loading} badgeColor="blue" />
+      <EventSection title="Upcoming" events={upcoming} loading={loading} badgeColor="blue" onSelectEvent={handleSelectEvent} />
       <Divider />
-      <EventSection title="Past" events={past} loading={loading} badgeColor="gray" />
+      <EventSection title="Past" events={past} loading={loading} badgeColor="gray" onSelectEvent={handleSelectEvent} />
+
+      <EventDetailModal event={selectedEvent} isOpen={isOpen} onClose={onClose} />
     </VStack>
   )
 }
