@@ -1,18 +1,12 @@
 // Likely want to do something with an image at the top, the author, then a preview of the post, then a click for more button at the bottom
 import {
     Box,
-    Flex,
     Text,
-    Heading,
-    Spacer,
     Image,
-    LinkBox,
   } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom';
-import EventsCarousel from '../components/EventsCarousel.tsx'
+import EventListSection from '../components/EventListSection.tsx'
 import { usePublicEvents } from '../hooks/usePublicEvents.ts';
 import type { PublicEvent } from '../types/PublicEvent.ts';
-import yellowRightArrow from '../assets/YellowRightArrow.svg';
 import { useLayoutEffect } from 'react';
 import blogheader from '../assets/blogheader.jpg';
 
@@ -58,7 +52,7 @@ export function Events() {
                     <Box h='100px' position='relative'>
                     <Image position='absolute' src={blogheader} h='100px' w='100%' objectFit='cover' zIndex='0'/>
                     <Box position='relative' h='100px' w='100%' bgGradient='linear(to-r, rgba(47, 71, 53, 0.8), rgba(7, 19, 25, 0))' />
-                    <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Upcoming Events</Text>
+                    <Text position='absolute' left='0' right='0' top='50px' bottom='0' m='auto' w='100%' h='100px' textColor='white' fontSize='3xl' fontWeight='bold'>Events</Text>
                     </Box>
                 {error && (
                     <Text textAlign='center' color='red.600' py={4}>Couldn't load events: {error}</Text>
@@ -66,97 +60,23 @@ export function Events() {
                 {loading ? (
                     <Text textAlign='center' py={8}>Loading events…</Text>
                 ) : (
-                    <EventsCarousel events={upcomingEventList}/>
+                    <EventListSection
+                        id='upcoming-events'
+                        title='Upcoming Events'
+                        events={upcomingEventList}
+                        emptyMessage='No upcoming events'
+                        marginTop='30px'
+                        marginBottom='0px'
+                    />
                 )}
-                <Flex 
-                id='past-events'
-                w='100vw'
-                justifyContent='center'
-                bg='#143343'
-                >
-                    <Flex
-                    flexDir='column'
-                    w='850px'
-                    marginTop='60px'
-                    marginBottom='90px'
-                    marginX='30px'
-                    alignItems='center'
-                    textColor='white'
-                    >
-                        <Heading
-                        color='white'
-                        fontSize='53px'
-                        fontWeight='800'
-                        marginBottom='30px'
-                        textTransform='uppercase'>
-                            Past Events
-                        </Heading>
-                        {pastEventList.length === 0 ? (
-                            <Box w='100%'>
-                                <Box h='2px' w='100%' bg='white'></Box>
-                                <Text mt='40px'>
-                                    No events
-                                </Text>
-                            </Box>
-                        ) : (
-                            <Flex flexDir='column' w='100%'>
-                                {pastEventList.map( event => {
-                                    const eventDate = new Date(event.date);
-                                    return (
-                                    <LinkBox
-                                    as={RouterLink}
-                                    to={'/events/' + event.id}
-                                    display='flex'
-                                    id='event-row'
-                                    flexDir='column'
-                                    w='100%'
-                                    key={event.id}
-                                    >
-                                        <Box h='2px' w='100%' bg='white'></Box>
-                                        <Flex paddingY='22px'>
-                                            <Box w='10px' h='100%' bg='yellow'> </Box>
-                                            <Flex w='min(80px, 5%)'></Flex>
-                                            <Flex
-                                            id='event-date'
-                                            flexDir='column'
-                                            justifyContent='center'
-                                            alignItems='center'
-                                            >
-                                                <Text fontSize={{base: '23px', sm: '30px'}} fontWeight='700'>
-                                                    {eventDate.toLocaleDateString('default', {month: "short", timeZone: 'UTC'})}
-                                                </Text>
-                                                <Text marginTop='-15px' fontSize={{base: '45px', sm: '60px'}} fontWeight='700'>
-                                                    {eventDate.toLocaleDateString('default', {day: "2-digit", timeZone: 'UTC'})}
-                                                </Text>
-                                            </Flex>
-                                            <Flex w='min(150px, 10%)'></Flex>
-
-                                            <Flex
-                                            id='event-info'
-                                            flexDirection='column'
-                                            alignItems='flex-start'
-                                            marginY='15px'
-                                            >
-                                                <Text textAlign='left' lineHeight='30px' fontSize={{base: '30px', sm:'40px'}}>{event.title}</Text> 
-                                                <Spacer/>
-                                                <Text textAlign='left' fontSize={{base: '18px', sm: '24px'}}>{event.location}</Text>
-                                            </Flex>
-                                            <Spacer/>
-                                            <Flex
-                                            alignItems='center'>
-                                                <Image
-                                                h='50%'
-                                                src={yellowRightArrow}
-                                                />
-                                            </Flex>
-                                        </Flex>
-                                    </LinkBox>
-                                    );
-                                })}
-                            </Flex>
-                        )}
-                    </Flex>    
-                </Flex>
+                <EventListSection
+                    id='past-events'
+                    title='Past Events'
+                    events={pastEventList}
+                    emptyMessage='No events'
+                    marginTop='20px'
+                    marginBottom='45px'
+                />
             </Box>
     )
 }
