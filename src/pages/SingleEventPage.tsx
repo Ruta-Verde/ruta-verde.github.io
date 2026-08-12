@@ -6,7 +6,6 @@ import {
   VStack,
   Image,
   Flex,
-  Spacer,
 } from '@chakra-ui/react';
 import {useParams} from 'react-router-dom';
 import { usePublicEvent } from '../hooks/usePublicEvent.ts';
@@ -69,12 +68,11 @@ const { event, loading, error } = usePublicEvent(id);
                 />
             </Box>
             <Box textAlign="left" mt={{ base: 8, md: 0 }} maxW={{md: "35%", base: "100%"}}>
-                    <Flex flex={1} >
+                    <Flex gap={10}>
                         <Flex direction={'column'} alignItems={"start"}>
                             <Text as={"b"}>WHERE</Text>
                             <Text>{event.location}</Text>
                         </Flex>
-                        <Spacer />
                         <Flex direction={'column'} alignItems={"start"}>
                             <Text as={"b"}>DATE</Text>
                             <Text>{new Date(event.date).toLocaleDateString('default', dateOptions)}</Text>
