@@ -240,8 +240,15 @@ export default function UpdateParticipantStatsSection({
         {rows.length === 0 ? (
           <Text color="gray.500" fontSize="sm">No {title.toLowerCase()} registered for this event yet.</Text>
         ) : (
-          <TableContainer borderWidth="1px" borderColor="gray.200" borderRadius="lg" overflow="hidden">
-            <Table size="sm" sx={{ borderCollapse: 'collapse' }}>
+          <TableContainer
+            borderWidth="1px"
+            borderColor="gray.200"
+            borderRadius="lg"
+            overflowX="auto"
+            overflowY="hidden"
+            sx={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            <Table size="sm" minWidth={isTreePlantingEvent ? '640px' : '520px'} sx={{ borderCollapse: 'collapse' }}>
               <Thead>
                 <Tr>
                   <Th borderWidth="1px" borderColor="gray.200" bg="gray.50">Name</Th>

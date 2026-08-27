@@ -151,17 +151,40 @@ export function useEventParticipantMetrics(eventId: string | undefined): UseEven
       const now = new Date().toISOString()
       const existing = metrics[eventParticipantId]
 
+      const mergedHours = field === 'dailyVolunteerHours' ? (value as number | null) : existing?.dailyVolunteerHours ?? null
+      const mergedTrees = field === 'treesPlanted' ? (value as number | null) : existing?.treesPlanted ?? null
+      const mergedNotes = field === 'notes' ? (value as string | null) : existing?.notes ?? null
+      const isNowEmpty = mergedHours === null && mergedTrees === null && !mergedNotes
+
+      // No values left for this participant: drop the row instead of
+      // upserting an all-null one. Nothing to do if there was no row to begin with.
+      if (isNowEmpty) {
+        if (!existing) return null
+
+        const { error: deleteError } = await supabase
+          .from('event_participant_metrics')
+          .delete()
+          .eq('event_id', eventId)
+          .eq('event_participant_id', eventParticipantId)
+
+        if (deleteError) {
+          return deleteError.message
+        }
+
+        setMetrics(prev => {
+          const next = { ...prev }
+          delete next[eventParticipantId]
+          return next
+        })
+        return null
+      }
+
       const patch = {
         event_id: eventId,
         event_participant_id: eventParticipantId,
-        daily_volunteer_hours: existing?.dailyVolunteerHours ?? null,
-        trees_planted: existing?.treesPlanted ?? null,
-        notes: existing?.notes ?? null,
-        [field === 'dailyVolunteerHours'
-          ? 'daily_volunteer_hours'
-          : field === 'treesPlanted'
-            ? 'trees_planted'
-            : 'notes']: value,
+        daily_volunteer_hours: mergedHours,
+        trees_planted: mergedTrees,
+        notes: mergedNotes,
         verified_by: user?.id ?? null,
         verified_at: now,
       }
