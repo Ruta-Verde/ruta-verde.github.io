@@ -1,9 +1,9 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
-import BlogPdfViewer from '../components/BlogPdfViewer';
-import { fetchPublishedBlogPosts, slugifyTitle } from '../lib/publicBlog';
-import type { PublicBlogPost } from '../types/PublicBlogPost';
+import BlogPdfViewer from '../../components/BlogPdfViewer';
+import { fetchBlogPostBySlug } from '../../lib/dashboardBlog';
+import type { DashboardBlogPost } from '../../types/DashboardBlogPost';
 
 const containerStyle = {
   display: 'flex',
@@ -19,21 +19,19 @@ const errorStyle = {
   fontWeight: 'bold'
 };
 
-function BlogPage() {
+export default function BlogPostPreview() {
   const { title } = useParams();
-  const [blogPost, setBlogPost] = useState<PublicBlogPost | null>(null);
+  const [blogPost, setBlogPost] = useState<DashboardBlogPost | null>(null);
   const [loadingPost, setLoadingPost] = useState(true);
 
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-  });
-
   useEffect(() => {
-    fetchPublishedBlogPosts()
-      .then(posts => {
-        setBlogPost(posts.find(post => slugifyTitle(post.title) === title) ?? null)
-      })
-      .finally(() => setLoadingPost(false))
+    if (!title) {
+      setLoadingPost(false);
+      return;
+    }
+    fetchBlogPostBySlug(title)
+      .then(setBlogPost)
+      .finally(() => setLoadingPost(false));
   }, [title]);
 
   if (loadingPost) {
@@ -55,7 +53,5 @@ function BlogPage() {
     );
   }
 
-  return <BlogPdfViewer fileUrl={blogPost.fileUrl} author={blogPost.author} date={blogPost.date} />;
+  return <BlogPdfViewer fileUrl={blogPost.fileUrl} author={blogPost.author} date={new Date(blogPost.date)} />;
 }
-
-export default BlogPage;

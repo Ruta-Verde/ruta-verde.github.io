@@ -26,4 +26,10 @@ export const dashboardNavConfig: NavItem[] = [
     icon: MdArticle,
     roles: ['admin'],
   },
+  {
+    label: 'Create Post',
+    to: '/dashboard/blog/create',
+    icon: MdAddBox,
+    roles: ['admin'],
+  },
 ]
