@@ -10,7 +10,6 @@ import {
   Image,
   Text,
   VStack,
-  HStack,
   Divider,
   Button,
   Icon,
@@ -19,6 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import { MdEdit, MdDelete, MdOpenInNew, MdPublish, MdUnpublished } from 'react-icons/md'
 import { statusConfig } from '../../utils/blogStatus'
 import { slugifyTitle } from '../../lib/publicBlog'
+import DetailRow from './DetailRow'
 import type { DashboardBlogPost } from '../../types/DashboardBlogPost'
 
 function formatDate(iso: string) {
@@ -27,22 +27,6 @@ function formatDate(iso: string) {
     day: 'numeric',
     year: 'numeric',
   })
-}
-
-interface DetailRowProps {
-  label: string
-  value: string
-}
-
-function DetailRow({ label, value }: DetailRowProps) {
-  return (
-    <HStack align="flex-start" spacing={2} fontSize="sm">
-      <Text fontWeight="600" color="gray.600" minW="90px">
-        {label}
-      </Text>
-      <Text color="gray.700">{value}</Text>
-    </HStack>
-  )
 }
 
 interface BlogPostDetailModalProps {
