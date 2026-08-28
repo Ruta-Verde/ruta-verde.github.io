@@ -9,11 +9,11 @@ import {
   Image,
   Text,
   VStack,
-  HStack,
   Divider,
   Button,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import DetailRow from './DetailRow'
 import type { DashboardEvent } from '../../types/DashboardEvent'
 
 const STATUS_LABELS: Record<DashboardEvent['status'], string> = {
@@ -38,22 +38,6 @@ function formatDateTime(iso: string) {
     hour: 'numeric',
     minute: '2-digit',
   })
-}
-
-interface DetailRowProps {
-  label: string
-  value: string
-}
-
-function DetailRow({ label, value }: DetailRowProps) {
-  return (
-    <HStack align="flex-start" spacing={2} fontSize="sm">
-      <Text fontWeight="600" color="gray.600" minW="90px">
-        {label}
-      </Text>
-      <Text color="gray.700">{value}</Text>
-    </HStack>
-  )
 }
 
 interface EventDetailModalProps {

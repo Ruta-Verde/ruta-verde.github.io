@@ -1,279 +1,110 @@
 /**
- * DashboardBlog.tsx  (+ BlogPostCard)
+ * BlogDashboard.tsx
  *
- * Admin-only Blog tab.  Displays all blog posts as cards.
- * Image is a placeholder — swap for real Supabase Storage URLs when ready.
- *
- * BlogPostCard actions (stub):
- *   Edit   → navigate to /dashboard/blog/:id/edit  (not yet built)
- *   Delete → stub handler, wire to supabase.from('posts').delete()
- *   View   → navigate to /blog/:slug (existing public page)
- *
- * fetchBlogPosts() returns stub data.
- * Replace with: supabase.from('posts').select('*').order('created_at', { ascending: false })
+ * Admin-only Blog tab. Displays blog posts grouped into Published/Drafts
+ * sections, backed by the blog_posts Supabase table via useBlogPosts().
  */
 
 import {
   Box,
-  Grid,
-  GridItem,
   VStack,
   Heading,
   Text,
-  Image,
-  Badge,
   Button,
   Icon,
-  Skeleton,
-  SkeletonText,
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton,
+  Divider,
   useToast,
   Input,
   InputGroup,
   InputLeftElement,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  MdAdd,
-  MdMoreVert,
-  MdEdit,
-  MdDelete,
-  MdOpenInNew,
-  MdSearch,
-} from 'react-icons/md'
+import { MdAdd, MdSearch } from 'react-icons/md'
+import { useBlogPosts } from '../../hooks/useBlogPosts'
+import { supabase } from '../../lib/supabaseClient'
+import { groupBlogPostsByStatus } from '../../utils/blogStatus'
+import BlogSection from '../../components/dashboard/BlogSection'
+import BlogPostDetailModal from '../../components/dashboard/BlogPostDetailModal'
+import type { DashboardBlogPost } from '../../types/DashboardBlogPost'
+import type { BlogStatus } from '../../types/BlogStatus'
 
-// ─── Types ─────────────────────────────────────────────────────────────────────
-
-type PostStatus = 'published' | 'draft' | 'archived'
-
-interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  status: PostStatus
-  author: string
-  createdAt: string
-  slug: string
-  /** placeholder — real app uses Supabase Storage URL */
-  coverUrl?: string
-}
-
-// ─── Stub data ─────────────────────────────────────────────────────────────────
-
-const PLACEHOLDER_IMAGE = 'https://placehold.co/600x320/e2e8f0/a0aec0?text=No+Image'
-
-async function fetchBlogPosts(): Promise<BlogPost[]> {
-  await new Promise(r => setTimeout(r, 600))
-  return [
-    {
-      id: 'post-1',
-      title: 'Why Reforestation Matters in the Andes',
-      excerpt: 'The Andean ecosystem is one of the most biodiverse on Earth, yet it faces unprecedented pressure...',
-      status: 'published',
-      author: 'Maria Torres',
-      createdAt: new Date(Date.now() - 3 * 86400000).toISOString(),
-      slug: 'reforestation-andes',
-    },
-    {
-      id: 'post-2',
-      title: 'Volunteer Spotlight: Carlos from Lima',
-      excerpt: 'Carlos has logged over 120 hours with Ruta Verde since joining last year. We caught up with him...',
-      status: 'published',
-      author: 'Ana Ramos',
-      createdAt: new Date(Date.now() - 10 * 86400000).toISOString(),
-      slug: 'volunteer-spotlight-carlos',
-    },
-    {
-      id: 'post-3',
-      title: 'Q3 Impact Report — Draft',
-      excerpt: 'This quarter, Ruta Verde volunteers contributed over 800 hours across 12 events...',
-      status: 'draft',
-      author: 'Maria Torres',
-      createdAt: new Date(Date.now() - 1 * 86400000).toISOString(),
-      slug: 'q3-impact-report',
-    },
-    {
-      id: 'post-4',
-      title: 'Introducing the Ruta Verde App',
-      excerpt: 'We have been building something exciting: a platform to connect volunteers, organizers...',
-      status: 'archived',
-      author: 'Admin',
-      createdAt: new Date(Date.now() - 60 * 86400000).toISOString(),
-      slug: 'introducing-ruta-verde-app',
-    },
-  ]
-}
-
-// Stub delete — replace with supabase.from('posts').delete().eq('id', id)
-async function deletePostStub(id: string): Promise<void> {
-  console.log('[stub] delete post:', id)
-  await new Promise(r => setTimeout(r, 400))
-}
-
-// ─── Status badge config ────────────────────────────────────────────────────────
-
-const statusConfig: Record<PostStatus, { label: string; colorScheme: string }> = {
-  published: { label: 'Published', colorScheme: 'green' },
-  draft:     { label: 'Draft',     colorScheme: 'yellow' },
-  archived:  { label: 'Archived',  colorScheme: 'gray' },
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
-
-// ─── BlogPostCard ───────────────────────────────────────────────────────────────
-
-interface BlogPostCardProps {
-  post: BlogPost
-  onDelete: (id: string) => void
-}
-
-function BlogPostCard({ post, onDelete }: BlogPostCardProps) {
-  const navigate = useNavigate()
-  const { label, colorScheme } = statusConfig[post.status]
-
-  return (
-    <Box
-      bg="white"
-      borderRadius="xl"
-      borderWidth="1px"
-      borderColor="gray.200"
-      overflow="hidden"
-      transition="box-shadow 0.15s"
-      _hover={{ boxShadow: 'md' }}
-    >
-      {/* Cover image — placeholder until Supabase Storage is wired up */}
-      <Image
-        src={post.coverUrl ?? PLACEHOLDER_IMAGE}
-        alt={post.title}
-        w="100%"
-        h="160px"
-        objectFit="cover"
-        bg="gray.100"
-        fallbackSrc={PLACEHOLDER_IMAGE}
-      />
-      <Box p={4}>
-        {/* Title + overflow menu */}
-        <Flex justify="space-between" align="flex-start" mb={2}>
-          <Text
-            fontFamily="'Josefin Sans', sans-serif"
-            fontWeight="600"
-            fontSize="md"
-            color="gray.800"
-            noOfLines={2}
-            flex={1}
-            pr={2}
-          >
-            {post.title}
-          </Text>
-
-          {/* Three-dot menu */}
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              icon={<Icon as={MdMoreVert} />}
-              variant="ghost"
-              size="xs"
-              aria-label="Post options"
-              flexShrink={0}
-            />
-            <MenuList fontSize="sm" fontFamily="'Josefin Sans', sans-serif">
-              <MenuItem
-                icon={<Icon as={MdEdit} />}
-                onClick={() => navigate(`/dashboard/blog/${post.id}/edit`)}
-              >
-                Edit
-              </MenuItem>
-              <MenuItem
-                icon={<Icon as={MdOpenInNew} />}
-                onClick={() => navigate(`/blog/${post.slug}`)}
-              >
-                View Public Post
-              </MenuItem>
-              <MenuItem
-                icon={<Icon as={MdDelete} />}
-                color="red.500"
-                onClick={() => onDelete(post.id)}
-              >
-                Delete
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-
-        <Text fontSize="sm" color="gray.500" noOfLines={2} mb={3}>
-          {post.excerpt}
-        </Text>
-
-        <Flex justify="space-between" align="center">
-          <Badge
-            colorScheme={colorScheme}
-            borderRadius="full"
-            px={2}
-            fontSize="xs"
-            fontFamily="'Josefin Sans', sans-serif"
-          >
-            {label}
-          </Badge>
-          <Text fontSize="xs" color="gray.400">
-            {formatDate(post.createdAt)}
-          </Text>
-        </Flex>
-      </Box>
-    </Box>
-  )
-}
-
-// ─── Skeleton card ─────────────────────────────────────────────────────────────
-
-function BlogPostCardSkeleton() {
-  return (
-    <Box bg="white" borderRadius="xl" borderWidth="1px" borderColor="gray.200" overflow="hidden">
-      <Skeleton height="160px" />
-      <Box p={4}>
-        <SkeletonText noOfLines={2} spacing="2" mb={3} />
-        <SkeletonText noOfLines={2} spacing="2" mb={3} />
-        <Skeleton height="20px" w="80px" />
-      </Box>
-    </Box>
-  )
-}
-
-// ─── Page ──────────────────────────────────────────────────────────────────────
+const ASSET_BUCKET = 'public-assets'
 
 export default function BlogDashboard() {
   const navigate = useNavigate()
   const toast = useToast()
+  const { posts, loading, error, refetch } = useBlogPosts()
 
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [selectedPost, setSelectedPost] = useState<DashboardBlogPost | null>(null)
+  const [postPendingDelete, setPostPendingDelete] = useState<DashboardBlogPost | null>(null)
+  const [deleting, setDeleting] = useState(false)
+  const { isOpen: isDetailOpen, onOpen: onDetailOpen, onClose: onDetailClose } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
+  const cancelDeleteRef = useRef<HTMLButtonElement>(null)
 
-  useEffect(() => {
-    fetchBlogPosts().then(data => {
-      setPosts(data)
-      setLoading(false)
+  function handleSelectPost(post: DashboardBlogPost) {
+    setSelectedPost(post)
+    onDetailOpen()
+  }
+
+  function requestDelete(post: DashboardBlogPost) {
+    setPostPendingDelete(post)
+    onDetailClose()
+    onDeleteOpen()
+  }
+
+  async function handleTogglePublish(post: DashboardBlogPost) {
+    const nextStatus: BlogStatus = post.status === 'published' ? 'draft' : 'published'
+    const { error } = await supabase
+      .from('blog_posts')
+      .update({ blog_status: nextStatus })
+      .eq('blog_id', post.id)
+
+    if (error) {
+      toast({ title: 'Failed to update post', status: 'error', duration: 3000 })
+      return
+    }
+
+    toast({
+      title: nextStatus === 'published' ? 'Post published' : 'Post unpublished',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
     })
-  }, [])
+    refetch()
+  }
 
-  async function handleDelete(id: string) {
+  async function handleConfirmDelete() {
+    if (!postPendingDelete) return
+    setDeleting(true)
     try {
-      await deletePostStub(id)
-      setPosts(prev => prev.filter(p => p.id !== id))
-      toast({ title: 'Post deleted', status: 'info', duration: 3000, isClosable: true })
+      const { error } = await supabase.from('blog_posts').delete().eq('blog_id', postPendingDelete.id)
+      if (error) throw error
+
+      const pathsToRemove = [postPendingDelete.filePath, postPendingDelete.coverPath]
+        .filter((path): path is string => Boolean(path))
+      if (pathsToRemove.length > 0) {
+        await supabase.storage.from(ASSET_BUCKET).remove(pathsToRemove)
+      }
+
+      toast({ title: 'Post deleted', status: 'success', duration: 3000, isClosable: true })
+      onDeleteClose()
+      setPostPendingDelete(null)
+      refetch()
     } catch {
       toast({ title: 'Failed to delete post', status: 'error', duration: 3000 })
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -281,6 +112,7 @@ export default function BlogDashboard() {
   const filtered = posts.filter(p =>
     p.title.toLowerCase().includes(search.toLowerCase())
   )
+  const { published, drafts } = useMemo(() => groupBlogPostsByStatus(filtered), [filtered])
 
   return (
     <VStack align="stretch" spacing={8}>
@@ -309,7 +141,7 @@ export default function BlogDashboard() {
           borderRadius="lg"
           fontFamily="'Josefin Sans', sans-serif"
           _hover={{ bg: '#2d4a33' }}
-          onClick={() => navigate('/dashboard/blog/create')} // stub route
+          onClick={() => navigate('/dashboard/blog/create')}
         >
           New Post
         </Button>
@@ -331,39 +163,67 @@ export default function BlogDashboard() {
         />
       </InputGroup>
 
-      {/* Cards grid */}
-      <Grid
-        templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }}
-        gap={5}
-      >
-        {loading
-          ? Array.from({ length: 4 }).map((_, i) => (
-              <GridItem key={i}><BlogPostCardSkeleton /></GridItem>
-            ))
-          : filtered.length === 0
-            ? (
-              <GridItem colSpan={3}>
-                <Box
-                  bg="gray.50"
-                  borderRadius="xl"
-                  borderWidth="1px"
-                  borderColor="gray.200"
-                  p={10}
-                  textAlign="center"
-                >
-                  <Text color="gray.400" fontFamily="'Josefin Sans', sans-serif">
-                    {search ? `No posts matching "${search}"` : 'No blog posts yet'}
-                  </Text>
-                </Box>
-              </GridItem>
-            )
-            : filtered.map(post => (
-                <GridItem key={post.id}>
-                  <BlogPostCard post={post} onDelete={handleDelete} />
-                </GridItem>
-              ))
-        }
-      </Grid>
+      {error && (
+        <Flex bg="red.50" borderWidth="1px" borderColor="red.200" borderRadius="lg" p={4} justify="space-between" align="center">
+          <Text color="red.600" fontSize="sm">Couldn't load posts: {error}</Text>
+          <Button size="xs" variant="outline" colorScheme="red" onClick={refetch}>Retry</Button>
+        </Flex>
+      )}
+
+      <BlogSection
+        title="Published"
+        posts={published}
+        loading={loading}
+        badgeColor="green"
+        emptyLabel="published"
+        onSelectPost={handleSelectPost}
+      />
+      <Divider />
+      <BlogSection
+        title="Drafts"
+        posts={drafts}
+        loading={loading}
+        badgeColor="yellow"
+        emptyLabel="draft"
+        onSelectPost={handleSelectPost}
+      />
+
+      <BlogPostDetailModal
+        post={selectedPost}
+        isOpen={isDetailOpen}
+        onClose={onDetailClose}
+        onTogglePublish={handleTogglePublish}
+        onRequestDelete={requestDelete}
+      />
+
+      <AlertDialog isOpen={isDeleteOpen} leastDestructiveRef={cancelDeleteRef} onClose={onDeleteClose}>
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontFamily="'Josefin Sans', sans-serif">Delete Post</AlertDialogHeader>
+            <AlertDialogBody>
+              This permanently deletes "{postPendingDelete?.title}" and its file. This cannot be undone.
+            </AlertDialogBody>
+            <AlertDialogFooter>
+              <Button ref={cancelDeleteRef} onClick={onDeleteClose} borderRadius="lg" fontFamily="'Josefin Sans', sans-serif">
+                Cancel
+              </Button>
+              <Button
+                bg="red.500"
+                color="white"
+                _hover={{ bg: 'red.600' }}
+                borderRadius="lg"
+                fontFamily="'Josefin Sans', sans-serif"
+                onClick={handleConfirmDelete}
+                isLoading={deleting}
+                loadingText="Deleting…"
+                ml={3}
+              >
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </VStack>
   )
 }

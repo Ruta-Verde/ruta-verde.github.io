@@ -1,5 +1,6 @@
 import blogheader from '../assets/blogheader.jpg';
-import { BlogInfo } from '../blog_data/blogs.ts';
+import { PublicBlogPost } from '../types/PublicBlogPost';
+import { fetchPublishedBlogPosts, slugifyTitle } from '../lib/publicBlog';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import {
   Box,
@@ -15,10 +16,13 @@ import {
   Button,
   useBoolean
 } from '@chakra-ui/react';
-import { blogList } from '../blog_data/blogs.ts';
+
+const PLACEHOLDER_IMAGE = 'https://placehold.co/600x320/e2e8f0/a0aec0?text=No+Image';
 
 function Blog() {
   const [show, setShow] = useBoolean(false);
+  const [blogList, setBlogList] = useState<PublicBlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [hiddenHeight, setHiddenHeight] = useState(0)
   const [visibleHeight, setVisibleHeight] = useState(0)
   const [mVisibleHeight, setmVisibleHeight] = useState(0)
@@ -31,9 +35,19 @@ function Blog() {
   });
 
   useEffect(() => {
-    window
-    .matchMedia("(min-width: 768px)")
-    .addEventListener('change', e => setMatches( e.matches ));
+    fetchPublishedBlogPosts()
+      .then(setBlogList)
+      .finally(() => setLoading(false))
+  }, []);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)")
+    const handleChange = (e: MediaQueryListEvent) => setMatches(e.matches)
+    mql.addEventListener('change', handleChange)
+    return () => mql.removeEventListener('change', handleChange)
+  }, []);
+
+  useEffect(() => {
     let height = 0
     if (matches) {
       height = ((800 - 20) / 2)
@@ -53,7 +67,7 @@ function Blog() {
       setmVisibleHeight(500)
       setVisibleHeight(800)
     }
-  }, [matches]);
+  }, [matches, blogList.length]);
 
   return (
     <Box w='100%'>
@@ -65,7 +79,7 @@ function Blog() {
       <Flex h='80px' alignItems='center' justifyContent='center' pt='15px' px={['10px', null, null, '60px', '150px']}>
         <Heading textColor='#E9D523' fontSize='2xl' fontWeight='bold'>Latest From Ruta Verde</Heading>
       </Flex>
-      {blogList.length > 0 ? 
+      {loading ? null : blogList.length > 0 ?
         <Flex w='100%' h={['400px', null, null, '500px']} pb='50px' alignItems='center' justifyContent='center' px={['10px', null, null, '60px', '150px']}>
           {<MainCard post={blogList[0]}/>}
         </Flex> :
@@ -78,7 +92,7 @@ function Blog() {
         blogList.filter((_, index) => index >= 1 && index <= 3).map((card) => <BlogCard post={card}/>)
         }
       </SimpleGrid>
-      {show && 
+      {show &&
       <SimpleGrid bgColor='#F0F0F0' columns={[1, null, 3]} h={hiddenHeight} px={['10px', null, null, '60px', '150px']}>
         {matches ?
         blogList.filter((_, index) => index > 6).map((card) => <BlogCard post={card}/>) :
@@ -102,12 +116,12 @@ function dateToString(date: Date) {
     + date.toLocaleDateString('default', {year: "numeric" })
 }
 
-function BlogCard( {post} : {post: BlogInfo} ) {
+function BlogCard( {post} : {post: PublicBlogPost} ) {
   return (
     <Flex justifySelf={'center'} alignSelf={'center'}>
-      <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w={['300px', null, '225px', null, '300px']} h={['100px', null, '350px']} borderRadius={'10px'}>
+      <Link href={'/#/blog/' + slugifyTitle(post.title)} _hover='text-decoration: none' w={['300px', null, '225px', null, '300px']} h={['100px', null, '350px']} borderRadius={'10px'}>
         <Card direction='column' overflow='hidden' borderRadius={'10px'}>
-          <Image h={['0px', null, '206.25px', '225px']} objectFit='cover' src={post.img} alt='Image'/>
+          <Image h={['0px', null, '206.25px', '225px']} objectFit='cover' src={post.coverUrl ?? PLACEHOLDER_IMAGE} alt='Image'/>
           <Stack textColor='#385C40' h='125px' w='100%'>
             <CardBody textAlign='left'>
               <Text>
@@ -127,12 +141,12 @@ function BlogCard( {post} : {post: BlogInfo} ) {
   )
 }
 
-function MainCard( {post} : {post: BlogInfo} ) {
+function MainCard( {post} : {post: PublicBlogPost} ) {
   return(
     <Flex w={['80%', null, null, '70%']}>
-      <Link href={'/#/blog/' + post.slug} _hover='text-decoration: none' w='100%' borderRadius={'10px'}>
+      <Link href={'/#/blog/' + slugifyTitle(post.title)} _hover='text-decoration: none' w='100%' borderRadius={'10px'}>
         <Card direction='row' h={['300px', null, null, '400px']} overflow='hidden' variant='filled' bgColor='#385C40' borderRadius={'10px'}>
-          <Image w={['0', null, '50%']} objectFit='cover' src={post.img} alt='Image'/>
+          <Image w={['0', null, '50%']} objectFit='cover' src={post.coverUrl ?? PLACEHOLDER_IMAGE} alt='Image'/>
           <Stack textColor='white' spacing='10' w='100%'>
             <CardBody textAlign='left'>
               <Text>
@@ -143,14 +157,14 @@ function MainCard( {post} : {post: BlogInfo} ) {
               </Heading>
               <Box h='5px' w={['100%', null, '50%']} borderBottom='5px solid #E9D523' />
               <Text py='20px' w={['100%', null, '50%']}>
-                {post.summary}
+                {post.description}
               </Text>
             </CardBody>
           </Stack>
         </Card>
       </Link>
     </Flex>
-  ) 
+  )
 }
 
 export default Blog;

@@ -44,6 +44,9 @@ import CreateEvent from './pages/dashboard/CreateEvent.tsx'
 import ManageEvent from './pages/dashboard/ManageEvent.tsx'
 import EditEvent from './pages/dashboard/EditEvent.tsx'
 import BlogDashboard from './pages/dashboard/BlogDashboard.tsx'
+import CreateBlogPost from './pages/dashboard/CreateBlogPost.tsx'
+import EditBlogPost from './pages/dashboard/EditBlogPost.tsx'
+import BlogPostPreview from './pages/dashboard/BlogPostPreview.tsx'
 import RouteGuard from './components/RouteGuard.tsx'
 
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
@@ -66,7 +69,15 @@ function App() {
               <Route path="/events"        element={<Events />} />
               <Route path="/events/:id"    element={<SingleEventPage />} />
               <Route path="/blog"          element={<Blog />} />
-              <Route path="/blog/:slug"    element={<BlogPage />} />
+              <Route path="/blog/:title"   element={<BlogPage />} />
+              <Route
+                path="/blog/preview/:title"
+                element={
+                  <RouteGuard allowed={['admin']}>
+                    <BlogPostPreview />
+                  </RouteGuard>
+                }
+              />
               <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route index element={<Navigate to="impact" replace />} />
                 <Route
@@ -114,6 +125,22 @@ function App() {
                   element={
                     <RouteGuard allowed={['admin']}>
                       <BlogDashboard />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="blog/create"
+                  element={
+                    <RouteGuard allowed={['admin']}>
+                      <CreateBlogPost />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="blog/:id/edit"
+                  element={
+                    <RouteGuard allowed={['admin']}>
+                      <EditBlogPost />
                     </RouteGuard>
                   }
                 />
