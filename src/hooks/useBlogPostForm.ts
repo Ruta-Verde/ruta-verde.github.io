@@ -90,6 +90,15 @@ function missingRequiredFields(data: BlogPostFormState): boolean {
   return !data.title || !data.description || !data.author || !data.date
 }
 
+// PDF isn't part of BlogPostFormState (it's tracked as separate File/path
+// hook state), so it needs its own presence check alongside
+// missingRequiredFields — without this, a missing PDF isn't caught until
+// resolvePdfPath() throws deep inside the save, surfacing as a generic
+// "Failed to..." error instead of the same upfront validation toast.
+function hasPdf(pdfFile: File | null, isEditMode: boolean, existingFilePath: string | null): boolean {
+  return Boolean(pdfFile) || (isEditMode && Boolean(existingFilePath))
+}
+
 // Postgres gives back an ISO timestamp; <input type="date"> just wants the
 // calendar date portion, and since blog_date is stored as UTC midnight for
 // date-only input there's no timezone shift to correct for (unlike the
@@ -114,6 +123,14 @@ export function useBlogPostForm(blogId?: string) {
   const [status, setStatus] = useState<BlogStatus>('draft')
   const [existingFilePath, setExistingFilePath] = useState<string | null>(null)
   const [existingCoverPath, setExistingCoverPath] = useState<string | null>(null)
+  // Mirrors the paths as loaded from the DB, untouched by handleRemoveCover
+  // (which nulls existingCoverPath) or a new file selection -- so storage
+  // cleanup always knows what the *real* row currently points at, whether
+  // that's after a successful save (stale file replaced/removed) or a
+  // delete with no save in between (existingCoverPath may already be null
+  // locally even though the row/storage object still exists).
+  const originalFilePathRef = useRef<string | null>(null)
+  const originalCoverPathRef = useRef<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [publishing, setPublishing] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -161,8 +178,10 @@ export function useBlogPostForm(blogId?: string) {
     })
     setStatus(row.blog_status)
     setExistingFilePath(row.file_path)
+    originalFilePathRef.current = row.file_path
     setPdfFileName(row.file_path.split('/').pop() ?? row.file_path)
     setExistingCoverPath(row.cover_image_path)
+    originalCoverPathRef.current = row.cover_image_path
     setCoverPreviewUrl(
       row.cover_image_path
         ? supabase.storage.from(ASSET_BUCKET).getPublicUrl(row.cover_image_path).data.publicUrl
@@ -270,6 +289,10 @@ export function useBlogPostForm(blogId?: string) {
 
   async function handleSaveDraft() {
     if (!user) return
+    if (!hasPdf(pdfFile, isEditMode, existingFilePath)) {
+      toast({ title: 'Please select a PDF file', status: 'warning', duration: 3000 })
+      return
+    }
     setSaving(true)
     try {
       const filePath = await resolvePdfPath()
@@ -295,7 +318,7 @@ export function useBlogPostForm(blogId?: string) {
 
   async function handlePublish() {
     if (!user) return
-    if (missingRequiredFields(form)) {
+    if (missingRequiredFields(form) || !hasPdf(pdfFile, isEditMode, existingFilePath)) {
       toast({ title: 'Fill in all required fields', status: 'warning', duration: 3000 })
       return
     }
@@ -340,6 +363,18 @@ export function useBlogPostForm(blogId?: string) {
         .eq('blog_id', Number(blogId))
       if (error) throw error
 
+      // Best-effort cleanup of any file that was replaced or removed by
+      // this save — don't block the save on it.
+      const stalePaths = [
+        originalFilePathRef.current && originalFilePathRef.current !== filePath ? originalFilePathRef.current : null,
+        originalCoverPathRef.current && originalCoverPathRef.current !== coverPath ? originalCoverPathRef.current : null,
+      ].filter((p): p is string => Boolean(p))
+      if (stalePaths.length > 0) {
+        await supabase.storage.from(ASSET_BUCKET).remove(stalePaths)
+      }
+      originalFilePathRef.current = filePath
+      originalCoverPathRef.current = coverPath
+
       toast({ title: 'Post updated', status: 'success', duration: 3000, isClosable: true })
       navigate('/dashboard/blog')
     } catch (error) {
@@ -363,7 +398,11 @@ export function useBlogPostForm(blogId?: string) {
       if (error) throw error
 
       // Best-effort storage cleanup — don't block the row delete on it.
-      const pathsToRemove = [existingFilePath, existingCoverPath].filter((p): p is string => Boolean(p))
+      // Uses the original loaded paths, not existingFilePath/existingCoverPath
+      // state, since handleRemoveCover nulls the latter locally without
+      // saving — the row (and its storage object) may still reference it.
+      const pathsToRemove = [originalFilePathRef.current, originalCoverPathRef.current]
+        .filter((p): p is string => Boolean(p))
       if (pathsToRemove.length > 0) {
         await supabase.storage.from(ASSET_BUCKET).remove(pathsToRemove)
       }

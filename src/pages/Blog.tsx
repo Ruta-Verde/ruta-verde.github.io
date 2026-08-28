@@ -41,9 +41,13 @@ function Blog() {
   }, []);
 
   useEffect(() => {
-    window
-    .matchMedia("(min-width: 768px)")
-    .addEventListener('change', e => setMatches( e.matches ));
+    const mql = window.matchMedia("(min-width: 768px)")
+    const handleChange = (e: MediaQueryListEvent) => setMatches(e.matches)
+    mql.addEventListener('change', handleChange)
+    return () => mql.removeEventListener('change', handleChange)
+  }, []);
+
+  useEffect(() => {
     let height = 0
     if (matches) {
       height = ((800 - 20) / 2)

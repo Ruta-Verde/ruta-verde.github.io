@@ -42,6 +42,8 @@ export function mapDashboardBlogPostRow(row: DashboardBlogPostRow): DashboardBlo
     coverUrl: row.cover_image_path
       ? supabase.storage.from(ASSET_BUCKET).getPublicUrl(row.cover_image_path).data.publicUrl
       : null,
+    filePath: row.file_path,
+    coverPath: row.cover_image_path,
   }
 }
 

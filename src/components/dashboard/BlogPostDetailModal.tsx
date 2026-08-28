@@ -16,18 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { MdEdit, MdDelete, MdOpenInNew, MdPublish, MdUnpublished } from 'react-icons/md'
-import { statusConfig } from '../../utils/blogStatus'
+import { statusConfig, formatBlogDate } from '../../utils/blogStatus'
 import { slugifyTitle } from '../../lib/publicBlog'
 import DetailRow from './DetailRow'
 import type { DashboardBlogPost } from '../../types/DashboardBlogPost'
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
 
 interface BlogPostDetailModalProps {
   post: DashboardBlogPost | null
@@ -93,7 +85,7 @@ export default function BlogPostDetailModal({ post, isOpen, onClose, onTogglePub
                 <VStack align="stretch" spacing={1.5}>
                   <DetailRow label="Status" value={statusConfig[post.status].label} />
                   <DetailRow label="Author" value={post.author} />
-                  <DetailRow label="Published" value={formatDate(post.date)} />
+                  <DetailRow label="Published" value={formatBlogDate(post.date)} />
                 </VStack>
 
                 <Divider />

@@ -91,9 +91,7 @@ export default function BlogDashboard() {
       const { error } = await supabase.from('blog_posts').delete().eq('blog_id', postPendingDelete.id)
       if (error) throw error
 
-      const pathsToRemove = [postPendingDelete.fileUrl, postPendingDelete.coverUrl]
-        .filter((url): url is string => Boolean(url))
-        .map(url => url.split(`${ASSET_BUCKET}/`).pop())
+      const pathsToRemove = [postPendingDelete.filePath, postPendingDelete.coverPath]
         .filter((path): path is string => Boolean(path))
       if (pathsToRemove.length > 0) {
         await supabase.storage.from(ASSET_BUCKET).remove(pathsToRemove)

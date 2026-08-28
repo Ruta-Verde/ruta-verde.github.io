@@ -10,4 +10,6 @@ export interface DashboardBlogPost {
   createdAt: string
   fileUrl: string
   coverUrl: string | null
+  filePath: string
+  coverPath: string | null
 }

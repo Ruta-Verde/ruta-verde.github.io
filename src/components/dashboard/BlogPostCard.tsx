@@ -1,14 +1,6 @@
 import { Box, Badge, Text, Image, Flex, Skeleton, SkeletonText } from '@chakra-ui/react'
-import { statusConfig, PLACEHOLDER_IMAGE } from '../../utils/blogStatus'
+import { statusConfig, PLACEHOLDER_IMAGE, formatBlogDate } from '../../utils/blogStatus'
 import type { DashboardBlogPost } from '../../types/DashboardBlogPost'
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
 
 interface BlogPostCardProps {
   post: DashboardBlogPost
@@ -70,7 +62,7 @@ export function BlogPostCard({ post, onClick }: BlogPostCardProps) {
             {label}
           </Badge>
           <Text fontSize="xs" color="gray.400">
-            {formatDate(post.date)}
+            {formatBlogDate(post.date)}
           </Text>
         </Flex>
       </Box>
