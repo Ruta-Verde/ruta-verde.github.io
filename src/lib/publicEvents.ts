@@ -6,6 +6,7 @@ export const PUBLIC_EVENT_COLUMNS = `
   event_name,
   location,
   start_date,
+  end_date,
   about,
   image_path
 `
@@ -15,6 +16,7 @@ export interface PublicEventRow {
   event_name: string
   location: string
   start_date: string
+  end_date: string
   about: string | null
   image_path: string | null
 }
@@ -25,6 +27,7 @@ export function mapPublicEventRow(row: PublicEventRow): PublicEvent {
     title: row.event_name,
     location: row.location,
     date: row.start_date,
+    endDate: row.end_date,
     about: row.about,
     imageUrl: row.image_path
       ? supabase.storage.from('public-assets').getPublicUrl(row.image_path).data.publicUrl

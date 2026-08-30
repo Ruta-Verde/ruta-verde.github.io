@@ -3,6 +3,7 @@ export interface PublicEvent {
   title: string
   location: string
   date: string
+  endDate: string
   about: string | null
   imageUrl: string | null
 }
