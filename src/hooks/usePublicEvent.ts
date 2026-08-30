@@ -28,7 +28,7 @@ export function usePublicEvent(id: string | undefined): UsePublicEventResult {
       .from('events')
       .select(PUBLIC_EVENT_COLUMNS)
       .eq('event_id', id)
-      .in('status', ['scheduled', 'completed'])
+      .in('status', ['scheduled', 'active', 'completed'])
       .maybeSingle()
 
     if (fetchError) {

@@ -10,12 +10,8 @@ import type { PublicEvent } from '../types/PublicEvent.ts';
 import { useLayoutEffect } from 'react';
 import blogheader from '../assets/blogheader.jpg';
 
-function isBeforeToday(targetDate: Date): boolean {
-  const now = new Date();
-  // Zero out the time components
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const compareDate = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
-  return compareDate < today;
+function isUpcoming(event: PublicEvent): boolean {
+  return event.status === 'scheduled' || event.status === 'active';
 }
 
 // Events that happen sooner should be first.
@@ -33,11 +29,11 @@ export function Events() {
   });
   const { events, loading, error } = usePublicEvents();
   const pastEventList: PublicEvent[] = events
-    .filter(event => isBeforeToday(new Date(event.date)))
+    .filter(event => !isUpcoming(event))
     .sort(compareDate)
     .slice(0, 10);
   const upcomingEventList = events
-    .filter(event => !isBeforeToday(new Date(event.date)))
+    .filter(event => isUpcoming(event))
     .sort(compareDate)
     .reverse();
   return (

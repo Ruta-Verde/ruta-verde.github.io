@@ -22,7 +22,7 @@ export function usePublicEvents(): UsePublicEventsResult {
     const { data, error: fetchError } = await supabase
       .from('events')
       .select(PUBLIC_EVENT_COLUMNS)
-      .in('status', ['scheduled', 'completed'])
+      .in('status', ['scheduled', 'active', 'completed'])
       .order('start_date', { ascending: true })
 
     if (fetchError) {
