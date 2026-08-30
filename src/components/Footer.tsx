@@ -1,5 +1,6 @@
 import '../styles/footer.css';
 import { Flex, Image, Text, Link, VStack, Heading, Box, FormControl, Input, FormErrorMessage, Button} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import footerlogo from '../assets/footerlogo.svg';
 import { useState } from 'react'
 import { createClient } from "@supabase/supabase-js";
@@ -76,6 +77,7 @@ function Footer() {
           <Link>info@rutaverde.org</Link>
           <Text>425-577-3312</Text>
           <Text>Chelan, WA</Text>
+          <Link as={RouterLink} to="/privacy">Privacy Policy</Link>
         </VStack>
       </Flex>
     </Flex>
