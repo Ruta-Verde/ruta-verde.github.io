@@ -233,7 +233,7 @@ export default function UpdateParticipantStatsSection({
   // Renders a titled table (Organizers or Volunteers) for a subset of participants.
   function renderParticipantTable(title: string, rows: EventParticipant[]) {
     return (
-      <VStack align="stretch" spacing={2}>
+      <VStack align="stretch" spacing={2} minW={0}>
         <Text fontFamily="'Josefin Sans', sans-serif" fontWeight="600" fontSize="sm" color="gray.700" textAlign="left">
           {title}
         </Text>
@@ -241,6 +241,8 @@ export default function UpdateParticipantStatsSection({
           <Text color="gray.500" fontSize="sm">No {title.toLowerCase()} registered for this event yet.</Text>
         ) : (
           <TableContainer
+            w="100%"
+            maxW="100%"
             borderWidth="1px"
             borderColor="gray.200"
             borderRadius="lg"
@@ -267,7 +269,7 @@ export default function UpdateParticipantStatsSection({
   }
 
   return (
-    <VStack align="stretch" spacing={3}>
+    <VStack align="stretch" spacing={3} minW={0}>
       <Heading
         fontFamily="'Josefin Sans', sans-serif"
         fontSize="lg"
@@ -285,7 +287,7 @@ export default function UpdateParticipantStatsSection({
       ) : participants.length === 0 ? (
         <Text color="gray.500" fontSize="sm">No volunteers registered for this event yet.</Text>
       ) : (
-        <VStack align="stretch" spacing={5}>
+        <VStack align="stretch" spacing={5} minW={0}>
           {renderParticipantTable('Organizers', organizers)}
           {renderParticipantTable('Volunteers', volunteers)}
         </VStack>

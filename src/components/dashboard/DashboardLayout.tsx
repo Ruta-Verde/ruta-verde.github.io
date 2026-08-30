@@ -6,7 +6,7 @@ export default function DashboardLayout() {
   return (
     <Flex minH="calc(100vh - 80px)" w="100%">
       <Sidebar />
-      <Box flex={1} p={{ base: 4, md: 8 }} overflowY="auto">
+      <Box flex={1} minW={0} p={{ base: 4, md: 8 }} overflowY="auto" overflowX="hidden">
         <Outlet />
       </Box>
     </Flex>

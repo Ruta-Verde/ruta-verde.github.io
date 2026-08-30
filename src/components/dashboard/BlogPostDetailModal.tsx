@@ -53,7 +53,7 @@ export default function BlogPostDetailModal({ post, isOpen, onClose, onTogglePub
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
       <ModalOverlay />
-      <ModalContent bg="transparent" boxShadow="none">
+      <ModalContent bg="transparent" boxShadow="none" mx={4}>
         <VStack align="stretch" spacing={4}>
           <Box
             position="relative"

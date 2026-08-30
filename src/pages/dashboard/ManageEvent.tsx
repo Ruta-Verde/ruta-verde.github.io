@@ -25,7 +25,7 @@ export default function ManageEvent() {
   const { participants, loading: participantsLoading, refetch: refetchParticipants } = useEventParticipants(eventId)
 
   return (
-    <VStack align="stretch" spacing={8} maxW="720px" w="full" mx="auto">
+    <VStack align="stretch" spacing={8} maxW="720px" w="full" minW={0} mx="auto">
 
       <Breadcrumb fontSize="sm" color="gray.400" fontFamily="'Josefin Sans', sans-serif">
         <BreadcrumbItem>
@@ -84,6 +84,8 @@ export default function ManageEvent() {
         borderWidth="1px"
         borderColor="gray.200"
         p={{ base: 5, md: 8 }}
+        minW={0}
+        overflowX="hidden"
       >
         {loading ? (
           <HStack spacing={3} color="gray.500">

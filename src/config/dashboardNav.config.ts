@@ -1,5 +1,5 @@
 import type { NavItem } from '../types/NavItem'
-import { MdLeaderboard, MdEvent, MdAddBox, MdArticle } from 'react-icons/md'
+import { MdLeaderboard, MdEvent, MdArticle } from 'react-icons/md'
 
 export const dashboardNavConfig: NavItem[] = [
   {
@@ -15,21 +15,9 @@ export const dashboardNavConfig: NavItem[] = [
     roles: ['admin', 'event-organizer'],
   },
   {
-    label: 'Create Event',
-    to: '/dashboard/events/create',
-    icon: MdAddBox,
-    roles: ['admin', 'event-organizer'],
-  },
-  {
     label: 'Blog',
     to: '/dashboard/blog',
     icon: MdArticle,
-    roles: ['admin'],
-  },
-  {
-    label: 'Create Post',
-    to: '/dashboard/blog/create',
-    icon: MdAddBox,
     roles: ['admin'],
   },
 ]
