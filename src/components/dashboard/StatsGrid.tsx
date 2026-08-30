@@ -10,11 +10,11 @@ interface StatsGridProps {
 export function StatsGrid({ stats, loading }: StatsGridProps) {
   return (
     <Grid
-      templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}
+      templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)' }}
       gap={4}
     >
       {loading
-        ? Array.from({ length: 4 }).map((_, i) => (
+        ? Array.from({ length: 5 }).map((_, i) => (
             <GridItem key={i}>
               <Skeleton height="130px" borderRadius="xl" />
             </GridItem>
