@@ -61,7 +61,7 @@ export default function EventDetailModal({ event, isOpen, onClose }: EventDetail
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
       <ModalOverlay />
-      <ModalContent bg="transparent" boxShadow="none">
+      <ModalContent bg="transparent" boxShadow="none" mx={4}>
         <VStack align="stretch" spacing={4}>
           <Box
             position="relative"
