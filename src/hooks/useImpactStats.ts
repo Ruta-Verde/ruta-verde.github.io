@@ -15,6 +15,7 @@ async function fetchImpactStats(role: UserRole): Promise<ImpactStat[]> {
     return [
       { label: 'Total Members',   value: d.total_members,   icon: MdGroup,             trend: 'increase', helpText: 'Across all events' },
       { label: 'Active Events',   value: d.active_events,   icon: MdEvent,             trend: 'increase', helpText: 'Currently running' },
+      { label: 'Trees Planted',   value: d.trees_planted,   icon: MdEco,               trend: 'increase', helpText: 'Organisation-wide' },
       { label: 'CO₂ Offset (kg)', value: formatCo2(co2Kg),  icon: MdEco,               trend: 'increase', helpText: 'This quarter'      },
       { label: 'Volunteer Hours', value: d.volunteer_hours, icon: MdVolunteerActivism, trend: 'increase', helpText: 'Organisation-wide' },
     ]
@@ -43,6 +44,7 @@ if (role === 'event-organizer') {
   return [
     { label: 'Events Attended', value: d.events_attended, helpText: 'Total all time',     trend: 'increase', icon: MdEvent },
     { label: 'Hours Logged',    value: d.hours_logged,    helpText: 'Volunteering hours', trend: 'increase', icon: MdVolunteerActivism },
+    { label: 'Trees Planted',   value: d.trees_planted,  helpText: 'Total all time',     trend: 'increase', icon: MdEco },
     { label: 'CO₂ Offset (kg)', value: formatCo2(co2Kg), helpText: 'Your contribution',  trend: 'increase', icon: MdEco },
     { label: 'Impact Points',   value: d.impact_points,  helpText: 'Ruta Verde score',   trend: 'increase', icon: MdGroup },
   ]

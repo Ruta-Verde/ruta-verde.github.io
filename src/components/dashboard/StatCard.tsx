@@ -9,6 +9,7 @@ export function StatCard({ stat }: { stat: ImpactStat }) {
       borderWidth="1px"
       borderColor="gray.200"
       p={5}
+      h="100%"
       boxShadow="sm"
       transition="box-shadow 0.2s"
       _hover={{ boxShadow: 'md' }}
