@@ -48,6 +48,7 @@ import BlogDashboard from './pages/dashboard/BlogDashboard.tsx'
 import CreateBlogPost from './pages/dashboard/CreateBlogPost.tsx'
 import EditBlogPost from './pages/dashboard/EditBlogPost.tsx'
 import BlogPostPreview from './pages/dashboard/BlogPostPreview.tsx'
+import RosterDashboard from './pages/dashboard/RosterDashboard.tsx'
 import RouteGuard from './components/RouteGuard.tsx'
 
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
@@ -143,6 +144,14 @@ function App() {
                   element={
                     <RouteGuard allowed={['admin']}>
                       <EditBlogPost />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="roster"
+                  element={
+                    <RouteGuard allowed={['admin']}>
+                      <RosterDashboard />
                     </RouteGuard>
                   }
                 />
