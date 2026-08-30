@@ -37,6 +37,7 @@ import Blog from './pages/Blog.tsx'
 import BlogPage from './pages/BlogPage.tsx'
 import LoginPage from './pages/LoginPage.tsx'
 import GetInvolved from './pages/GetInvolved.tsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.tsx'
 import DashboardLayout from './components/dashboard/DashboardLayout.tsx'
 import RutaImpact from './pages/dashboard/RutaImpact.tsx'
 import DashboardEvents from './pages/dashboard/EventsDashboard.tsx'
@@ -66,6 +67,7 @@ function App() {
               <Route path="/projects"      element={<Projects />} />
               <Route path="/loginpage"     element={<LoginPage />} />
               <Route path="/getinvolved"   element={<GetInvolved />} />
+              <Route path="/privacy"       element={<PrivacyPolicy />} />
               <Route path="/events"        element={<Events />} />
               <Route path="/events/:id"    element={<SingleEventPage />} />
               <Route path="/blog"          element={<Blog />} />
